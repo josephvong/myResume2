@@ -1,0 +1,85 @@
+// 此文件为 stylus 的 函数
+
+thin-border-bottom($color)
+  position relative
+  //border-bottom 1px solid $color
+  &:before
+    content ""
+    position absolute
+    bottom 0
+    left 0
+    right 0
+    height 1px
+    border-bottom 1px solid $color
+    transform-origin 0 100%
+    transform scaleY(0.5)
+
+
+/*
+bg-image($url)
+  background-image: url($url + "@2x.png")
+  @media(-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    background-image url($url + "@3x.png")
+*/
+
+// 不换行
+no-wrap()
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+
+multiline-hide(num)
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: num;
+  -webkit-box-orient: vertical;
+
+
+// 拓展点击区域的 css 方法: 用伪类 绝对定位 扩大 他的 点击区域
+extend-click()
+  position:relative
+  &:before
+    content ''
+    position absolute
+    top -10px
+    left -10px
+    right -10px
+    bottom -10px
+
+// 有header 的 自路由 全屏页面样式
+sub-page-head()
+  position:absolute; // 必须为 绝对定位
+  z-index:1;    // 必须设置 z-index  此两个 属性用于 处理 -webkit-overflow-scrolling: touch 的副作用
+  top 0rem // 顶部bar
+  padding-top 0.8rem  // header的位置
+  bottom 0.98rem
+  width 100%
+  max-width 10rem
+  overflow auto
+  background white
+  font-size 0.32rem
+  -webkit-overflow-scrolling: touch;
+
+//无header 的 自路由 全屏页面样式
+sub-page()
+  position:absolute; // 必须为 绝对定位
+  z-index:1;
+  top 0rem // 顶部bar
+  bottom 0.98rem
+  width 100%
+  max-width 10rem
+  overflow auto
+  background white
+  font-size 0.32rem
+  -webkit-overflow-scrolling: touch;
+
+// mGrid 组件 定义 列数的 样式函数
+gird-column-ctrl(num)
+  if num <=3
+    width 33.333333%
+  if num ==4
+    width 25%
+  if num >=5
+    width 20%

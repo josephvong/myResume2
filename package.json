@@ -5,8 +5,9 @@
   "author": "joseph",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.8.74",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0",
     "start": "npm run dev",
+    "test": "node build/dev-server.js",
     "build": "node build/build.js"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "js-base64": "^2.3.2",
     "jsonp": "^0.2.1",
     "vue": "^2.5.2",
+    "vue-lazyload": "^1.1.4",
     "vue-loader": "^13.5.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -33,6 +35,7 @@
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.22.0",
     "chalk": "^2.0.1",
+    "connect-history-api-fallback": "^1.5.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "eventsource-polyfill": "^0.9.6",
@@ -40,6 +43,7 @@
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
+    "http-proxy-middleware": "^0.17.4",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
@@ -58,7 +62,9 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-dev-middleware": "^1.12.1",
     "webpack-dev-server": "^2.9.1",
+    "webpack-hot-middleware": "^2.20.0",
     "webpack-merge": "^4.1.0"
   },
   "engines": {

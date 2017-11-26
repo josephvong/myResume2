@@ -24,9 +24,13 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'common': resolve('common'),
-      'style': resolve('common/style'),
-      'api':resolve('common/api')
+      'common': resolve('src/common'), // 公共文件
+      'style': resolve('src/common/style'), // 公共样式
+      'api':resolve('src/common/api'), // 公共api
+      'base':resolve('src/base'), // 公共组件 
+      'directive':resolve('src/common/directive'), // 公共自定义指令
+      'filter':resolve('src/common/filter'), // 公共自定义过滤器
+      'assets':resolve('src/common/assets'), // 其他公共资源文件（如图片） 
     }
   },
   module: {

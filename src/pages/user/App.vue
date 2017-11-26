@@ -1,6 +1,9 @@
 <template>
   <div id="app"> 
-     <h1>this is homepagesdsdf</h1>
+     <h1>this is user page</h1>
+     <p>user
+      <a href="./home.html">home</a>
+     </p>
   </div>
 </template>
 
