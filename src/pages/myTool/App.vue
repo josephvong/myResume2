@@ -10,6 +10,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="stylus" rel="stylesheet/stylus">
+@import '~style/mixin.styl'
+#app
+  width 100%
+  max-width 10rem
+  margin 0 auto
 </style>
