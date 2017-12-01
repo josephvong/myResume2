@@ -1,3 +1,5 @@
+import 'babel-polyfill' // es6 语法兼容补丁 一定要放到最开始
+import 'url-search-params-polyfill'
 import 'style/index.styl'
 import Vue from 'vue'
 import FastClick from "fastclick"

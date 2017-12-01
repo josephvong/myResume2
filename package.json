@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "better-scroll": "^1.4.2",
+    "bulma": "^0.6.1",
     "create-keyframe-animation": "^0.1.0",
     "exif-js": "^2.3.0",
     "fastclick": "^1.0.6",
@@ -56,6 +57,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.8",
+    "url-search-params-polyfill": "^2.0.1",
     "vconsole": "^3.0.0",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",

@@ -16,11 +16,11 @@
             <p class="grid_label">我的组件案例</p> 
           </a>
           
-          <a href="" class="m-grid" >
+          <a href="./myBlog.html" class="m-grid" >
             <div class="grid_icon">
               <img :src="require('assets/img/jizhi.png')" alt="">
             </div>
-            <p class="grid_label">我的其他案例</p> 
+            <p class="grid_label">我的博客</p> 
           </a>
        </mGrid>  
      </div>
