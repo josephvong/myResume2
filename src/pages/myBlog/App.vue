@@ -1,5 +1,5 @@
 <template>
-  <div class="section" style="" id="app">
+  <div style="" id="app">
     <router-view></router-view> 
     <!-- <div class="login-wrap">
       
