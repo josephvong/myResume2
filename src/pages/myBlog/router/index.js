@@ -12,10 +12,10 @@ export default new Router({
       redirect: '/'
     },*/
     {
-      path: '/',  
-      name:'首次访问',
+      path: '/user',  
+      name:'登录注册',
       component:Enter,
-      redirect: '/login',
+      redirect: '/user/login',
       children:[
         {
           path: 'login',
@@ -30,7 +30,7 @@ export default new Router({
       ]
     },
     {
-      path: '/main',  
+      path: '/',  
       name:'主界面',
       component:Layout,
     }

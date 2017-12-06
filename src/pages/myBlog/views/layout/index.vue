@@ -58,6 +58,7 @@
       
       <div class="layout-main">
         router-view (article list)
+        <p>{{name}}</p> 
         <ul>
           <li v-for="i in 300">{{i}}</li>
         </ul>
@@ -73,7 +74,8 @@
 </template>
 
 <script>
-import layoutHead from './layoutHead.vue' 
+import {mapGetters } from 'vuex'
+import layoutHead from './layoutHead.vue'
 export default {
   name: 'Layout',
   props:{
@@ -84,19 +86,23 @@ export default {
 
     }
   },
-  computed:{ 
+  computed:{
+
+    //---------------------------------
+    ...mapGetters({  // 获取 store 中的属性 ‘搜索历史’ 
+      name: 'name'
+    }) 
   },
   created(){
 
   },
   methods:{
-     
+    
   },
   components:{
     layoutHead
   }, 
-  mounted(){ 
-    
+  mounted(){  
   }
 }
 </script>
@@ -139,6 +145,7 @@ export default {
           flex 1 1 auto
   .layout-submenu
     width 100%
+    background orange
     input[type="checkbox"]
       display none 
     .container

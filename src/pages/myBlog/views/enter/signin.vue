@@ -12,21 +12,21 @@
           <div class="field">
             <label class="label">用户名</label>
             <div class="control">
-              <input class="input" type="text" placeholder="e.g Alex Smith">
+              <input class="input" type="text" placeholder="请输入用户名">
             </div>
           </div>
 
           <div class="field">
             <label class="label">密码</label>
             <div class="control">
-              <input class="input" type="password" placeholder="e.g Alex Smith">
+              <input class="input" type="password" placeholder="输入密码">
             </div>
           </div>
 
           <div class="field">
             <label class="label">再次输入密码</label>
             <div class="control">
-              <input class="input" type="password" placeholder="">
+              <input class="input" type="password" placeholder="确认密码">
             </div>
           </div>
 
@@ -41,7 +41,7 @@
         </div>
       </div>
       <footer class="card-footer">
-        <router-link to="/login" class="card-footer-item">我已注册</router-link>
+        <router-link to="/user/login" class="card-footer-item">我已注册</router-link>
         <!--<a href="#" class="card-footer-item">Edit</a>
         <a href="#" class="card-footer-item">Delete</a> -->
       </footer>

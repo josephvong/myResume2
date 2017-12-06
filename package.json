@@ -19,6 +19,7 @@
     "fastclick": "^1.0.6",
     "good-storage": "^1.0.1",
     "js-base64": "^2.3.2",
+    "js-cookie": "^2.2.0",
     "jsonp": "^0.2.1",
     "vue": "^2.5.2",
     "vue-lazyload": "^1.1.4",

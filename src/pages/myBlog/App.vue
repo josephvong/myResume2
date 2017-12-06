@@ -1,41 +1,47 @@
 <template>
   <div style="" id="app">
-    <router-view></router-view> 
-    <!-- <div class="login-wrap">
-      
-    </div>
-    <div class="field">
-      <p class="control has-icons-left has-icons-right">
-        <input class="input" type="email" placeholder="Email">
-        <span class="icon is-small is-left">
-          <i class="fa fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fa fa-check"></i>
-        </span>
-      </p>
-    </div>
-    <div class="field">
-      <p class="control has-icons-left">
-        <input class="input" type="password" placeholder="Password">
-        <span class="icon is-small is-left">
-          <i class="fa fa-lock"></i>
-        </span>
-      </p>
-    </div>
-    <div class="field">
-      <p class="control">
-        <button class="button is-success">
-          Login
-        </button>
-      </p>
-    </div>  --> 
+    <router-view></router-view>
   </div>
 </template>
 
-<script>
+<script> 
+import {mapGetters} from 'vuex'
 export default {
-  name: 'app'
+  name: 'app',
+  props:{
+
+  },
+  data () {
+    return {
+
+    }
+  },
+  computed:{ 
+    //---------------------------------
+    ...mapGetters({  // 获取 store 中的属性 ‘搜索历史’ 
+      token: 'token'
+    })
+  },
+  created(){
+
+  },
+  methods:{
+    
+  },
+  components:{ 
+  },
+  created(){ 
+    if(this.token){
+      this.$store.dispatch('getInfoByToken',this.token).then((res)=>{
+        console.log(res)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    } 
+    
+  }, 
+  mounted(){  
+  }
 }
 </script>
 
