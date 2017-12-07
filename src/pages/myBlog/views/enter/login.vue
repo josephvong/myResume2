@@ -90,8 +90,7 @@ export default {
     goLogin(obj){ // 登录
       this.$store.dispatch('loginByUsername',{
         ...obj
-      }).then((res)=>{
-        console.log(res)
+      }).then((res)=>{ 
         this.getInfo(res.token) 
       }).catch((err)=>{
         console.log(err)

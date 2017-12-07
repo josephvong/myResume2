@@ -12,27 +12,29 @@
           <div class="field">
             <label class="label">用户名</label>
             <div class="control">
-              <input class="input" type="text" placeholder="请输入用户名">
+              <input class="input" type="text" v-model="name" placeholder="请输入用户名">
             </div>
+             <p class="warning">{{namenote}}</p>
           </div>
 
           <div class="field">
             <label class="label">密码</label>
             <div class="control">
-              <input class="input" type="password" placeholder="输入密码">
+              <input class="input" type="password" v-model="password_a" placeholder="输入密码">
             </div>
           </div>
 
           <div class="field">
             <label class="label">再次输入密码</label>
             <div class="control">
-              <input class="input" type="password" placeholder="确认密码">
+              <input class="input" type="password" v-model="password_b" placeholder="确认密码">
             </div>
+             <p class="warning">{{pswnote}}</p>
           </div>
 
           <div class="field">
             <p class="control" style="text-align:center">
-              <a href="" class="button is-success">
+              <a @click="signinClick" class="button is-success">
                 注册
               </a>
             </p>
@@ -49,7 +51,8 @@
   </div>
 </template>
 
-<script> 
+<script>
+import {signinAPI} from 'api/blogAPI/api' // login接口 
 export default {
   name: 'Signin',
   props:{
@@ -57,7 +60,11 @@ export default {
   },
   data () {
     return {
-
+      pswnote:'', // 密码提示
+      namenote:'', // 用户名提示
+      name:'',
+      password_a:'', // 密码
+      password_b:''  // 确认密码
     }
   },
   computed:{ 
@@ -66,7 +73,35 @@ export default {
 
   },
   methods:{
-     
+    signinClick(){
+      if(!this.name){
+        this.namenote = '请输入用户名'
+      }
+      if(!this.password_a || !this.password_b){
+        this.pswnote = '请输入密码'
+      }
+      if(this.password_a !== this.password_b){
+        this.pswnote = '请确认密码相同'
+      }
+      if(this.name && this.password_a && this.password_b && this.password_a === this.password_b){ 
+        this.goSignin({
+          name:this.name,
+          password:this.password_a,
+          role:'user'
+        }) 
+      } 
+    },
+
+    goSignin(obj){
+      signinAPI(obj).then((res)=>{
+        if(res.success){
+          this.$store.dispatch('changeToken',res.token);
+          this.$router.push({path:'/'})
+        }else{
+          console.log(res.message)
+        }
+      })
+    } 
   }, 
   mounted(){ 
     

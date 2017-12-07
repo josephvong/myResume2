@@ -19,7 +19,7 @@ export function loginAPI(obj){
 }
 
 export function signinAPI(obj){
-  return axios.post('api/login',{
+  return axios.post('api/signin',{
     ...obj 
   }).then((res)=>{
     return Promise.resolve(res.data)

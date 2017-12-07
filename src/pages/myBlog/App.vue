@@ -31,13 +31,13 @@ export default {
   components:{ 
   },
   created(){ 
-    if(this.token){
+    /*if(this.token){
       this.$store.dispatch('getInfoByToken',this.token).then((res)=>{
         console.log(res)
       }).catch((err)=>{
         console.log(err)
       })
-    } 
+    }*/ 
     
   }, 
   mounted(){  

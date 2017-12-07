@@ -16,6 +16,7 @@
       <ul class="navbar-start tool-menu">
         <li class="navbar-item" v-if="role!='guest'">写文章</li>
         <li class="navbar-item" v-if="role=='guest'">留言箱</li>
+        <li class="navbar-item" v-if="role=='admin'">权限</li>
         <li class="navbar-item">联系方式</li>
         <li class="navbar-item">我的GitHub</li>
       </ul> 
@@ -26,8 +27,11 @@
               <router-link v-if="role=='guest'" to="/user" class="button success" >
                 登录/注册 
               </router-link>
-              <a v-if="role!='guest'" class="button success">
-                重新登录 
+              <a @click="reLogin" v-if="role!='guest'" class="button success">
+                切换用户
+              </a>
+              <a @click="logoutClick" v-if="role!='guest'" class="button success">
+                退出登录
               </a>
             </p>
                
@@ -46,7 +50,7 @@
 </template>
 
 <script>
-import {mapGetters } from 'vuex' 
+import {mapGetters, mapActions } from 'vuex' 
 export default {
   name: 'layoutHead',
   props:{
@@ -68,7 +72,14 @@ export default {
 
   },
   methods:{
-     
+    reLogin(){
+      this.$store.dispatch('toRemoveToken');
+      this.$router.push({path:'/user'})
+    },
+    logoutClick(){
+      this.$store.dispatch('toRemoveToken');
+      this.$router.push({path:'/'})
+    }
   }, 
   mounted(){ 
     

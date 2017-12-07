@@ -33,31 +33,45 @@ router.post('/login',(req,res)=>{
   })
 })
 
-router.post('/signin',(req,res)=>{ 
-  var user = new User({
-    name:req.body.name,
-    password:req.body.password,
-    role:req.body.role
-  })
+router.post('/signin',(req,res)=>{
+  if(!req.body.name || !req.body.password){res.json({success:false,message:'注册失败'});return}
+  User.findOne({name:req.body.name},(err,user)=>{
+    if(err){res.json({success:false,message:'注册失败'})}
+    if(!user){
+      var newOne = new User({
+        name:req.body.name,
+        password:req.body.password,
+        role:req.body.role
+      }) 
+      newOne.save(function(err){
+        if(err){ res.json({ success:false,  message:'注册失败' }) } 
+        
+        var token = jwt.sign({// 创建token
+          name:req.body.name,
+          password:req.body.password,
+          role:req.body.role
+        }, app.get('superSecret'))
 
-  user.save(function(err){
-    if(err){
-      res.json({
-        success:false,
-        message:'注册失败'
+        res.json({
+          success:true,
+          message:'用户创建成功',
+          token:token
+        })
       })
-    } 
-    var token = jwt.sign({
-      name:req.body.name,
-      password:req.body.password,
-      role:req.body.role
-    }, app.get('superSecret'))
-
-    res.json({
-      success:true,
-      message:'用户创建成功',
-      token:token
-    })
+    }else{
+      res.json({ success:false,  message:'用户已存在' })
+    }
   })
 })
+
+router.get('/findAll',(req,res)=>{
+  User.find({},(err,users)=>{
+    res.json({ users:users })
+  })
+})
+router.get('/removeAll',(req,res)=>{
+  User.remove({},()=>{
+    res.json({ success:true })
+  })
+})    
 module.exports = router

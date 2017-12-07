@@ -1,5 +1,5 @@
 import {getToken,setToken,removeToken} from 'common/js/cache/localCache'
-import {loginAPI, getInfoAPI} from 'api/blogAPI/api' // login接口
+import {loginAPI, getInfoAPI, signinAPI} from 'api/blogAPI/api' // login接口
 const TokenKey = 'USERTOKEN'
 
 const user = {
@@ -24,6 +24,19 @@ const user = {
   },
 
   actions:{
+    changeToken({commit, state},token){
+      setToken(TokenKey,token)
+      commit('SET_TOKEN',token)
+    },
+
+    toRemoveToken({commit, state}){
+      removeToken(TokenKey)
+      commit('SET_TOKEN','')
+      commit('SET_ROLE','guest')
+      commit('SET_NAME','游客')
+    },
+
+
     loginByUsername({commit, state},userInfo){  
       return loginAPI(userInfo).then((res)=>{
         if(res.success){
@@ -36,11 +49,10 @@ const user = {
       }).catch((err)=>{
         return Promise.reject(err)
       }) 
-    },
-
+    }, 
 
     getInfoByToken({commit,state},token){
-      return getInfoAPI(token).then((res)=>{  
+      return getInfoAPI(token).then((res)=>{ 
         commit('SET_NAME',res.name);
         commit('SET_ROLE',res.role); 
         return Promise.resolve(res)
