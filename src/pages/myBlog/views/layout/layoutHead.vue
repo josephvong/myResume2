@@ -1,7 +1,7 @@
 <template>
 <!--固定头部--> 
 <div class="container"><!--头部内容居中容器-->
-  <nav class="navbar " role="navigation" aria-label="main navigation">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://bulma.io">
         <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
@@ -16,8 +16,7 @@
       <ul class="navbar-start tool-menu">
         <li class="navbar-item" v-if="role!='guest'">写文章</li>
         <li class="navbar-item" v-if="role=='guest'">留言箱</li>
-        <li class="navbar-item" v-if="role=='admin'">权限</li>
-        <li class="navbar-item">联系方式</li>
+        <li class="navbar-item" v-if="role=='admin'">权限</li> 
         <li class="navbar-item">我的GitHub</li>
       </ul> 
       <div class="navbar-end user-status">
@@ -40,7 +39,7 @@
         <div class="navbar-item" style="padding-right:0">
           <div class="user-status" >
             <span class="">你好:{{name}}</span> 
-            <span>{{role}}</span>
+            <span>权限:{{role}}</span>
           </div>   
         </div> 
       </div>
@@ -87,7 +86,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style scope lang="stylus" rel="stylesheet/stylus">
 //@import '~style/mixin.styl'
  
  

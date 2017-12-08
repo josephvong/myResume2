@@ -12,26 +12,26 @@
           <div class="field">
             <label class="label">用户名</label>
             <div class="control">
-              <input class="input" type="text" v-model="name" placeholder="请输入用户名">
+              <input class="input" type="text" @focus="inputFocus" v-model="name" placeholder="请输入用户名">
             </div>
-             <p class="warning">{{namenote}}</p>
+              
           </div>
 
           <div class="field">
             <label class="label">密码</label>
             <div class="control">
-              <input class="input" type="password" v-model="password_a" placeholder="输入密码">
+              <input class="input" type="password" @focus="inputFocus" v-model="password_a" placeholder="输入密码">
             </div>
           </div>
 
           <div class="field">
             <label class="label">再次输入密码</label>
             <div class="control">
-              <input class="input" type="password" v-model="password_b" placeholder="确认密码">
+              <input class="input" type="password" @focus="inputFocus" v-model="password_b" placeholder="确认密码">
             </div>
-             <p class="warning">{{pswnote}}</p>
+            
           </div>
-
+          <p class="warning">{{warning}}</p>
           <div class="field">
             <p class="control" style="text-align:center">
               <a @click="signinClick" class="button is-success">
@@ -60,8 +60,7 @@ export default {
   },
   data () {
     return {
-      pswnote:'', // 密码提示
-      namenote:'', // 用户名提示
+      warning:'',
       name:'',
       password_a:'', // 密码
       password_b:''  // 确认密码
@@ -73,15 +72,15 @@ export default {
 
   },
   methods:{
+    inputFocus(){
+
+    },
     signinClick(){
-      if(!this.name){
-        this.namenote = '请输入用户名'
-      }
-      if(!this.password_a || !this.password_b){
-        this.pswnote = '请输入密码'
-      }
+      if(!this.name || !this.password_a || !this.password_b){
+        this.warning = '请输入用户名和密码'
+      } 
       if(this.password_a !== this.password_b){
-        this.pswnote = '请确认密码相同'
+        this.warning = '请确认密码相同'
       }
       if(this.name && this.password_a && this.password_b && this.password_a === this.password_b){ 
         this.goSignin({
@@ -98,7 +97,7 @@ export default {
           this.$store.dispatch('changeToken',res.token);
           this.$router.push({path:'/'})
         }else{
-          console.log(res.message)
+          this.warning = res.message
         }
       })
     } 
@@ -109,7 +108,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" scope rel="stylesheet/stylus">
 @import './fixwrap.styl'
 //@import '~style/mixin.styl' 
 </style>

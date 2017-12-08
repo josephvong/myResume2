@@ -37,39 +37,26 @@
           </p>
           <p class="level-item ">
             <a class="link is-info">分类C</a>
-          </p>
-          <p class="level-item ">
-            <a class="link is-info">首页</a>
-          </p>
-          <p class="level-item ">
-            <a class="link is-info">分类A</a>
-          </p>
-          
-          <p class="level-item ">
-            <a class="link is-info">分类B</a>
-          </p>
-          <p class="level-item ">
-            <a class="link is-info">分类C</a>
-          </p>
+          </p> 
         </nav>
       </div>
     </div>  
-    <div class="container">  
-      
+    <div class="container">   
       <div class="layout-main">
-        router-view (article list)
-        <p>{{name}}</p> 
-        <ul>
-          <li v-for="i in 300">{{i}}</li>
-        </ul>
-      </div>
-      <div class="layout-foot">
-        footer 
+        <router-view></router-view> 
+        <!--  <section class="section">
+          <div class="container">
+            <h1 class="title">Section</h1>
+            <h2 class="subtitle">
+              A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
+            </h2>
+          </div>
+        </section>  -->
       </div>
     </div>
-    <div class="side-layer">
+   <!--  <div class="side-layer">
       hide header
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -107,7 +94,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scope>
 @import '~style/mixin.styl'
 .layout-wrap
   width 100%

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router' 
-const _import = require('./_import_' + process.env.NODE_ENV) //
+const _import = require('./_import_' + process.env.NODE_ENV)  
 Vue.use(Router)
 import store from '../store'
 
@@ -34,6 +34,13 @@ export default new Router({
       path: '/',  
       name:'主界面',
       component:Layout,
+      redirect:'/articleedit',
+      children:[
+        {
+          path:'articleedit',
+          component:_import('editor/arteditor')
+        }
+      ],
       beforeEnter(from,to,next){ // 每次进入 主界面 前 先判断 有没有登录 
         if(store.getters.token){
           store.dispatch('getInfoByToken',store.getters.token).then((res)=>{ 

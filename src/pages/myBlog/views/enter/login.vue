@@ -13,17 +13,16 @@
             <label class="label">用户名</label>
             <div class="control">
               <input class="input" @focus="inputFocus" type="text" placeholder="请输入用户名" v-model="name">
-            </div>
-            <p class="warning">{{namenote}}</p>
+            </div> 
           </div>
 
           <div class="field">
             <label class="label">密码</label>
             <div class="control">
               <input class="input" @focus="inputFocus" type="password" placeholder="" v-model="password">
-            </div>
-            <p class="warning">{{pswnote}}</p>
+            </div>  
           </div>
+          <p class="warning">{{warning}}</p>
 
           <div class="field">
             <p class="control" style="text-align:center">
@@ -56,8 +55,7 @@ export default {
   },
   data () {
     return {
-      pswnote:'', // 密码提示
-      namenote:'', // 用户名提示
+      warning:'', // 错误提示 
       name:'',
       password:'',
     }
@@ -69,16 +67,13 @@ export default {
   },
   methods:{
     inputFocus(){
-      this.pswnote = ''
-      this.namenote = ''
+       this.warning =''
     },
     loginClick(){
-      if(!this.name){
-        this.namenote = '请输入用户名'
+      if(!this.name || !this.password){
+        this.warning = '请输入用户名 和 密码'
       }
-      if(!this.password){
-        this.pswnote = '请输入密码'
-      }
+       
       if(this.name && this.password){ 
         this.goLogin({
           name:this.name,
@@ -92,8 +87,8 @@ export default {
         ...obj
       }).then((res)=>{ 
         this.getInfo(res.token) 
-      }).catch((err)=>{
-        console.log(err)
+      }).catch((err)=>{ 
+        this.warning = err.message
       }) 
     },
     getInfo(token){ // 获取用户想你想
@@ -102,7 +97,7 @@ export default {
           this.$router.push('/')
         }
       }).catch((err)=>{
-        console.log(err)
+        console.log(err) 
       })
     }
   }, 
@@ -112,7 +107,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" scope rel="stylesheet/stylus">
 @import './fixwrap.styl'
 //@import '~style/mixin.styl' 
 </style>
