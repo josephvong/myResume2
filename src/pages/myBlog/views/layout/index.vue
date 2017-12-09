@@ -4,7 +4,7 @@
        <layoutHead></layoutHead>
     </div>
     <div class="layout-banner hero ">
-      <div class="hero-body" > 
+      <div class="hero-body" style="padding-bottom:0.5rem"> 
         <div class="hero-content container">
           <div class="left">
             <h1 class="title">Joseph 的 博客</h1>

@@ -34,12 +34,16 @@ export default new Router({
       path: '/',  
       name:'主界面',
       component:Layout,
-      redirect:'/articleedit',
+      redirect:'/main',
       children:[
         {
           path:'articleedit',
           component:_import('editor/arteditor')
-        }
+        },
+        {
+          path:'main',
+          component:_import('main/index')
+        },
       ],
       beforeEnter(from,to,next){ // 每次进入 主界面 前 先判断 有没有登录 
         if(store.getters.token){
