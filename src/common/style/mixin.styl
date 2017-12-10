@@ -85,11 +85,18 @@ gird-column-ctrl(num)
     width 20%
     
 // 三角形
-down-triangle(color,width)
+triangle(color,width,orient)
   width 0px
   height 0px
   border-right width solid color
   border-left 0px solid transparent
   border-top width solid transparent
   borer-bottom width solid transparent
-  transform rotate(45deg)  
+  if orient == 'down'
+    transform rotate(45deg)
+  if orient == 'top'
+    transform rotate(-135deg)
+  if orient == 'left'
+    transform rotate(-45deg)
+  if orient == 'right'
+    transform rotate(-225deg)  
