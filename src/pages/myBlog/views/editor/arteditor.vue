@@ -7,9 +7,12 @@
         <myEditor ref="myEditor"></myEditor> 
       </div>
       
-    </div>
-    <button class="button" @click="outputCont">输出</button>
-  </div>
+    </div> 
+  </div> 
+  <button class="button" @click="outputCont">输出</button>
+  <ul>
+    <li v-for="i in 100">{{i}}</li>
+  </ul>
 </section>  
 </template>
 

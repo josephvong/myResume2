@@ -11,11 +11,11 @@
     <div class="art-title">title</div>
     <div class="art-content">
       <div class="l-thumb">
-        <img  src="./sample.jpg" alt="">
+        <img src='./sample.jpg' alt="">
       </div> 
       <div class="r-desc">
         <p class="detail">
-          一共是四个页面，首页，图文列表，图片列表，文字内容。此模板风格为中国古典风格，山水画墨迹成就一幅江南墨卷。页面首页设计较为简单，突出文章重点。二级栏目导航菜单。图文列表显示，可用作相册展示.一共是四个页面，<!-- 首页，图文列表，图片列表，文字内容。此模板风格为中国古典风格，山图片列表，文字内容。此模板风格为中国古典风格，山水画墨迹成就一幅江南墨卷。页面首页设计较为简单，突出文章重点。二级栏目水画墨迹成就图片列表，文字内容。此模板风格为中国古典风格，山水画墨迹成就一幅江南墨卷。页面首页设计较为简单，突出文章重点。二级栏目 -->
+          一共是四个页面，首页，图文列表，图片列表，文字内容。此模板风格为中国古典风格，山水画墨迹成就一幅江南墨卷。页面首页设计较为简单，突出文章重点。二级栏目导航菜单。图文列表显示，可用作相册展示.一共是四个页面
         </p>
         <div class="down">
           <p class="art-tag">CSS</p>
@@ -46,28 +46,31 @@ export default {
 
   },
   methods:{
-    getItemTop(){
+    // 获取所有list Item 节点 的 “BoundingClientRect().top”（节点 相对于视口的top）
+    getItemTop(){ // 输出一个数组（所有节点的 top值）
       let artList = this.$refs.artItem
       let arr = []
       for (let i = 0; i < artList.length; i++) {
         arr.push(artList[i].getBoundingClientRect().top)
       }
-      return arr
-      //console.log(arr)
-      //console.log(document.documentElement.clientHeight)
+      return arr 
     },
 
-    getViewItem(arr,vh){
+    // 获取 出现在当前视口 范围的 item节点 列表
+    getViewItem(arr,vh){ // 返回 一个数组（出现在视口范围的 list Item）
+      let winW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+      let overH = winW<=425 ? -220 : -100  // 超出高度
       let vitems = []
       for (let i = 0; i < arr.length; i++) {
-        if(arr[i]>-30 && arr[i]<vh+20){
+        if(arr[i]>overH && arr[i]<vh){
           vitems.push(i)
         }
       }
-      this.showItems = vitems
-      console.log(this.showItems)
+      this.showItems = vitems 
     },
-    isWindowScroll(){
+
+    // 根据“_findScrollParent”方法 判断 监听滚动事件的父级节点（此案例 输出的 是window 节点）
+    isWindowScroll(){ 
       let parent = this._findScrollParent(this.$refs.artList)
       if(parent.nodeName == "BODY"){
         return window
@@ -75,6 +78,8 @@ export default {
         return parent
       }
     },
+
+    // 查找 当前 item的序号是否出现在showItems数组里面的函数（用于绑定到每个 文章item里面）
     findItem(num){
       let isView = this.showItems.findIndex((item)=>{
         return item == num
@@ -84,11 +89,14 @@ export default {
       }else{
         return false
       }
-    },
+    }, 
+
+    // 让一个 dom节点 输出 ‘overflow’属性值的函数（工具函数）  
     _overflow(el){
-      return style(el, 'overflow') + style(el, 'overflow-y') + style(el, 'overflow-x')
+      return style(el, 'overflow') + style(el, 'overflow-y') /*+ style(el, 'overflow-x')*/
     },
 
+    // 查找 具有滚动功能的 容器节点（若没有 返回 window/body(window/body默认有滚动功能)）
     _findScrollParent(el){ 
       if(!(el instanceof HTMLElement)){
         return window
@@ -116,12 +124,22 @@ export default {
   }, 
   mounted(){
     let This = this
-    This.getViewItem(This.getItemTop(),document.documentElement.clientHeight)
+    let winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+    // 先执行 首次加载 时的 列表显示
+    This.getViewItem(This.getItemTop(),winH) 
     
+    this.scrollFn = function(){ // 将滚动事件 函数 命名
+      //throttle(This.getViewItem(This.getItemTop(),winH),50) // 节流执行 
+      This.getViewItem(This.getItemTop(),winH)
+    } 
+
+    // 确定 监听 scroll 事件的 dom节点
+    let scrollParent = this.isWindowScroll();
+    scrollParent.addEventListener('scroll', this.scrollFn, false) // 添加事件监听
+  },
+  destroyed(){ 
     let scrollParent = this.isWindowScroll() 
-    scrollParent.addEventListener('scroll',throttle(()=>{
-      This.getViewItem(This.getItemTop(),document.documentElement.clientHeight)
-    },500))
+    scrollParent.removeEventListener('scroll',this.scrollFn, false) // 解除事件监听
   }
 }
 </script>
@@ -135,10 +153,8 @@ export default {
     position relative
     margin-bottom 20px
     padding-left 2rem
-    opacity 0
-    transition all 1s
-    &.active
-      opacity 1
+    opacity 0.1  
+    transition opacity 0.8s 
     .point
       position absolute
       width 15px
@@ -157,7 +173,7 @@ export default {
       padding-right 10px
       text-align right
       color #46A4DA
-      transition all 0.8s
+      transition background 0.5s, border-radius 1s
       .date
         line-height 24px
         font-size 14px
@@ -171,6 +187,8 @@ export default {
       padding 10px 20px 20px 20px
       border-radius 5px
       background #579dc5
+      transform translate3d(40px,0,0)
+      transition transform 0.8s
       .triangle
         position absolute
         left -7px
@@ -210,7 +228,7 @@ export default {
               font-size 14px
               color white 
             .art-link
-              flex 0 0 30%
+              flex 0 0 40%
               text-align center
               border-radius 5px
               line-height 30px
@@ -220,11 +238,15 @@ export default {
     &:hover .time-stamp 
       background #afdcf8
       border-radius 15px 0 0 15px
+      color gray
       .date
         color white
       .year
         color white
-
+    &.active
+      opacity 1
+      &>a
+        transform translate3d(0px,0,0)
 
 @media only screen and (max-width : 640px)
   .article-list
@@ -253,8 +275,7 @@ export default {
         .art-tag
           margin-top 10px
           flex 0 0 100% 
-        .art-link
-          
+        .art-link 
           flex 0 0 100% 
 </style>
 

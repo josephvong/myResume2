@@ -51,11 +51,11 @@ export default {
 .main-wrap
   display flex
   flex-flow row no-wrap
-  align-items stretch 
+  align-items stretch
   .left
     flex 1 1 auto
     width auto
-    padding 0 20px 0 100px 
+    padding 0 20px 0 100px
   .right 
     flex 0 0 200px
     width 200px 
@@ -66,11 +66,17 @@ export default {
     display none
 
 @media only screen and (max-width : 640px)
-  .main-wrap .left 
-    padding 0
+  body
+    width 100%
+    overflow-x hidden
+    .main-wrap .left 
+      padding 0
 
-/*@media only screen and (max-width : 425px)
-  .main-wrap .left .article-list
+@media only screen and (max-width : 425px)
+  body
+    width 100%
+    overflow-x hidden
+  /*.main-wrap .left .article-list
     border none
     li.article
       padding-left 0*/

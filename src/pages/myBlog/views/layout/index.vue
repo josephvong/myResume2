@@ -26,7 +26,7 @@
 
         <nav class="level" >
           <p class="level-item ">
-            <a class="link is-info">首页</a>
+            <router-link to="/" class="link is-info">首页</router-link>
           </p>
           <p class="level-item ">
             <a class="link is-info">分类A</a>

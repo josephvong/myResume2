@@ -14,7 +14,7 @@
     </div>
     <div class="navbar-menu">
       <ul class="navbar-start tool-menu">
-        <li class="navbar-item" v-if="role!='guest'">写文章</li>
+        <router-link class="navbar-item" to="/articleedit" v-if="role!='guest'">写文章</router-link>
         <li class="navbar-item" v-if="role=='guest'">留言箱</li>
         <li class="navbar-item" v-if="role=='admin'">权限</li> 
         <li class="navbar-item">我的GitHub</li>
