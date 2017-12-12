@@ -39,5 +39,8 @@ app.use('/api',userRouter)
 var infoRouter = require('./routes/info')
 app.use('/api',infoRouter)
 
+var articleRouter = require('./routes/article')
+app.use('/api',articleRouter)
+
 
 app.listen(port);

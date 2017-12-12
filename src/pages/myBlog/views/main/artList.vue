@@ -1,6 +1,6 @@
 <template> 
 <ul class="article-list" ref="artList">
- <li ref="artItem" class="article" v-for="i in 20" @click="getItemTop" :num="i" :class="{active:findItem(i-1)}" >
+ <li v-if="itemList.length" ref="artItem" class="article" v-for="(item,index) in itemList" :class="{active:findItem(index)}" :num="index"  ><!--  -->
     <div class="time-stamp">
       <p class="date">08-08</p>
       <p class="year">2017</p>
@@ -8,14 +8,16 @@
     <div class="point"></div>
   <a>
     <div class="triangle"></div> 
-    <div class="art-title">title</div>
+    <div class="art-title">{{item.title}}</div>
     <div class="art-content">
       <div class="l-thumb">
-        <img src='./sample.jpg' alt="">
+        <img :src='item.thumb' alt="">
       </div> 
       <div class="r-desc">
         <p class="detail">
+        {{index}}
           一共是四个页面，首页，图文列表，图片列表，文字内容。此模板风格为中国古典风格，山水画墨迹成就一幅江南墨卷。页面首页设计较为简单，突出文章重点。二级栏目导航菜单。图文列表显示，可用作相册展示.一共是四个页面
+         
         </p>
         <div class="down">
           <p class="art-tag">CSS</p>
@@ -33,7 +35,10 @@ import {style,throttle} from 'common/js/cusFn'
 export default {
   name: 'artList',
   props:{
-
+    itemList:{
+      type:Array,
+      default:[]
+    }
   },
   data () {
     return {
@@ -48,7 +53,7 @@ export default {
   methods:{
     // 获取所有list Item 节点 的 “BoundingClientRect().top”（节点 相对于视口的top）
     getItemTop(){ // 输出一个数组（所有节点的 top值）
-      let artList = this.$refs.artItem
+      let artList = this.$refs.artItem 
       let arr = []
       for (let i = 0; i < artList.length; i++) {
         arr.push(artList[i].getBoundingClientRect().top)
@@ -80,7 +85,7 @@ export default {
     },
 
     // 查找 当前 item的序号是否出现在showItems数组里面的函数（用于绑定到每个 文章item里面）
-    findItem(num){
+    findItem(num){ 
       let isView = this.showItems.findIndex((item)=>{
         return item == num
       })
@@ -89,6 +94,14 @@ export default {
       }else{
         return false
       }
+    },
+
+    listInit(){
+      let winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+      // 先执行 首次加载 时的 列表显示
+      this.$nextTick(()=>{
+        this.getViewItem(this.getItemTop(),winH) 
+      }) 
     }, 
 
     // 让一个 dom节点 输出 ‘overflow’属性值的函数（工具函数）  
@@ -125,9 +138,8 @@ export default {
   mounted(){
     let This = this
     let winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-    // 先执行 首次加载 时的 列表显示
-    This.getViewItem(This.getItemTop(),winH) 
-    
+   
+
     this.scrollFn = function(){ // 将滚动事件 函数 命名
       //throttle(This.getViewItem(This.getItemTop(),winH),50) // 节流执行 
       This.getViewItem(This.getItemTop(),winH)

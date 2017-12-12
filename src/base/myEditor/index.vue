@@ -1,7 +1,7 @@
 <template> 
  
-<div class="editor-wrap" style="height:250px">
-  <quill-editor ref="textEditor" style="height:100%"
+<div class="editor-wrap" style="min-height:250px;">
+  <quill-editor ref="textEditor" style="height:200px"
     v-model="content"
     :options="editorOption"
   >
@@ -30,10 +30,13 @@ export default {
       editorOption:{
         modules:{
           toolbar:[
-            [{'size':['small',false,'large']}],
-            ['bold','italic'],
-            [{'list':'ordered'},{'list':'bullet'}],
-            ['link','image']
+            [{'size':['small',false,'large']}], 
+            [{ 'header': [1,2,3,4,5,6,false]}],
+            ['bold','italic', 'underline', 'strike'],
+            ['blockquote', 'code-block',{'list':'ordered'},{'list':'bullet'}],
+            [{ 'color': [] }, { 'background': [] }, { 'font': [] }], 
+            [{ 'align': [] }],
+            ['link','image','video']
           ],
           history: {
             delay: 1000,
@@ -64,9 +67,12 @@ export default {
   },
   methods:{
     outputContent(){
-      console.log(this.content)
       return this.content
-    } 
+    },
+    removeContent(){
+      this.content = ''
+    }
+
   }, 
   mounted(){ 
      

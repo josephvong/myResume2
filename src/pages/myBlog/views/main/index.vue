@@ -4,7 +4,7 @@
     <h1 class="title" style="font-size:2rem">全部文章</h1>
     <div class="main-wrap">
       <div class="left">
-        <artList></artList>
+        <artList ref="artList" :itemList="articleList" ></artList>
        
       </div>
       <div class="right">
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import {articleGetApi} from 'api/blogAPI/api'
 import artList from './artList' 
 export default {
   name: 'Main',
@@ -26,7 +27,7 @@ export default {
   },
   data () {
     return {
-
+      articleList:[]
     }
   },
   computed:{ 
@@ -34,11 +35,26 @@ export default {
   components:{
     artList
   },
-  created(){
-
+  created(){ 
+    this.getListData().then((res)=>{ 
+      this.$refs.artList.listInit()
+    })
   },
   methods:{
-     
+    getListData(){
+      return new Promise((resolve,reject)=>{
+        articleGetApi().then((res)=>{ 
+          if(res || res.articles.length){
+            this.articleList = res.articles
+            resolve(res.articles)
+          }else{
+            reject(res)
+          } 
+        }).catch((err)=>{
+          reject(err)
+        })
+      })
+    }
   }, 
   mounted(){ 
     
