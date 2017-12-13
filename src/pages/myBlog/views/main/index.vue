@@ -1,20 +1,18 @@
-<template>
-<!-- <section class="section"> -->
-  <div class="container" style="padding:30px 10px 0">
-    <h1 class="title" style="font-size:2rem">全部文章</h1>
-    <div class="main-wrap">
-      <div class="left">
-        <artList ref="artList" :itemList="articleList" ></artList>
-       
-      </div>
-      <div class="right">
-        <ul>
-          <li v-for="i in 20">{{i}}</li>
-        </ul>
-      </div>
-    </div> 
-  </div>
-<!-- </section>  -->
+<template> 
+<div class="container" style="padding:30px 10px 0">
+  <h1 class="title" style="font-size:2rem">全部文章</h1>
+  <div class="main-wrap">
+    <div class="left">
+      <artList ref="artList" :itemList="articleList" ></artList>
+     
+    </div>
+    <div class="right">
+      <ul>
+        <li v-for="i in 20">{{i}}</li>
+      </ul>
+    </div>
+  </div> 
+</div> 
 </template>
 
 <script>

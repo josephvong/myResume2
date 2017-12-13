@@ -6,6 +6,7 @@ var Article = require('../models/article')
 router.post('/article_post',(req,res)=>{ 
   var newArticle = new Article({
     art_id:req.body.art_id,
+    desc:req.body.desc,
     title:req.body.title, 
     content:req.body.content,
     thumb:req.body.thumb,
@@ -27,6 +28,7 @@ router.get('/article_all',(req,res)=>{
     let detailList = articles.map((item)=>{
       return {
         title:item.title,
+        desc:item.desc,
         art_id:item.art_id,
         thumb:item.thumb,
         time:item.time

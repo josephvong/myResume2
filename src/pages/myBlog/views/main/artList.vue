@@ -2,22 +2,21 @@
 <ul class="article-list" ref="artList">
  <li v-if="itemList.length" ref="artItem" class="article" v-for="(item,index) in itemList" :class="{active:findItem(index)}" :num="index"  ><!--  -->
     <div class="time-stamp">
-      <p class="date">08-08</p>
-      <p class="year">2017</p>
+      <p class="date">{{timeStampInit(item.time,'date')}}</p>
+      <p class="year">{{timeStampInit(item.time,'year')}}</p>
     </div> 
     <div class="point"></div>
   <a>
     <div class="triangle"></div> 
     <div class="art-title">{{item.title}}</div>
     <div class="art-content">
-      <div class="l-thumb">
-        <img :src='item.thumb' alt="">
+      <div class="l-thumb" :style="'backgroundImage:url('+item.thumb+')'">
+        <!-- <div class="thum-img"></div>
+        <img :src='item.thumb' alt=""> -->
       </div> 
       <div class="r-desc">
         <p class="detail">
-        {{index}}
-          一共是四个页面，首页，图文列表，图片列表，文字内容。此模板风格为中国古典风格，山水画墨迹成就一幅江南墨卷。页面首页设计较为简单，突出文章重点。二级栏目导航菜单。图文列表显示，可用作相册展示.一共是四个页面
-         
+          {{item.desc}}
         </p>
         <div class="down">
           <p class="art-tag">CSS</p>
@@ -31,7 +30,7 @@
 </template>
 
 <script> 
-import {style,throttle} from 'common/js/cusFn'
+import {style,throttle,dateFormat} from 'common/js/cusFn'
 export default {
   name: 'artList',
   props:{
@@ -51,6 +50,15 @@ export default {
 
   },
   methods:{
+    timeStampInit(time,tag){
+      let date = new Date(parseInt(time))
+      if(tag=="date"){
+        return dateFormat(date,'MM-dd')
+      }
+      if(tag=="year"){
+        return dateFormat(date,'yyyy')
+      }
+    },
     // 获取所有list Item 节点 的 “BoundingClientRect().top”（节点 相对于视口的top）
     getItemTop(){ // 输出一个数组（所有节点的 top值）
       let artList = this.$refs.artItem 
@@ -218,12 +226,14 @@ export default {
         .l-thumb 
           flex 0 0 200px
           width 200px
+          height 133px
           margin-right 15px
-          img
-            display block
-            width 100%
+          background no-repeat
+          background-color rgba(7,84,152,0.4)
+          background-size contain
+          background-position center center 
         .r-desc
-          flex 0 1 auto
+          flex 1 1 auto
           .detail
             height 80px
             line-height 20px
@@ -278,10 +288,14 @@ export default {
     .l-thumb
       flex 0 0 100%
       width 100%
+      height 15rem
       margin-bottom 10px
     .r-desc 
       flex 0 0 100%
       width 100%
+      .detail
+        height 40px 
+        multiline-hide(2)
       .down
         flex-direction column-reverse
         .art-tag

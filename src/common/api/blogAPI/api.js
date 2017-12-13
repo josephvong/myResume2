@@ -42,6 +42,7 @@ export function getInfoAPI(token){
 export function articlePostApi(article){
   return axios.post('api/article_post',{
     title:article.title,
+    desc:article.desc,
     content:article.content,
     art_id:article.art_id, 
     thumb:article.thumb,

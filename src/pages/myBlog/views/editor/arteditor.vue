@@ -7,13 +7,19 @@
         <input class="input" type="text" placeholder="输入标题" v-model="title" >
       </p>
     </div>
+    <div class="field">
+      <div class="control">
+        <textarea class="textarea" type="text" rows="4" placeholder="文章描述" v-model="art_desc"></textarea>
+      </div>
+    </div>
+    
     <!--图片上传控件，组件imgUpload 仅封装了个隐藏的 input，其他显示节点在 solt中插入 -->
     <div class="field">
       <imgUpload ref="imgUpload" class="img-upload" @imgUrlChange="thumbNailChange">
         <template slot="label" slot-scope="props">
           <div class="file has-name">
-            <label class="file-label" :for="props.input_id" style="display:inline-flex">
-              <span class="file-cta">
+            <label class="file-label" :for="props.input_id" style="display:inline-flex;" @touchend="fileClick(props.input_id)" >
+              <span class="file-cta" style="point-events:none">
                 <span class="file-icon">
                   <i class="fa fa-upload"></i>
                 </span>
@@ -21,7 +27,7 @@
                   上传图片
                 </span>
               </span>
-              <span class="file-name">
+              <span class="file-name" style="point-events:none">
                 {{props.picValName}} 
               </span>
             </label>
@@ -58,6 +64,7 @@ export default {
   data () {
     return {
       title:'',
+      art_desc:'',
       thumbnailUrl:'',
     }
   },
@@ -74,6 +81,9 @@ export default {
     myEditor,imgUpload
   },
   methods:{
+    fileClick(id){ 
+      setTimeout(()=>{this.$refs.imgUpload.$el.querySelector('#'+id).click()},5)  
+    },
     thumbNailChange(newUrl){
       this.thumbnailUrl = newUrl
     },
@@ -82,10 +92,15 @@ export default {
       let time = new Date().getTime()
       let art_id = `art_${time}`
       let title = this.title
+      let desc = this.art_desc
       let thumb = this.thumbnailUrl
-      if(!title){return}
+      if(!title || !desc){
+        alert('需要填写标题和文章描述')
+        return  
+      } 
       articlePostApi({
         content,
+        desc,
         time,
         art_id,
         thumb,
@@ -96,7 +111,8 @@ export default {
         this.$refs.imgUpload.clearInput() // 清空 图片 
         this.$refs.myEditor.removeContent() // 清空 内容输入框
         this.title = ''
-      })
+        this.art_desc = ''
+      }) 
       
     }
   }, 
@@ -113,6 +129,7 @@ export default {
 </style>
 <style scope lang="stylus" rel="stylesheet/stylus">
 //@import '~style/mixin.styl'
+
 .img-upload .show  
   width: 200px;  
   height: 200px;  

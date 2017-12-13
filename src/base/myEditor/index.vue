@@ -1,7 +1,7 @@
 <template> 
  
 <div class="editor-wrap" style="min-height:250px;">
-  <quill-editor ref="textEditor" style="height:200px"
+  <quill-editor ref="textEditor" style="height:200px" 
     v-model="content"
     :options="editorOption"
   >
@@ -22,7 +22,10 @@ import 'quill/dist/quill.bubble.css'
 export default {
   name: 'myEditor',
   props:{
-
+    placeholder:{
+      type:String,
+      default:"输入内容"
+    }
   },
   data () {
     return {
@@ -30,7 +33,7 @@ export default {
       editorOption:{
         modules:{
           toolbar:[
-            [{'size':['small',false,'large']}], 
+            [{'size':['small',false, 'large', 'huge']}], 
             [{ 'header': [1,2,3,4,5,6,false]}],
             ['bold','italic', 'underline', 'strike'],
             ['blockquote', 'code-block',{'list':'ordered'},{'list':'bullet'}],
@@ -42,7 +45,7 @@ export default {
             delay: 1000,
             maxStack: 50,
             userOnly: false
-          },
+          }, 
           imageDrop: true,
           imageResize:{
             displayStyles: {
@@ -52,7 +55,8 @@ export default {
             },
             modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
           }
-        }
+        },
+        placeholder: this.placeholder, 
       }
     }
   },
