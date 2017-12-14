@@ -7,5 +7,6 @@ module.exports = mongoose.model("Article",new Schema({
   desc:String,
   content:String, 
   thumb:String,
-  time:String
+  time:String,
+  tags:Array
 }))

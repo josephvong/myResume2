@@ -10,7 +10,17 @@
         
 </template>
 
-<script> 
+<script>
+/*
+quill-image-drop-module 使用：
+1.npm install 之后，在 webpack (base) 中配置如下：
+  babel-loader 解析器 include:[......, resolve('node_modules/.1.0.3@quill-image-drop-module')] 专门对 image-drop-module 文件夹进行 解析
+    原因 ： image-drop-module 的index.js 为 es6 语法，需要进行转化
+  添加 Plugin: 将 Quill 暴露成全局的 变量， 可以给 img-drop-module 成功调用
+  new webpack.ProvidePlugin({
+    'window.Quill': 'quill'
+  }) 
+*/ 
 import {quillEditor, Quill } from 'vue-quill-editor'
 import { ImageDrop } from 'quill-image-drop-module'
 import ImageResize from 'quill-image-resize-module'

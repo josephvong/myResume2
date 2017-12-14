@@ -1,10 +1,11 @@
 <template> 
 <div class="container" style="padding:30px 10px 0">
+  
   <h1 class="title" style="font-size:2rem">全部文章</h1>
+
   <div class="main-wrap">
     <div class="left">
-      <artList ref="artList" :itemList="articleList" ></artList>
-     
+      <artList ref="artList" :itemList="articleList" ></artList> 
     </div>
     <div class="right">
       <ul>
@@ -36,7 +37,7 @@ export default {
   created(){ 
     this.getListData().then((res)=>{ 
       this.$refs.artList.listInit()
-    })
+    }) 
   },
   methods:{
     getListData(){

@@ -29,29 +29,20 @@
             <router-link to="/" class="link is-info">首页</router-link>
           </p>
           <p class="level-item ">
-            <a class="link is-info">分类A</a>
-          </p>
-          
+            <a class="link is-info">文章</a>
+          </p> 
           <p class="level-item ">
-            <a class="link is-info">分类B</a>
+            <a class="link is-info">简介</a>
           </p>
           <p class="level-item ">
-            <a class="link is-info">分类C</a>
+            <a class="link is-info">留言</a>
           </p> 
         </nav>
       </div>
-    </div>  
+    </div>
     <div class="container">   
       <div class="layout-main">
-        <router-view></router-view> 
-        <!--  <section class="section">
-          <div class="container">
-            <h1 class="title">Section</h1>
-            <h2 class="subtitle">
-              A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
-            </h2>
-          </div>
-        </section>  -->
+        <router-view></router-view>  
       </div>
     </div>
    <!--  <div class="side-layer">

@@ -11,15 +11,13 @@
     <div class="art-title">{{item.title}}</div>
     <div class="art-content">
       <div class="l-thumb" :style="'backgroundImage:url('+item.thumb+')'">
-        <!-- <div class="thum-img"></div>
-        <img :src='item.thumb' alt=""> -->
       </div> 
       <div class="r-desc">
         <p class="detail">
           {{item.desc}}
         </p>
         <div class="down">
-          <p class="art-tag">CSS</p>
+          <p class="art-tag">{{item.tags.join(' , ')}}</p>
           <a class="art-link">进入文章</a>
         </div>
       </div>
@@ -60,13 +58,13 @@ export default {
       }
     },
     // 获取所有list Item 节点 的 “BoundingClientRect().top”（节点 相对于视口的top）
-    getItemTop(){ // 输出一个数组（所有节点的 top值）
+    getItemTop(){ // 输出一个数组（所有节点的 top值） 
       let artList = this.$refs.artItem 
       let arr = []
       for (let i = 0; i < artList.length; i++) {
         arr.push(artList[i].getBoundingClientRect().top)
       }
-      return arr 
+      return arr  
     },
 
     // 获取 出现在当前视口 范围的 item节点 列表
@@ -146,10 +144,9 @@ export default {
   mounted(){
     let This = this
     let winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-   
+    
 
-    this.scrollFn = function(){ // 将滚动事件 函数 命名
-      //throttle(This.getViewItem(This.getItemTop(),winH),50) // 节流执行 
+    this.scrollFn = function(){ // 将滚动事件 函数 命名 
       This.getViewItem(This.getItemTop(),winH)
     } 
 
@@ -245,10 +242,11 @@ export default {
             display flex
             justify-content space-between
             .art-tag
-              flex 0 0 30%  
+              flex 0 0 40%  
               line-height 30px
               font-size 14px
-              color white 
+              color white
+              no-wrap() 
             .art-link
               flex 0 0 40%
               text-align center

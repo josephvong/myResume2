@@ -21,9 +21,9 @@ mongoose.connect(dburl)
 
 
 
-app.get('/',function(req,res){
+/*app.get('/',function(req,res){
   res.send('myblog restful api')
-})
+})*/
 
 //===============加密设置===============
 var jwt =require('jsonwebtoken')
@@ -42,5 +42,7 @@ app.use('/api',infoRouter)
 var articleRouter = require('./routes/article')
 app.use('/api',articleRouter)
 
+//================静态文件=====================
+app.use('/',express.static(__dirname+'/staticFile')) 
 
 app.listen(port);

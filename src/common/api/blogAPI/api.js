@@ -46,7 +46,8 @@ export function articlePostApi(article){
     content:article.content,
     art_id:article.art_id, 
     thumb:article.thumb,
-    time:article.time
+    time:article.time,
+    tags:article.tags
   }).then((res)=>{
     return Promise.resolve(res.data)
   }).catch((err)=>{
@@ -57,6 +58,18 @@ export function articlePostApi(article){
 export function articleGetApi(){
   return axios.get('api/article_all').then((res)=>{
     return Promise.resolve(res.data)
+  }).catch((err)=>{
+    return Promise.reject(err)
+  })
+}
+
+//==================文章标签获取==========================
+export function tagsGetApi(){
+  return axios.get('api/article_tags').then((res)=>{
+    let arr = res.data.tags.map((item)=>{
+      return item.tag_name
+    })
+    return Promise.resolve(arr)
   }).catch((err)=>{
     return Promise.reject(err)
   })

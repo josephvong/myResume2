@@ -44,7 +44,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test'),resolve('node_modules/.1.0.3@quill-image-drop-module')] // 由于使用了quill-image-drop-module,需要对此模块进行解析
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

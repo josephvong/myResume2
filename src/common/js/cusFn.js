@@ -141,7 +141,13 @@ export function dateFormat(oDate,fmt) {
 }
 
 
-
+//------------------------------------------数组去重----------------------------------------------------
+export function unique(arr){ // 排序去重方法
+  return arr.concat().sort().filter(function(item,index,arr){ // 现将数组排序后 用filter() 过滤输出去重
+    // index 不为0  且  当前 item 不等于上一个 item
+    return !index || item !==arr[index-1]
+  })
+}
 
 
 
