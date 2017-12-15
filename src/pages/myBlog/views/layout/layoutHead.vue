@@ -16,7 +16,7 @@
       <ul class="navbar-start tool-menu">
         <router-link class="navbar-item" to="/articleedit" v-if="role=='admin'">写文章</router-link>
         <li class="navbar-item" v-if="role=='admin'">权限</li>
-        <li class="navbar-item" v-if="role=='user'">留言箱</li>
+        <router-link class="navbar-item" v-if="role!='guest'" to="/infoedit">留言箱</router-link>
         <li class="navbar-item" v-if="role!='guest'">个人</li>  
         <li class="navbar-item">我的GitHub</li>
       </ul> 
@@ -75,7 +75,7 @@
           <li @click="routerGo('articleedit')"> 
             <a class="navbar-item"  v-if="role=='admin'"> 写文章 </a>
           </li>
-          <li v-if="role=='user'" @click="routerGo('')"><a> 留言箱 </a></li>
+          <li v-if="role!='guest'" @click="routerGo('infoedit')"><a> 留言箱 </a></li>
           <li v-if="role=='admin'" @click="routerGo('')"><a> 权限 </a></li>
           <li v-if="role!='guest'" @click="routerGo('')"><a> 个人 </a></li>
           <li @click="routerGo('')"><a> 我的GitHub </a></li> 

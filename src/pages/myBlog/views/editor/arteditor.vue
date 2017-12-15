@@ -57,23 +57,29 @@
     
     <!--文章输入框-->
     <div>
-     <myEditor ref="myEditor"></myEditor> 
+     <myEditor ref="myEditor" :height='500'></myEditor> 
     </div>
 
     <!--提交按钮-->
     <div>
       <button class="button" @click="outputCont">输出</button>
+      <button class="button" @click="showContent">预览</button>
     </div>
+  
   </div> 
+  <div  v-html="content"></div>
 </section>  
 </template>
 
 <script>
 import {unique} from 'common/js/cusFn' 
 import myEditor from 'base/myEditor'
-import imgUpload from 'base/imgUpload'
+import imgUpload from 'base/imgUpload' 
 import tagModal from './tagModal' 
 import {articlePostApi, tagsGetApi} from 'api/blogAPI/api'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 //import {mapGetters, mapActions } from 'vuex' 
 export default {
   name: 'arteditor',
@@ -86,7 +92,8 @@ export default {
       art_desc:'',
       kwString:'',
       thumbnailUrl:'',
-      tagList:[]
+      tagList:[],
+      content:''
     }
   },
   computed:{ 
@@ -97,15 +104,14 @@ export default {
   },
   created(){
     // 获取 标签列表
-    tagsGetApi().then((res)=>{
-      console.log(res) 
+    tagsGetApi().then((res)=>{ 
       this.tagList = res
     })
   },
   components:{
     imgUpload,
     myEditor,
-    tagModal
+    tagModal 
   },
   methods:{
     openTagModal(){
@@ -116,6 +122,15 @@ export default {
       let reg = /[,，]$/;
       let addString = this.kwString=='' || reg.test(this.kwString)?`${str}`:`,${str}`
       this.kwString += addString
+    },
+
+    getKeyWord(str){
+      let reg = /[,，]$/;
+      if(reg.test(str)){ 
+        str = str.substring(0,str.length-1)
+      }
+      return str
+
     },
 
     // 上传图片label 的 点击处理事件，适配移动端（异步触发 file input）
@@ -143,7 +158,7 @@ export default {
       let title = this.title
       let desc = this.art_desc
       let thumb = this.thumbnailUrl
-      let tags = unique(this.kwString.split(/[,，]/)) 
+      let tags = unique(this.getKeyWord(this.kwString).split(/[,，]/)) 
       if(!title || !desc){
         alert('需要填写标题和文章描述')
         return  
@@ -161,6 +176,10 @@ export default {
         alert("发布曾共")
       }) 
       
+    },
+
+    showContent(){
+      this.content = this.$refs.myEditor.outputContent()
     }
   }, 
   mounted(){ 

@@ -1,12 +1,12 @@
 <template> 
 <ul class="article-list" ref="artList">
- <li v-if="itemList.length" ref="artItem" class="article" v-for="(item,index) in itemList" :class="{active:findItem(index)}" :num="index"  ><!--  -->
+ <li ref="artItem" class="article" v-for="(item,index) in itemList" :class="{active:findItem(index)}" :num="index"  ><!--  -->
     <div class="time-stamp">
       <p class="date">{{timeStampInit(item.time,'date')}}</p>
       <p class="year">{{timeStampInit(item.time,'year')}}</p>
     </div> 
     <div class="point"></div>
-  <a>
+  <router-link :to="`/article/${item.art_id}`">
     <div class="triangle"></div> 
     <div class="art-title">{{item.title}}</div>
     <div class="art-content">
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-  </a>
+  </router-link>
  </li>
 </ul>   
 </template>
@@ -61,6 +61,7 @@ export default {
     getItemTop(){ // 输出一个数组（所有节点的 top值） 
       let artList = this.$refs.artItem 
       let arr = []
+      
       for (let i = 0; i < artList.length; i++) {
         arr.push(artList[i].getBoundingClientRect().top)
       }
@@ -73,7 +74,7 @@ export default {
       let overH = winW<=425 ? -220 : -100  // 超出高度
       let vitems = []
       for (let i = 0; i < arr.length; i++) {
-        if(arr[i]>overH && arr[i]<vh){
+        if(arr[i]>overH && arr[i]<vh+30){
           vitems.push(i)
         }
       }
@@ -104,10 +105,11 @@ export default {
 
     listInit(){
       let winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+      let This = this
       // 先执行 首次加载 时的 列表显示
-      this.$nextTick(()=>{
+      this.$nextTick(()=>{ 
         this.getViewItem(this.getItemTop(),winH) 
-      }) 
+      })
     }, 
 
     // 让一个 dom节点 输出 ‘overflow’属性值的函数（工具函数）  
@@ -140,23 +142,27 @@ export default {
         parent = parent.parentNode
       }
     }
+  },
+  watch:{
+    itemList(){
+      this.listInit()
+    }
   }, 
   mounted(){
     let This = this
-    let winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+    let winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
     
-
-    this.scrollFn = function(){ // 将滚动事件 函数 命名 
-      This.getViewItem(This.getItemTop(),winH)
-    } 
-
-    // 确定 监听 scroll 事件的 dom节点
-    let scrollParent = this.isWindowScroll();
-    scrollParent.addEventListener('scroll', this.scrollFn, false) // 添加事件监听
+    // 将滚动事件 函数 命名 
+    this.scrollFn = function(){  This.getViewItem(This.getItemTop(),winH) }
+     
+    setTimeout(()=>{ // 设置 延时50毫秒 绑定事件（因为在路由切换过程中会触发 scroll 事件）
+      let scrollParent = This.isWindowScroll();// 确定 监听 scroll 事件的 dom节点
+      scrollParent.addEventListener('scroll', This.scrollFn, false) // 添加事件监听
+    },50)
   },
   destroyed(){ 
     let scrollParent = this.isWindowScroll() 
-    scrollParent.removeEventListener('scroll',this.scrollFn, false) // 解除事件监听
+    scrollParent.removeEventListener('scroll',this.scrollFn, false) // 解除事件监听*/
   }
 }
 </script>

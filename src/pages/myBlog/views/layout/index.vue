@@ -42,7 +42,9 @@
     </div>
     <div class="container">   
       <div class="layout-main">
-        <router-view></router-view>  
+        <keep-alive>  
+          <router-view></router-view>  
+        </keep-alive>
       </div>
     </div>
    <!--  <div class="side-layer">

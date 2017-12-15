@@ -52,6 +52,17 @@ router.post('/article_post',(req,res)=>{
 })
 
 
+router.post('/article_get',(req,res)=>{
+  Article.findOne({art_id:req.body.article_id},(err,article)=>{
+    if(err){res.json({success:false,message:'文章获取失败'})}
+    if(!article){
+      res.json({ success:false,  message:'文章不存在' }) 
+    }else{
+      res.json({ success:true,  article:article })
+    } 
+  })
+})
+
 router.get('/article_all',(req,res)=>{
   Article.find({},(err,articles)=>{
     let detailList = articles.map((item)=>{

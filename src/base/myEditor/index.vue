@@ -1,7 +1,7 @@
 <template> 
  
-<div class="editor-wrap" style="min-height:250px;">
-  <quill-editor ref="textEditor" style="height:200px" 
+<div class="editor-wrap">
+  <quill-editor ref="textEditor" :style="{height:`${height}px`}" 
     v-model="content"
     :options="editorOption"
   >
@@ -35,6 +35,10 @@ export default {
     placeholder:{
       type:String,
       default:"输入内容"
+    },
+    height:{
+      type:Number,
+      default: 200
     }
   },
   data () {
@@ -95,7 +99,9 @@ export default {
 </script> 
 <style scope lang="stylus" rel="stylesheet/stylus">
 //@import '~style/mixin.styl'
- 
+.editor-wrap
+  min-height 200px
+  padding-bottom 100px
  
  
 </style>

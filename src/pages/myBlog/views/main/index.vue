@@ -34,10 +34,9 @@ export default {
   components:{
     artList
   },
-  created(){ 
-    this.getListData().then((res)=>{ 
-      this.$refs.artList.listInit()
-    }) 
+  created(){
+    this.getListData() // 获取列表数据
+    
   },
   methods:{
     getListData(){
