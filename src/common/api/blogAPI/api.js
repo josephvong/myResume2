@@ -39,6 +39,7 @@ export function getInfoAPI(token){
 }
 
 //=============文章发布等api================
+// 文章发布
 export function articlePostApi(article){
   return axios.post('api/article_post',{
     title:article.title,
@@ -55,6 +56,19 @@ export function articlePostApi(article){
   })
 }
 
+//单篇文章获取
+export function articleReadApi(article_id){
+  return axios.post('api/article_get',{
+    article_id:article_id
+  }).then((res)=>{
+    return Promise.resolve(res.data)
+  }).catch((err)=>{
+    return Promise.reject(err)
+  })
+}
+
+
+// 文章列表获取
 export function articleGetApi(){
   return axios.get('api/article_all').then((res)=>{
     return Promise.resolve(res.data)

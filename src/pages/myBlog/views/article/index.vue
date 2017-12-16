@@ -1,16 +1,17 @@
 <template> 
 <section class="section">
   <div class="container" >
-    <h1 class="title">文章</h1> 
-    
-    文章内容
-      
+    <h1 class="title">{{article.title}}</h1>
+    <a href="#/article/art_1513396765741#art_CCC">CCC</a> 
+    <ul><li v-for="i in 50">{{i}}</li></ul>
+    <div id="art_CCC">CCCC</div>
+    <ul><li v-for="i in 50">{{i}}</li></ul>  
   </div> 
 </section>  
 </template>
 
 <script>
-   
+import {articleReadApi} from 'api/blogAPI/api'   
 export default {
   name: 'article',
   props:{
@@ -18,7 +19,8 @@ export default {
   },
   data () {
     return {
-      articleId: this.$route.params
+      articleId: this.$route.params.article_id,
+      article:{},
     }
   },
   computed:{ 
@@ -28,12 +30,18 @@ export default {
     })*/ 
   },
   created(){
-    
+    /*articleReadApi(this.articleId).then((res)=>{ 
+      this.article = res
+    })*/
   },
   activated(){ 
-    this.$watch("articleId",(newVal)=>{
-      console.log(newVal)
-    })
+    articleReadApi(this.articleId).then((res)=>{
+      if(res.success){
+        this.article = res.article
+      }else{
+        this.$router.push({path:'/main'})
+      } 
+    }) 
   },
   components:{ 
     

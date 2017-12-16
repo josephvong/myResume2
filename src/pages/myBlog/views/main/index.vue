@@ -35,8 +35,10 @@ export default {
     artList
   },
   created(){
-    this.getListData() // 获取列表数据
     
+  },
+  activated(){
+    this.getListData() // 获取列表数据
   },
   methods:{
     getListData(){
