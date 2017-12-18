@@ -69,8 +69,18 @@ export function articleReadApi(article_id){
 
 
 // 文章列表获取
-export function articleGetApi(){
-  return axios.get('api/article_all').then((res)=>{
+/*export function articleListApi(){
+  return axios.get('api/article_list').then((res)=>{
+    return Promise.resolve(res.data)
+  }).catch((err)=>{
+    return Promise.reject(err)
+  })
+}*/
+
+export function articleListApi(tag){
+  return axios.post('api/article_list',{
+    tag:tag||'all'
+  }).then((res)=>{
     return Promise.resolve(res.data)
   }).catch((err)=>{
     return Promise.reject(err)

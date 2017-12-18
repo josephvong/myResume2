@@ -74,7 +74,7 @@ export default {
       let overH = winW<=425 ? -220 : -100  // 超出高度
       let vitems = []
       for (let i = 0; i < arr.length; i++) {
-        if(arr[i]>overH && arr[i]<vh+30){
+        if(arr[i]>overH && arr[i]<vh-20){
           vitems.push(i)
         }
       }
@@ -103,6 +103,7 @@ export default {
       }
     },
 
+    // 列表初始化
     listInit(){
       let winH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
       let This = this
@@ -144,8 +145,10 @@ export default {
     }
   },
   watch:{
-    itemList(){
-      this.listInit()
+    itemList(list){
+      if(list.length){
+        this.listInit()
+      }
     }
   }, 
   mounted(){

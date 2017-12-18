@@ -16,15 +16,9 @@
       </div>
     </div>
 
-    <!--标签输入-->
-    <div class="field">
-      <p class="control">
-        <input class="input" type="text" placeholder="标签" v-model="kwString" >
-      </p>
-      <p @click="openTagModal">+ 过往的标签</p> 
-    </div>
-    <!--标签选择弹窗-->
-    <tagModal :tagList="tagList" ref="tagModal" @confirmSel="concatKeyWord"></tagModal> 
+    <!--标签输入 --> 
+    <tagEditor ref="tagEditor" :tagList = "tagList"></tagEditor>  
+
 
     <!--图片上传控件，组件imgUpload 仅封装了个隐藏的 input，其他显示节点在 solt中插入 -->
     <div class="field">
@@ -74,8 +68,9 @@
 <script>
 import {unique} from 'common/js/cusFn' 
 import myEditor from 'base/myEditor'
-import imgUpload from 'base/imgUpload' 
-import tagModal from './tagModal' 
+import imgUpload from 'base/imgUpload'  
+import tagEditor from './tagEditor'
+
 import {articlePostApi, tagsGetApi} from 'api/blogAPI/api'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
@@ -93,7 +88,8 @@ export default {
       kwString:'',
       thumbnailUrl:'',
       tagList:[],
-      content:''
+      content:'',
+  
     }
   },
   computed:{ 
@@ -103,34 +99,21 @@ export default {
     })*/ 
   },
   created(){
-    // 获取 标签列表
-    tagsGetApi().then((res)=>{ 
-      this.tagList = res
-    })
+    // 获取 可选标签列表
+    this.getTagList()
+     
   },
   components:{
     imgUpload,
-    myEditor,
-    tagModal 
+    myEditor, 
+    tagEditor 
   },
   methods:{
-    openTagModal(){
-      this.$refs.tagModal.openModal()
-    }, 
-
-    concatKeyWord(str){ 
-      let reg = /[,，]$/;
-      let addString = this.kwString=='' || reg.test(this.kwString)?`${str}`:`,${str}`
-      this.kwString += addString
-    },
-
-    getKeyWord(str){
-      let reg = /[,，]$/;
-      if(reg.test(str)){ 
-        str = str.substring(0,str.length-1)
-      }
-      return str
-
+    // 获取标签列表
+    getTagList(){
+      tagsGetApi().then((res)=>{ 
+        this.tagList = res
+      })
     },
 
     // 上传图片label 的 点击处理事件，适配移动端（异步触发 file input）
@@ -148,6 +131,8 @@ export default {
       this.$refs.myEditor.removeContent() // 清空 内容输入框
       this.title = ''
       this.art_desc = ''
+      this.$refs.tagEditor.clearTags()// 清空填写标签列表
+      this.getTagList()  // 获取可选标签列表
     },
 
     // 输出 编辑内容
@@ -158,7 +143,7 @@ export default {
       let title = this.title
       let desc = this.art_desc
       let thumb = this.thumbnailUrl
-      let tags = unique(this.getKeyWord(this.kwString).split(/[,，]/)) 
+      let tags = this.$refs.tagEditor.returnTags() //unique(this.getKeyWord(this.kwString).split(/[,，]/)) 
       if(!title || !desc){
         alert('需要填写标题和文章描述')
         return  
@@ -222,6 +207,13 @@ export default {
     background-repeat: no-repeat;  
     background-size: cover;   
  
- 
+.tags
+  position relative
+  padding-left:50px
+  &:before
+    content:'标签:'
+    position absolute
+    left 0
+    top 0
 </style>
 

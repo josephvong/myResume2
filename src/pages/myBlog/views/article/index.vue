@@ -1,11 +1,7 @@
 <template> 
 <section class="section">
   <div class="container" >
-    <h1 class="title">{{article.title}}</h1>
-    <a href="#/article/art_1513396765741#art_CCC">CCC</a> 
-    <ul><li v-for="i in 50">{{i}}</li></ul>
-    <div id="art_CCC">CCCC</div>
-    <ul><li v-for="i in 50">{{i}}</li></ul>  
+    <h1 class="title">{{article.title}}</h1>  
   </div> 
 </section>  
 </template>
@@ -19,7 +15,7 @@ export default {
   },
   data () {
     return {
-      articleId: this.$route.params.article_id,
+      articleId: '',//this.$route.params.article_id,
       article:{},
     }
   },
@@ -29,14 +25,12 @@ export default {
       name: 'name',     
     })*/ 
   },
-  created(){
-    /*articleReadApi(this.articleId).then((res)=>{ 
-      this.article = res
-    })*/
+  created(){ 
   },
   activated(){ 
+    this.articleId = this.$route.params.article_id 
     articleReadApi(this.articleId).then((res)=>{
-      if(res.success){
+      if(res.success){ 
         this.article = res.article
       }else{
         this.$router.push({path:'/main'})

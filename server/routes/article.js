@@ -4,6 +4,7 @@ var router = express.Router();
 var Article = require('../models/article')
 var Tags = require('../models/tags')
 
+// 保存标签的判断函数
 function tagSave(tags){
   return new Promise((resolve,reject)=>{ 
     for (var i = 0; i < tags.length; i++) {
@@ -63,8 +64,9 @@ router.post('/article_get',(req,res)=>{
   })
 })
 
-router.get('/article_all',(req,res)=>{
-  Article.find({},(err,articles)=>{
+router.post('/article_list',(req,res)=>{
+  let findObj = req.body.tag=="all"?{}:{tags:req.body.tag}
+  Article.find(findObj,(err,articles)=>{
     let detailList = articles.map((item)=>{
       return {
         title:item.title,
@@ -76,6 +78,23 @@ router.get('/article_all',(req,res)=>{
       }
     }).reverse() 
     res.json({ articles:detailList })
+  })
+})
+
+router.post('/article_list_type',(req,res)=>{
+  Article.find({tags:req.body.tag},(err,articles)=>{
+    /*let detailList = articles.map((item)=>{
+      return {
+        title:item.title,
+        desc:item.desc,
+        art_id:item.art_id,
+        thumb:item.thumb,
+        time:item.time,
+        tags:item.tags
+      }
+    }).reverse() 
+    res.json({ articles:detailList })*/
+    res.json({ articles:articles })
   })
 })
 

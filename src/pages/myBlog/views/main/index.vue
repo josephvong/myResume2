@@ -1,6 +1,6 @@
 <template> 
 <div class="container" style="padding:30px 10px 0">
-  
+  <ul><li v-for="item in tagsList">{{item}}</li></ul>
   <h1 class="title" style="font-size:2rem">全部文章</h1>
 
   <div class="main-wrap">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {articleGetApi} from 'api/blogAPI/api'
+import {articleListApi,tagsGetApi} from 'api/blogAPI/api'
 import artList from './artList' 
 export default {
   name: 'Main',
@@ -26,7 +26,8 @@ export default {
   },
   data () {
     return {
-      articleList:[]
+      articleList:[],
+      tagsList:[]
     }
   },
   computed:{ 
@@ -35,15 +36,17 @@ export default {
     artList
   },
   created(){
-    
+    this.getListData() // 获取列表数据
+    this.getTagData()
   },
   activated(){
-    this.getListData() // 获取列表数据
+    
   },
   methods:{
+    // 获取 文章列表
     getListData(){
       return new Promise((resolve,reject)=>{
-        articleGetApi().then((res)=>{ 
+        articleListApi('服务器').then((res)=>{ 
           if(res || res.articles.length){
             this.articleList = res.articles
             resolve(res.articles)
@@ -54,7 +57,15 @@ export default {
           reject(err)
         })
       })
+    },
+
+    // 获取 tag
+    getTagData(){
+      tagsGetApi().then((res)=>{
+        this.tagsList = res
+      })
     }
+
   }, 
   mounted(){ 
     
