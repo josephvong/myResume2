@@ -8,10 +8,11 @@
         <div class="sample">
           <progressCircle ref="progCircleA" :radius="200" :percent="parseInt(circle1)||0"></progressCircle>
         </div>
-        <input style="border:1px solid red" type="number" v-model="circle1" />
+        <input style="border:1px solid red" type="number" ref="input_a" />
+        <button @click="numberGo">click</button>
       </div>
     </div>
-    <div class="case-wrap">
+    <!-- <div class="case-wrap">
       <div class="case">
         <h3>多边形雷达图</h3>
         <div class="sample">
@@ -19,27 +20,20 @@
         </div>
         <input style="border:1px solid red" type="number"  />
       </div>
-    </div>
-    <div class="case-wrap">
-      <!-- <div class="animate" ref="anim" ></div> -->
-      <svg class="animate" ref="SVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" version="1.1"  width='200' height="200" style="" @click="animateGo">
-        <circle class="cir" ref="Circle" r="50" cx="50" cy="50" fill="transparent"
-                stroke-dasharray="314"
-        ><!--  stroke-dasharray="314"  stroke-dashoffset="314" -->
-        </circle>
-      </svg>
-    </div>
+    </div> -->
+     
   </div>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
+//import {goCount} from 'common/js/cusFn'
 //import {mapActions, mapGetters, mapState} from 'vuex'
 import mHeader from 'base/mHeader/mHeader'
-import progressCircle from 'base/progressCircle/progressCircle'
+import progressCircle from 'base/progressCircle/index'
 import radarChart from 'base/radarChart/radarChart'
 
-import animations from 'create-keyframe-animation'  // 动画插件
+//import animations from 'create-keyframe-animation'  // 动画插件
 
 export default {
   name: 'svgCaseView',
@@ -52,44 +46,16 @@ export default {
     }
   },
   computed:{
-
-  	//-------------------------------
-  	/*...mapGetters('sample',{
-  		sampleTest:'sampleTest'
-  	})*/
+ 
   },
   created(){
-    //if(this.$refs.Circle){
-      //this.Circle = this.$refs.Circle
-      //console.log(this.Circle)
-    //}
+     
   },
   methods:{
-    animateGo(){
-
-      let animation = {
-        0:{'stroke-dashoffset':'0'},
-        100:{'stroke-dashoffset':'314'}
-      }
-
-      animations.registerAnimation({
-        name:'move',
-        animation,
-        presets:{
-          duration:400,
-          easing:'linear',
-        },
-      })
-      //console.log(document.querySelector('circle.cir'))
-      /*setTimeout(()=>{
-        animations.runAnimation(this.$refs.circle,'move').then(()=>{
-          //alert("A")
-          animations.unregisterAnimation('move')  // 取消 动画的注册（动画插件api）
-          this.$refs.circle.style.animation = ''
-        })
-      },100)*/
-
-    }
+    numberGo(){
+      let num = this.$refs.input_a.value
+      //goCount(this.circle1,num,500,'linear')
+    } 
   	//-----------------------------
   	/*...mapActions({
   		saveSearchHistory:"saveSearchHistory",
@@ -104,9 +70,7 @@ export default {
     radarChart
   },
   mounted(){
-    this.Circle = this.$refs.Circle
-      console.log(this.Circle)
-    //console.log(this.$refs.Circle)
+     
   }
 }
 </script>

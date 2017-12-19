@@ -37,8 +37,7 @@ export default {
       default:10
     }, 
     cusTool:{ // 自定义 工具栏按钮
-      type:Array,
-      default:[]
+      type:Array
     }
   },
   data () {

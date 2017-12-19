@@ -9,14 +9,17 @@ function tagSave(tags){
   return new Promise((resolve,reject)=>{ 
     for (var i = 0; i < tags.length; i++) {
       let nowTag = tags[i]
-      Tags.findOne({tag_name:nowTag},(err,tag)=>{
+      // 找到对应的tag，找到后 art_num 累加1 （{$inc: {art_num:1}}）
+      Tags.findOneAndUpdate({tag_name:nowTag},{$inc: {art_num:1}},(err,tag)=>{
         if(err){reject(err);return false}
+        // 若没有找到 tag 创建一条数据
         if(!tag){
           let newTag = new Tags({
-            tag_name:nowTag
+            tag_name:nowTag,
+            art_num:1
           })
           newTag.save()
-        }
+        } 
       }) 
     }
     resolve()
@@ -47,8 +50,7 @@ router.post('/article_post',(req,res)=>{
       success:false,
       message:err
     })
-  })
-
+  }) 
   
 })
 
@@ -81,22 +83,6 @@ router.post('/article_list',(req,res)=>{
   })
 })
 
-router.post('/article_list_type',(req,res)=>{
-  Article.find({tags:req.body.tag},(err,articles)=>{
-    /*let detailList = articles.map((item)=>{
-      return {
-        title:item.title,
-        desc:item.desc,
-        art_id:item.art_id,
-        thumb:item.thumb,
-        time:item.time,
-        tags:item.tags
-      }
-    }).reverse() 
-    res.json({ articles:detailList })*/
-    res.json({ articles:articles })
-  })
-})
 
 router.get('/article_d_all',(req,res)=>{
   Article.remove({},()=>{

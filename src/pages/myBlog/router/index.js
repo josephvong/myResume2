@@ -33,14 +33,14 @@ export default new Router({
     {
       path: '/',  
       name:'主界面',
-      component:Layout,
+      component:Layout, 
       redirect:'/main',
       children:[
         {
           name:'文章编写',
           path:'articleedit',
           component:_import('editor/arteditor')
-        },
+        }, 
         {
           name:'留言编写',
           path:'infoedit',
@@ -52,23 +52,28 @@ export default new Router({
           component:_import('main/index')
         },
         {
+          name:'文章列表',
+          path:'artlist/:tag',  
+          component:_import('artList/index')
+        }, 
+        {
           name:'文章',
           path:'article/:article_id', 
           component:_import('article/index')
-        },
+        }, 
       ],
       beforeEnter(from,to,next){ // 每次进入 主界面 前 先判断 有没有登录 
         if(store.getters.token){
           store.dispatch('getInfoByToken',store.getters.token).then((res)=>{ 
             next()
           }).catch((err)=>{
-            console.log(err)
+            console.log('未登录')
             next()
           })
         }else{
           next()
         }
       }
-    }
+    }, 
   ]
 })

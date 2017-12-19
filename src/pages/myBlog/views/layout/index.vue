@@ -29,7 +29,7 @@
             <router-link to="/" class="link is-info">首页</router-link>
           </p>
           <p class="level-item ">
-            <a class="link is-info">文章</a>
+            <router-link to="/artlist/all" class="link is-info">文章</router-link>
           </p> 
           <p class="level-item ">
             <a class="link is-info">简介</a>

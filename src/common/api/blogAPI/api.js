@@ -88,10 +88,10 @@ export function articleListApi(tag){
 }
 
 //==================文章标签获取==========================
-export function tagsGetApi(){
-  return axios.get('api/article_tags').then((res)=>{
+export function tagsGetApi(flag){
+  return axios.get('api/article_tags').then((res)=>{ 
     let arr = res.data.tags.map((item)=>{
-      return item.tag_name
+      return flag?item:item.tag_name
     })
     return Promise.resolve(arr)
   }).catch((err)=>{

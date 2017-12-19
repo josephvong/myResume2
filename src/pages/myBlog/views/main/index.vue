@@ -1,24 +1,11 @@
-<template> 
+<template>
 <div class="container" style="padding:30px 10px 0">
-  <ul><li v-for="item in tagsList">{{item}}</li></ul>
-  <h1 class="title" style="font-size:2rem">全部文章</h1>
-
-  <div class="main-wrap">
-    <div class="left">
-      <artList ref="artList" :itemList="articleList" ></artList> 
-    </div>
-    <div class="right">
-      <ul>
-        <li v-for="i in 20">{{i}}</li>
-      </ul>
-    </div>
-  </div> 
-</div> 
+  <h1 class="title">首页</h1>
+</div>
 </template>
 
 <script>
-import {articleListApi,tagsGetApi} from 'api/blogAPI/api'
-import artList from './artList' 
+//import {mapGetters } from 'vuex' 
 export default {
   name: 'Main',
   props:{
@@ -26,86 +13,32 @@ export default {
   },
   data () {
     return {
-      articleList:[],
-      tagsList:[]
+
     }
   },
-  computed:{ 
-  },
-  components:{
-    artList
+  computed:{
+
+    //---------------------------------
+    /*...mapGetters({  // 获取 store 中的属性 ‘搜索历史’ 
+      name: 'name'
+    })*/ 
   },
   created(){
-    this.getListData() // 获取列表数据
-    this.getTagData()
-  },
-  activated(){
-    
+
   },
   methods:{
-    // 获取 文章列表
-    getListData(){
-      return new Promise((resolve,reject)=>{
-        articleListApi('服务器').then((res)=>{ 
-          if(res || res.articles.length){
-            this.articleList = res.articles
-            resolve(res.articles)
-          }else{
-            reject(res)
-          } 
-        }).catch((err)=>{
-          reject(err)
-        })
-      })
-    },
-
-    // 获取 tag
-    getTagData(){
-      tagsGetApi().then((res)=>{
-        this.tagsList = res
-      })
-    }
-
-  }, 
-  mounted(){ 
     
+  },
+  components:{
+     
+  }, 
+  mounted(){  
   }
 }
 </script>
 
-<style lang="stylus" scpoe rel="stylesheet/stylus">
-@import '~style/mixin.styl'
-.main-wrap
-  display flex
-  flex-flow row no-wrap
-  align-items stretch
-  .left
-    flex 1 1 auto
-    width auto
-    padding 0 20px 0 100px
-  .right 
-    flex 0 0 200px
-    width 200px 
-    padding 10px 
-
-@media only screen and (max-width : 1023px) 
-  .main-wrap .right
-    display none
-
-@media only screen and (max-width : 640px)
-  body
-    width 100%
-    overflow-x hidden
-    .main-wrap .left 
-      padding 0
-
-@media only screen and (max-width : 425px)
-  body
-    width 100%
-    overflow-x hidden
-  /*.main-wrap .left .article-list
-    border none
-    li.article
-      padding-left 0*/
+<style lang="stylus" rel="stylesheet/stylus" scope>
+//@import '~style/mixin.styl'
+ 
 </style>
 

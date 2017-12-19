@@ -150,6 +150,46 @@ export function unique(arr){ // 排序去重方法
 }
 
 
+//---------------------------------数字线性变动------------------------------------------------
+// 参数:change（要改变的对象） target（目标数字），time（过渡时间），way（过渡线性方式linear/easeIn/easeOut）
+/*export function goCount(change,target,time,way){
+  const moveFn = {
+    linear:function(t, b, c, d){  //匀速参数(备用)：(已用时,开始值，距离值，总时间)
+      return c*t/d + b;  // 开始+ 距离*（当前已用时/总时长）
+    },
+    easeIn:function(t, b, c, d){  //加速曲线(备用函数)
+      return c*(t/=d)*t + b;
+    },
+    easeOut:function(t, b, c, d){  //减速曲线
+      return -c *(t/=d)*(t-2) + b;
+    }
+  }
+  let chn = change 
+  let start=0; //开始数字 0
+  let end =target; // 结束数字
+  let startTime=now(); // 当前时间 的微秒数
+  let value=0;
+  let fn
+  clearInterval(timer);
+  //console.log(moveFn)
+  fn = way&&(way=='linear'||way=='easeIn'||way=='easeOut')?moveFn[way]:moveFn['linear']
+
+  let timer= setInterval(()=>{
+    let changeTime=now();
+    let t= time-Math.max(0,startTime-changeTime+time); // 计算当前循环的剩余时间
+    value=Math.round(fn(t,start,end,time));
+    //dom.innerHTML=value;
+    change = value
+    if(value==target){
+      clearInterval(timer);
+    }
+  },10)
+
+  function now(){
+    return (new Date()).getTime();
+  }
+} 
+*/
 
 
 

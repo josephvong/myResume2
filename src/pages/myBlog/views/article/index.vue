@@ -46,11 +46,13 @@ export default {
   mounted(){ 
 
   },
-  /*beforeRouteLeave (to, from, next) {
-    // 导航离开该组件的对应路由时调用
-    // 可以访问组件实例 `this`  
-    next()
-  }*/
+  beforeRouteLeave (to, from, next) {
+    if(to.fullPath=='/article'){
+      next({path:'/main'})
+    }else{
+      next() 
+    } 
+  }
 }
 </script>
 <style lang="css" >
