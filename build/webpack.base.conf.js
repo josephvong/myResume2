@@ -25,7 +25,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'common': resolve('src/common'), // 公共文件
+      'common': resolve('src/common'), // 公共文件 
       'style': resolve('src/common/style'), // 公共样式
       'api':resolve('src/common/api'), // 公共api
       'base':resolve('src/base'), // 公共组件 

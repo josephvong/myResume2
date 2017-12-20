@@ -2,7 +2,7 @@
   <div id="app"> 
      <div class="grid-wrap">
        <mGrid>
-          <a href="" class="m-grid" >
+          <a href="./myStyle.html" class="m-grid" >
             <div class="grid_icon">
               <img :src="require('assets/img/jizhi.png')" alt="">
             </div>
@@ -21,6 +21,12 @@
               <img :src="require('assets/img/jizhi.png')" alt="">
             </div>
             <p class="grid_label">我的博客</p> 
+          </a>
+          <a href="./myCalendar.html" class="m-grid" >
+            <div class="grid_icon">
+              <img :src="require('assets/img/jizhi.png')" alt="">
+            </div>
+            <p class="grid_label">日历控件</p> 
           </a>
        </mGrid>  
      </div>

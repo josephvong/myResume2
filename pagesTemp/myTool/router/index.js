@@ -77,6 +77,11 @@ export default new Router({
           path: 'fallflowview',
           component: _import('fallflow/index'),
           name: '瀑布流'
+        },
+        {
+          path: '3dswitchview',
+          component: _import('3dSwitchView/index'),
+          name: '图片旋转'
         }
       ]
     }
