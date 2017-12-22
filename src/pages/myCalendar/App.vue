@@ -1,6 +1,11 @@
 <template>
   <div id="app">
+    <br/>
     <myDatePicker class="date-picker"></myDatePicker>
+    <br/>
+    <myDatePicker class="date-picker" :rangeSel="true"></myDatePicker>
+    <br/>
+    <input type="date" />
   </div>
 </template>
 

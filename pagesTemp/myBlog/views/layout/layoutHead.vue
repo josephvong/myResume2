@@ -126,12 +126,13 @@ export default {
       },10)
     },
     routerGo(link){ 
-      this.$router.push({path:`/${link}`})
+      this.$router.push({path:`/${link}`}) 
       setTimeout(()=>{
         if(this.sliderShow){
+        this.sliderShow = false
           this.sliderClose()
-        } 
-      },10)
+        }
+      },5)
     },
     //================滑动收起======================
     sliderClose(){// 关闭 slider ( 侧边栏添加 收起动画)
