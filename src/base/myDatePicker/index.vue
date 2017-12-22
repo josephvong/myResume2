@@ -8,30 +8,38 @@
     </div>
 
     <div class="input-wrap" v-if="rangeSel"> 
-      <div class="input" @click="rangeSelClickHandle(startDate)">{{startDate}} -- {{endDate}}</div>
+      <div class="input" @click="rangeSelClickHandle(startDate)">
+        {{startDate}} -- {{endDate}}
+      </div>
       <img v-show="startDate||endDate"  @click="clearRangeDate" class="cancel-btn" src="./cancel.png" alt="">
     </div>  
 
     <div class="calendar-wrap" v-show="calendarShow">
       <div class="cal-panel-bg" @click="calendarClose"></div>
+      
       <div class="cal-panel">
         <div class="panel-head-wrap">
           <div class="panel-header date">
             <div class="left-btn" @click="monthChange(-1)"><</div>
-            <div class="year">{{calInfo.year}}</div>
-            <div class="month">{{calInfo.month}}月</div>
+            <div class="year" @click="qSelectYearOpen(calInfo.year)">
+              {{calInfo.year}}
+            </div>
+            <div class="month" @click="qSelMonthOpen(calInfo.year)">{{calInfo.month}}月</div>
             <div class="right-btn" @click="monthChange(1)">></div>
           </div>
-          <!-- <div class="panel-header year">
-            <div class="left-btn"><</div>
-            <div class="year">2000-2011</div> 
-            <div class="right-btn">></div>
+
+          <div class="panel-header year" v-show="qSelYearShow">
+            <div class="left-btn" @click="yearChange(-1)"><</div>
+            <div class="year">{{qSelYear-6}}--{{qSelYear+5}}</div> 
+            <div class="right-btn" @click="yearChange(1)">></div>
           </div>
-          <div class="panel-header month">
-            <div class="year">2000</div>  
-          </div> -->
+
+          <div class="panel-header month"  v-show="qSelMonthShow">
+            <div class="year">{{qSelYear}}</div>  
+          </div>
         </div>
         <div class="panel-body-wrap">
+          
           <div class="panel-date-body">
             <ul class="week-label clearfix">
               <li>日</li>
@@ -48,11 +56,17 @@
               <li class="pending" v-for="i in pending_num"></li>
             </ul>
           </div>
-          <div class="panel-year-body" >
-            
+
+          <div class="panel-year-body" v-show="qSelYearShow">
+            <ul class="clearfix">
+              <li v-for = 'n in 12' @click="qSelMonthOpen(qSelYear-6+n-1)"><em></em><span>{{qSelYear-6+n-1}}</span></li> 
+            </ul>
           </div>
-          <div class="panel-month-body">
-            
+
+          <div class="panel-month-body" v-show="qSelMonthShow">
+            <ul class="clearfix">
+              <li v-for = 'n in 12'  @click="qSelMonthClick(qSelYear,n)"><em></em><span>{{n}}</span></li> 
+            </ul>
           </div>
         </div>
       </div>
@@ -78,8 +92,7 @@ export default {
 
       startDate:'',  // 范围开始时间
       endDate:'',    // 范围结束时间
-      tempEndDate:'',
-
+      tempEndDate:'',  // 临时的 endDate
 
       calInfo:{
         year:0,
@@ -88,7 +101,12 @@ export default {
         fir_day:0,
         sel_date:-1,   // 日历 渲染控制数据
         disable_num:-1
-      }
+      },
+
+      qSelYearShow:false,
+      qSelYear:-1,
+
+      qSelMonthShow:false,
     }
   },
   computed:{
@@ -193,11 +211,7 @@ export default {
       } 
     },
 
-
-    monthChange(goFlag){
-      let nowY = new Date().getFullYear()
-      let nowM = new Date().getMonth()+1 
-      let nowD = new Date().getDate() 
+    monthChange(goFlag){ 
 
       let nMonth = dateFormat(new Date(this.tempDate),'MM')
       let nYear = dateFormat(new Date(this.tempDate),'yyyy')
@@ -228,9 +242,7 @@ export default {
       }else{
         if(this.inputDate && nYear == parseInt(this.inputDate.split('-')[0]) && nMonth == parseInt(this.inputDate.split('-')[1])){
           this.initCalendar(dObj,parseInt(this.inputDate.split('-')[2])) 
-        }/*else if(nYear == nowY && nMonth ==nowM){ 
-          this.initCalendar(dObj,nowD)
-        }*/else{
+        }else{
           this.initCalendar(dObj)
         } 
       }
@@ -252,6 +264,47 @@ export default {
         }
       }
       this.calendarShow = false
+
+      this.qSelYearShow = false // 快捷年菜单关闭
+      this.qSelMonthShow = false // 快捷月菜单关闭
+    },
+
+    // -------------年份快捷菜单-------------
+    qSelectYearOpen(qSelYear){
+      this.qSelYearShow = true
+      this.qSelYear = qSelYear
+    },
+    yearChange(goFlag){
+      this.qSelYear += goFlag*12
+    },
+
+    qSelMonthOpen(qSelYear){
+      this.qSelMonthShow = true
+      this.qSelYear = qSelYear
+    },
+
+    qSelMonthClick(year,month){ 
+      
+      let dObj =this.getDate(parseInt(year)+'/'+parseInt(month)+'/01') 
+      let nMonth = dateFormat(new Date(this.tempDate),'MM')
+      let nYear = dateFormat(new Date(this.tempDate),'yyyy')
+
+      if(this.rangeSel && this.startDate){
+        if(nYear == parseInt(this.startDate.split('-')[0]) && nMonth == parseInt(this.startDate.split('-')[1])){
+          this.initCalendar(dObj,parseInt(this.startDate.split('-')[2]))
+        }else{
+          this.initCalendar(dObj)
+        }
+      }else{
+        if(this.inputDate && nYear == parseInt(this.inputDate.split('-')[0]) && nMonth == parseInt(this.inputDate.split('-')[1])){
+          this.initCalendar(dObj,parseInt(this.inputDate.split('-')[2])) 
+        }else{
+          this.initCalendar(dObj)
+        } 
+      } 
+
+      this.qSelYearShow = false // 快捷年菜单关闭
+      this.qSelMonthShow = false // 快捷月菜单关闭
     }
 
      
@@ -306,82 +359,134 @@ export default {
   left 0
   bottom 0 
   z-index 1001
-  .panel-header
-    display flex
+  .panel-head-wrap
+    position relative
     height 40px
-    padding 0 20px
-    align-items center
-    justify-content space-between 
-    background yellow
-    &.month
-      justify-content center
-    .left-btn , .right-btn
-      line-height 24px
-      font-size 20px
-      padding 0 10px
-    .year, .month
-      line-height 24px
-      font-size 20px
-      padding 0 20px 
-  .panel-date-body .week-label
-    display flex
-    width 100%
-    border-top:1px solid #f5f5f5
-    border-bottom:1px solid #f5f5f5
-    background skyblue
-    li
-      flex 1
-      text-align center
-      line-height 30px
-  .panel-date-body .calendar
-    display flex
-    flex-flow row wrap
-    justify-content start
-    background:#f5f5f5
-    li
-      position relative
-      height 0
-      flex 1 1 calc(100%/7)
-      min-width calc(100%/7)
-      max-width calc(100%/7)
-      padding-top: 14.285714%
-      background white
-      for n in (0..6)
-        saturday = 8 - n  //  7n-n+1
-        sunday = 9 - n  // 7n-n+2 
-        &.expand-{n}
-          counter-reset:date 
-          flex n n 14.285714% * n
-          min-width 14.285714% * n
-          max-width 100%
-          background #f5f5f5
-          //n=0 sat=8,一行正常日期 是7个，正常日期前还有个.empty 节点
-          ~:nth-child(7n+{saturday}),
-          ~:nth-child(7n + {sunday})
-            color orange
-          if n==0
-            ~:nth-child(2)
+    .panel-header
+      position absolute
+      display flex
+      height 100%
+      width 100%
+      padding 0 20px
+      align-items center
+      justify-content space-between 
+      background yellow
+      &.month
+        justify-content center
+      .left-btn , .right-btn
+        line-height 24px
+        font-size 20px
+        padding 0 10px
+      .year, .month
+        line-height 24px
+        font-size 20px
+        padding 0 20px 
+  .panel-body-wrap
+    position relative
+    .panel-date-body .week-label
+      display flex
+      width 100%
+      border-top:1px solid #f5f5f5
+      border-bottom:1px solid #f5f5f5
+      background skyblue
+      li
+        flex 1
+        text-align center
+        line-height 30px
+    .panel-date-body .calendar
+      display flex
+      flex-flow row wrap
+      justify-content start
+      background:#f5f5f5
+      li
+        position relative
+        height 0
+        flex 1 1 calc(100%/7)
+        min-width calc(100%/7)
+        max-width calc(100%/7)
+        padding-top: 14.285714%
+        background white
+        for n in (0..6)
+          saturday = 8 - n  //  7n-n+1
+          sunday = 9 - n  // 7n-n+2 
+          &.expand-{n}
+            counter-reset:date 
+            flex n n 14.285714% * n
+            min-width 14.285714% * n
+            max-width 100%
+            background #f5f5f5
+            //n=0 sat=8,一行正常日期 是7个，正常日期前还有个.empty 节点
+            ~:nth-child(7n+{saturday}),
+            ~:nth-child(7n + {sunday})
               color orange
-      &:not(:first-child).actived 
-        background skyblue
-      &:not(:first-child).disabled 
-        background #f5f5f5        
-      &:not(:first-child):before
-        display:inline-block
-        position:absolute
-        content:counter(date)
-        counter-increment:date
-        width:100%
-        top:50%
-        left:0
-        height:20px
-        margin-top:-10px
-        text-align:center
-      &:not(:first-child).pending // 最后占位行
-        background: #f5f5f5
-        &:before
-          content:''  
-        
+            if n==0
+              ~:nth-child(2)
+                color orange
+        &:not(:first-child).actived 
+          background skyblue
+        &:not(:first-child).disabled 
+          background #f5f5f5        
+        &:not(:first-child):before
+          display:inline-block
+          position:absolute
+          content:counter(date)
+          counter-increment:date
+          width:100%
+          top:50%
+          left:0
+          height:20px
+          margin-top:-10px
+          text-align:center
+        &:not(:first-child).pending // 最后占位行
+          background: #f5f5f5
+          &:before
+            content:''  
+    .panel-year-body, .panel-month-body
+      position absolute
+      left 0
+      top 0
+      width 100%
+      height 100%
+      background white 
+      ul
+        width 100%
+        height 100%
+        li
+          float left
+          display block
+          position relative
+          height 25%
+          width 33.3333% 
+          text-align center
+          &:before    // 定义顶部边框样式 (<1px)
+            content ''
+            position absolute
+            top 0
+            left 0
+            right 0  // left right 为0 表示 width100%
+            height 1px
+            border-top 1px solid #D9D9D9 // 顶部边框颜色
+            color #D9D9D9
+            transform-origin 0 0
+            transform scaleY(0.5)  // Y轴方向 搜索0.5
+          &:after   // 定义 左边的 边框
+            content ''
+            position absolute
+            left 0
+            top 0
+            bottom 0
+            width 1px
+            border-left 1px solid #D9D9D9
+            color #D9D9D9
+            transform-origin 0 0
+            transform scaleX(0.5)
+          em
+            display inline-block
+            width 0
+            height 100%
+            vertical-align middle
+          span
+            vertical-align middle    
       
       
         
