@@ -6,7 +6,7 @@
 
 <script>
 import SimpleMDE from 'simplemde'
-import toolbar from './toolbar' // 工具栏 数组 数据
+import defaultToolbar from './toolbar' // 工具栏 数组 数据
 import 'simplemde/dist/simplemde.min.css' 
 
 export default {
@@ -44,13 +44,13 @@ export default {
     return {
       simplemde:null, // 存放md编辑器的实例
       hasChange:false,  // 内容是否改变
-      defaultTool:toolbar 
+      defaultTool:defaultToolbar 
     }
   },
   computed:{ 
-    toolbar(){
+    /*toolbar(){
       return this.defaultTool.concat(this.cusTool)
-    }
+    }*/
   },
   created(){
 
@@ -70,26 +70,29 @@ export default {
   }, 
   mounted(){ 
     // 初始化 编辑器
-    this.simplemde = new SimpleMDE({
-      element:document.getElementById(this.id),
-      autofocus:this.autofocus,
-      toolbar:this.toolbar,
-      spellChecker: false,
-      insertTexts:{
-        //link: ['[', ']( )'],
-        image: ["![](http://", ")"],
-        link: ["[", "](http://)"],
-        /*table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],*/
-      },
-      placeholder:this.placeholder
-    })
-    if(this.value){
-      this.simplemde.value(this.value)
-    }
-    this.simplemde.codemirror.on('change',()=>{
-      if (this.hasChange) { this.hasChange = true }
-      this.$emit('input', this.simplemde.value())
-    })  
+    setTimeout(()=>{
+      this.simplemde = new SimpleMDE({
+        element:document.getElementById(this.id),
+        autofocus:this.autofocus,
+        toolbar:this.defaultTool,
+        spellChecker: false,
+        insertTexts:{
+          //link: ['[', ']( )'],
+          image: ["![](http://", ")"],
+          link: ["[", "](http://)"],
+          /*table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"],*/
+        },
+        placeholder:this.placeholder
+      })
+      if(this.value){
+        this.simplemde.value(this.value)
+      }
+      this.simplemde.codemirror.on('change',()=>{
+        if (this.hasChange) { this.hasChange = true }
+        this.$emit('input', this.simplemde.value())
+      }) 
+    },200)
+     
   },
   destroyed() {
     this.simplemde = null
