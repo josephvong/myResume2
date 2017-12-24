@@ -4,6 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const webpack = require('webpack')
+const PostCompilePlugin = require('webpack-post-compile-plugin') // cube-ui 后编译使用的 webpack 后编译插件
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -75,6 +76,7 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       'window.Quill': 'quill'
-    })
+    }),
+    new PostCompilePlugin() // cube-ui 后编译插件
   ]
 }

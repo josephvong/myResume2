@@ -30,10 +30,16 @@
           </a>
        </mGrid>  
      </div>
+     <cubeButton>button</cubeButton>
+     <cube-checkbox v-model="checked" style="font-size:0.28rem">
+      Checkbox
+     </cube-checkbox>
+     <cubeLoading :size="50"></cubeLoading>
   </div>
 </template>
 
 <script>
+import {  Style, Button, Checkbox, Loading } from 'cube-ui'
 import mGrid from 'base/mGrid'
 export default {
   name: 'app',
@@ -42,7 +48,7 @@ export default {
   },
   data () {
     return {
-
+      checked:false
     }
   },
   computed:{ 
@@ -55,7 +61,10 @@ export default {
   watch:{ 
   },
   components:{
-    mGrid 
+    mGrid,
+    cubeButton:Button,
+    cubeCheckbox:Checkbox,
+    cubeLoading:Loading 
   },
   mounted(){ 
   }
