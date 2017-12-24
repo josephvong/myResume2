@@ -68,6 +68,7 @@ export default {
   width 100%
   max-width 10rem
   margin 0 auto
+  background pink
   .grid-wrap
     width 100%
     .m-grid

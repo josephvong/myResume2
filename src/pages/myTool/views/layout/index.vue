@@ -72,7 +72,7 @@
             <img :src="require('assets/img/jizhi.png')" alt="">
           </div>
           <p class="grid_label">瀑布流</p>
-        </a>
+        </a> 
         <a class="m-grid"  @click="routerGo"  data-link="3dswitchview"  >
           <div class="grid_icon">
             <img :src="require('assets/img/jizhi.png')" alt="">
