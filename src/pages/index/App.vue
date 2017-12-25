@@ -30,17 +30,19 @@
           </a>
        </mGrid>  
      </div>
-     <cubeButton>button</cubeButton>
+     <!-- <cubeButton @click="showPicker">button</cubeButton>
      <cube-checkbox v-model="checked" style="font-size:0.28rem">
       Checkbox
      </cube-checkbox>
-     <cubeLoading :size="50"></cubeLoading>
+     <cubeLoading :size="50"></cubeLoading> -->
   </div>
 </template>
 
 <script>
-import {  Style, Button, Checkbox, Loading } from 'cube-ui'
+//import {  Style, Button, Checkbox, Loading, Picker  } from 'cube-ui'
 import mGrid from 'base/mGrid'
+const col1Data = [{ text: '剧毒', value: '剧毒'}, { text: '蚂蚁', value: '蚂蚁' }, 
+  { text: '幽鬼', value: '幽鬼' }]
 export default {
   name: 'app',
   props:{
@@ -56,17 +58,37 @@ export default {
   created(){
 
   },
-  methods:{ 
+  methods:{
+     
   },
   watch:{ 
   },
   components:{
     mGrid,
-    cubeButton:Button,
-    cubeCheckbox:Checkbox,
-    cubeLoading:Loading 
+    // cubeButton:Button,
+    // cubeCheckbox:Checkbox,
+    // cubeLoading:Loading 
   },
-  mounted(){ 
+  mounted(){
+    /*this.picker = this.$createPicker({
+      title: 'Picker',
+      data: [col1Data],
+      onSelect: (selectedVal, selectedIndex, selectedText) => {
+        this.$createDialog({
+          type: 'warn',
+          content: `Selected Item: <br/> - value: ${selectedVal.join(', ')} <br/>
+            - index: ${selectedIndex.join(', ')} <br/> - text: ${selectedText.join(' ')}`,
+          icon: 'cubeic-alert'
+        }).show()
+      },
+      onCancel: () => {
+        this.$createToast({
+          type: 'correct',
+          txt: 'Picker canceled',
+          time: 1000
+        }).show()
+      }
+    })*/ 
   }
 }
 </script>
