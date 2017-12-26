@@ -30,16 +30,30 @@
           </a>
        </mGrid>  
      </div>
-     <!-- <cubeButton @click="showPicker">button</cubeButton>
+     <cubeButton style="font-size:0.28rem">button</cubeButton>
      <cube-checkbox v-model="checked" style="font-size:0.28rem">
       Checkbox
      </cube-checkbox>
-     <cubeLoading :size="50"></cubeLoading> -->
+     <cubeLoading :size="50"></cubeLoading>
+     <br/> 
+     <p class="tip-eg">
+      <span  style="font-size:0.28rem">cube-ui</span>
+      <cubeTip
+          ref="tip2"
+          :direction="direction"
+          :style="tipStyle"
+          @close="close"
+      >
+        <div style="font-size:0.28rem " >Awesome!</div>
+      </cubeTip>
+    </p>
+    <br/> 
+    <cubeButton  @click="showTip('down')">top</cubeButton>
   </div>
 </template>
 
 <script>
-//import {  Style, Button, Checkbox, Loading, Picker  } from 'cube-ui'
+import {  Style, Button, Checkbox, Loading, Tip } from 'cube-ui'
 import mGrid from 'base/mGrid'
 const col1Data = [{ text: '剧毒', value: '剧毒'}, { text: '蚂蚁', value: '蚂蚁' }, 
   { text: '幽鬼', value: '幽鬼' }]
@@ -59,36 +73,37 @@ export default {
 
   },
   methods:{
-     
+    showTip(direction) {
+      this.direction = direction
+      this.$refs.tip2.show()
+
+      switch (direction) {
+        case 'top':
+          this.tipStyle = 'left: 100px; top: 30px;'
+          break
+        case 'bottom':
+          this.tipStyle = 'left: 100px; top: -50px;'
+          break
+        case 'left':
+          this.tipStyle = 'left: 200px; top: -10px;'
+          break
+        case 'right':
+          this.tipStyle = 'left: 2px; top: -10px;'
+          break
+      }
+    }
   },
   watch:{ 
   },
   components:{
     mGrid,
-    // cubeButton:Button,
-    // cubeCheckbox:Checkbox,
-    // cubeLoading:Loading 
+    cubeButton:Button,
+    cubeCheckbox:Checkbox,
+    cubeLoading:Loading,
+    cubeTip:Tip 
   },
-  mounted(){
-    /*this.picker = this.$createPicker({
-      title: 'Picker',
-      data: [col1Data],
-      onSelect: (selectedVal, selectedIndex, selectedText) => {
-        this.$createDialog({
-          type: 'warn',
-          content: `Selected Item: <br/> - value: ${selectedVal.join(', ')} <br/>
-            - index: ${selectedIndex.join(', ')} <br/> - text: ${selectedText.join(' ')}`,
-          icon: 'cubeic-alert'
-        }).show()
-      },
-      onCancel: () => {
-        this.$createToast({
-          type: 'correct',
-          txt: 'Picker canceled',
-          time: 1000
-        }).show()
-      }
-    })*/ 
+  mounted(){ 
+    
   }
 }
 </script>
