@@ -49,7 +49,7 @@
     <div class="slider-wrap" ref="sliderWrap"
       @click.stop
       @touchstart="slidTouchStart" 
-      @touchmove="slidTouchMove"
+      @touchmove.default="slidTouchMove"
       @touchend="slidTouchEnd"
       @transitionend="transEndHandle"
     >
@@ -151,12 +151,12 @@ export default {
     },
 
     slidTouchStart(event){
-      //event.preventDefault() 
+      event.preventDefault() 
       const oTouch = event.touches[0]
       this.startX = oTouch.clientX?oTouch.clientX:oTouch.pageX 
     },
     slidTouchMove(event){
-      //event.preventDefault()
+      event.preventDefault()
       const oTouch = event.touches[0];
       let startX = this.startX;
       let nowX = oTouch.clientX?oTouch.clientX:oTouch.pageX 

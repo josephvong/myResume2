@@ -1,9 +1,9 @@
 <template>
-<div> 
+<div ref="imgFile"> 
   <input style="display:none"  type="file" :id="input_id" accept="image/gif,image/jpg,image/jpeg,image/png" @change="imgUpload" />
   <!--自定义控制label(样式)的-->
-  <slot name="label" :input_id="input_id" :picValName="picValName"></slot>   
-  <slot name="displayimg" :headerImage="headerImage" ></slot> 
+  <slot name="label" :input_id="input_id" :picValName="picValName" :headerImage="headerImage" :isProcessing="isProcessing"></slot>   
+  <slot name="displayimg" :input_id="input_id" :picValName="picValName" :headerImage="headerImage" :isProcessing="isProcessing"></slot> 
 </div>  
 </template>
 
@@ -13,14 +13,17 @@ import Exif from 'exif-js'
 export default {
   name: 'imgUpload',
   props:{
-
+    input_id:{
+      type:String,
+      default:'myImageUpload'
+    }
   },
   data () {
     return {
       headerImage:'', // 解析出来的 图片 url 
       picValue:'', // 图片上传的value
-      picValName:'', // 上传图片名
-      input_id:'myImageUpload'
+      picValName:'', // 上传图片名 
+      isProcessing:false,
     }
   },
   computed:{
@@ -37,16 +40,20 @@ export default {
     })
   },
   methods:{
+    labelClick(){ 
+      this.$refs.imgFile.querySelector('#'+this.input_id).click() 
+    },
     imgUpload(event){
       let files = event.target.files || event.dataTransfer.files;
       if(!files.length) return
       this.picValue = files[0];
       this.picValName = this.picValue.name
+      this.isProcessing = true; 
       this.imgPreview(this.picValue)
     },
 
     // 图片数据的处理 并 显示
-    imgPreview(file){
+    imgPreview(file){ 
       let This = this;
       let Orientation; // 方向
 
@@ -60,32 +67,41 @@ export default {
 
       if(/^image/.test(file.type)){ // 正则判断 file的类型是否是img 类型 
         let reader = new FileReader(); // 创建一个 fileReader
-        
-        reader.readAsDataURL(file);  // 将文件解析为 dataUrl 格式
 
-        reader.onload=function(){
+        let errNoticTimer = setTimeout(()=>{// 启动一个错误提醒（20s内图片上传/压缩失败， 提示错误）
+          alert('设备上传图片失败')
+          This.isProcessing = false;
+        },20000)
+ 
+
+        reader.onload=function(){  
           let result  = this.result // 此处的this 为 reader
           let img = new Image();  // 创建一个 新 图片对象 （用作处理图片）
-          img.src = result
-          
+          img.src = result  
 
           // 如果上传图片大小 小于 10k 直接上传
           if(this.result.length <=(100*1024)){
             This.headerImage = this.result // 赋值给当前组件定义的headerImage 属性
-            // This.imgSend()  // 将 图片文件 发送给 服务器处理 （未定义此函数）
+            clearTimeout(errNoticTimer)  // 清除错误提醒
           }else{  // 如果 图片 大于 10k
             img.onload = function(){
-              // 调用组件的图片压缩函数(传参为 图片处理对象，Orient方向参数)
-              let data = This.compress(img,Orientation,8); 
+              // 调用组件的图片压缩函数(传参为 图片处理对象，Orient方向参数, cb回调)
+              let data = This.compress(img,Orientation,8,()=>{ 
+                This.isProcessing = false;
+                clearTimeout(errNoticTimer)  // 清除错误提醒
+              }); 
               This.headerImage = data;
             }
           }
         }
+
+        reader.readAsDataURL(file);  // 将文件解析为 dataUrl 格式
       }
     },
 
-    // 图片压缩处理函数： 参数： 图片对象、 旋转方向（exif计算得出）、压缩率（一个数字，8 表示800万像素）
-    compress(img,Orientation,rate){
+    // 图片压缩处理函数： 参数： 图片对象、 旋转方向（exif计算得出）、压缩率（一个数字，8 表示800万像素）, cb回调函数
+    compress(img,Orientation,rate,cb){
+      console.log('compress start')
       //正常 canvas ， 直接绘制一张图片（低于100w像素）
       let canvas = document.createElement('canvas');
       let ctx = canvas.getContext("2d");
@@ -166,7 +182,11 @@ export default {
       console.log('压缩前：' + initSize);  
       console.log('压缩后：' + ndata.length);  
       console.log('压缩率：' + ~~(100 * (initSize - ndata.length) / initSize) + "%");  
-      tCanvas.width = tCanvas.height = canvas.width = canvas.height = 0;  
+      tCanvas.width = tCanvas.height = canvas.width = canvas.height = 0; 
+      // 若 有 回调函数，执行回调函数
+      if(cb && typeof(cb)=='function'){
+        cb.apply(this) 
+      } 
       return ndata;  
 
     },

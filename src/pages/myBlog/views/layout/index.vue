@@ -140,12 +140,14 @@ export default {
       .show-sub
         margin:0 auto;
         display none
+        span
+          pointer-events none
       .level
         width:100%; 
         z-index:5;
         line-height:3rem 
     input[type="checkbox"]:checked ~ .container
-      max-height 100rem
+      max-height 80rem
       
 @media only screen and (max-width : 768px)  
   .layout-banner .hero-body .hero-content .left//屏幕小于 768px
