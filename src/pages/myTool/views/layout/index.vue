@@ -79,6 +79,12 @@
           </div>
           <p class="grid_label">3d旋转切换</p>
         </a>
+        <a class="m-grid"  @click="routerGo"  data-link="imgcroppaview"  >
+          <div class="grid_icon">
+            <img :src="require('assets/img/jizhi.png')" alt="">
+          </div>
+          <p class="grid_label">图片裁切</p>
+        </a>
     </mGrid>
     <router-view></router-view> 
   </div>

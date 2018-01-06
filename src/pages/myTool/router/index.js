@@ -82,6 +82,11 @@ export default new Router({
           path: '3dswitchview',
           component: _import('3dSwitchView/index'),
           name: '图片旋转'
+        },
+        {
+          path: 'imgcroppaview',
+          component: _import('imgCroppaView/index'),
+          name: '图片裁切'
         }
       ]
     }
