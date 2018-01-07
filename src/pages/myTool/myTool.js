@@ -9,6 +9,9 @@ import store from './store'
 import cusLazyLoad from 'base/cusLazy/cuslazyload' // 自定义的懒加载控件函数
 Vue.use(cusLazyLoad);  // 使用自定义的 cusLazyLoad 指令
 
+import vConsole from 'vconsole'
+var Console = new vConsole();
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
