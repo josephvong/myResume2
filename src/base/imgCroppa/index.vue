@@ -9,7 +9,9 @@
          @touchmove.prevent = "zoneTouchMove" 
     ></div>
   </div>
-  <div class="croppa-footer"></div> 
+  <div class="croppa-footer">
+    <button style="font-size:0.3rem" @click="croppaConfirm">confirm</button>
+  </div> 
 </div>  
 </template>
 
@@ -48,12 +50,13 @@ export default {
         y: 0
       },
       imageStyle: {
-        top: '0',
-        //left:'20px'
+        top: '0', 
         transform: 'translate3d(0px, 0px, 0px) scale(1)',
         transformOrigin: 'left top'
       },
       imgInitTop: 0, 
+
+      cutedImgSrc:''
 
     }
   },
@@ -78,11 +81,30 @@ export default {
     imgUpload(){
       this.$refs.croppaFile.click()
     },
+
     fileChangeHandle(event){ 
       let files = event.target.files || event.dataTransfer.files; 
-      if(!files.length) return 
-      this.imgPreview(files[0]) 
-            
+      if(!files.length){
+        this.isShow = false
+        this.uploadImgSrc = ''; 
+        return 
+      }
+      this.imgPreview(files[0])       
+    },
+
+    croppaClean(){
+      this.isShow = false
+      this.uploadImgSrc = ''; 
+      this.$refs.croppaFile.value = null
+      this.imageState = {
+        left: 0,
+        top: 0,
+        scale: 1,
+        width: 0,
+        height: 0,
+        originX: 0,
+        originY: 0
+      }
     },
 
     // 图片数据的处理 并 显示
@@ -96,7 +118,11 @@ export default {
         // alert(Orientation) // Exif.getTag()的返回值仅在 移动端拍照上传图片可获取值， 上传本地图片为undefind
       })
 
-      if(!file || !window.FileReader){ return } // 没有图片 或者 没法读取文件 返回 
+      if(!file || !window.FileReader){ 
+        This.isShow = false
+        This.uploadImgSrc = ''; 
+        return 
+      } // 没有图片 或者 没法读取文件 返回 
 
       if(/^image/.test(file.type)){ // 正则判断 file的类型是否是img 类型 
         let reader = new FileReader(); // 创建一个 fileReader
@@ -120,13 +146,8 @@ export default {
             // 处理图片旋转
             let data = This.fixImage(img,Orientation); 
             This.isShow = true
-            This.uploadImgSrc = data;
-            //let scale = This.imageState.scale>=1?1:This.imageState.scale
-            
-            //This.imageStyle.transform = 'translate3d(0px, 0px, 0px) scale('+ 1 +')'
-            //This.imageStyle.transform = 'translate3d(0px, 0px, 0px) scale('+This.imageState.scale+')'
-          }
-            
+            This.uploadImgSrc = data; 
+          }  
           
         }
 
@@ -170,97 +191,6 @@ export default {
       }  
       let ndata = canvas.toDataURL('image/jpeg', 1); // 0.1
       return ndata;  
-    },
-
-    // 图片压缩处理函数： 参数： 图片对象、 旋转方向（exif计算得出）、压缩率（一个数字，8 表示800万像素）, cb回调函数
-    compress(img,Orientation,rate,cb){ 
-      //正常 canvas ， 直接绘制一张图片（低于100w像素）
-      let canvas = document.createElement('canvas');
-      let ctx = canvas.getContext("2d");
-
-      // 瓦片绘制 的 canvas （用于对100w像素的图片 进行切片绘制）
-      let tCanvas = document.createElement('canvas');
-      let tctx = tCanvas.getContext('2d');
-
-      let initSize = img.src.length;  // 图片初始大小（容量大小）
-      let width = img.width  // 图片 原始 宽 (物理px)
-      let height = img.height  // 图片原始 高 (物理px)
-      
-
-      // 如果图片 大于四百万像素，计算压缩比 并将 大小压制 400万像素以下
-      let ratio 
-      if((ratio = width*height/(rate*1000000))>1){ // 图片w*h/4000000 >1 表示 超过 400w像素 
-        console.log('larger than 400w px')
-        ratio = Math.sqrt(ratio) // ratio = width*height/4000000 表示 图片控制在 400w像素以内
-        width /= ratio;  // 将 图片的 宽度 设置为 400w像素 之内的宽
-        height /= ratio;  // 将 图片的 高度 设置为 400w像素 之内的高
-      }else{
-        ratio = 1 
-      }
-
-      // 将 canvas 宽高 设置为 图片 （处理后）的宽高（此时图片被 限制在 400w像素以内）
-      canvas.width = width;
-      canvas.height = height; 
-
-      ctx.fillStyle = '#fff' // 画板填充色为 白
-      ctx.fillRect(0,0,canvas.width,canvas.height); // 设定画板的填充范围（左上角至右下角）
-
-      // 如果图片像素 大于 100万 则 使用瓦片绘制
-      let count;
-      if((count = width*height / 1000000)>1){  // 计算 压缩后图片的 像素 ，如果大于 100w 像素
-        console.log('超过100w像素')
-        //将 分辨率 开平方，确定 图片有多少个canvas瓦片来绘制 
-        count = ~~(Math.sqrt(count)+1) //（~~运算符表示将一个值转化为整 数字，此处确保count为整 数字）
-        let nw = ~~(width/count);  // 计算 每块瓦片的 宽度
-        let nh = ~~(height/count); // 计算每块瓦片的高度
-
-        tCanvas.width = nw;
-        tCanvas.height = nh;
-
-        // 瓦片绘制的算法
-        for (let i = 0; i < count; i++) {
-          for (let j = 0; j < count; j++) {
-            // 绘制每个小块的 tCanvas 瓦片
-            tctx.drawImage(img, i*nw*ratio, j*nh*ratio, nw*ratio, nh*ratio, 0, 0, nw, nh)
-            // 再将 tCanvas 作为 目标 逐个 绘制在 大canvas上
-            ctx.drawImage(tCanvas, i * nw, j * nh, nw, nh);   
-          } 
-        }
-
-      }else{  // 如果图片 小于 100w 像素，无需瓦片绘制
-        console.log("小于100w像素")
-        ctx.drawImage(img, 0, 0, width, height);  // 直接使用 大canvas 根据 图片的w h 进行绘制
-      }
-      
-
-      // 修复ios 拍照上传 的旋转问题
-      if(Orientation && Orientation !==1){
-        switch(Orientation){
-          case 6: // 需要顺时针（向左）转90度
-            this._rotateImg(img,'left',canvas);
-            break;
-          case 8://需要逆时针（向右）90度旋转  
-              this._rotateImg(img,'right',canvas);  
-              break;  
-          case 3://需要180度旋转  
-              this._rotateImg(img,'right',canvas);//转两次  
-              this._rotateImg(img,'right',canvas);  
-              break;  
-        }
-      }
-
-       //进行最小压缩  
-      let ndata = canvas.toDataURL('image/jpeg', 0.1);  
-      console.log('压缩前：' + initSize);  
-      console.log('压缩后：' + ndata.length);  
-      console.log('压缩率：' + ~~(100 * (initSize - ndata.length) / initSize) + "%");  
-      tCanvas.width = tCanvas.height = canvas.width = canvas.height = 0; 
-      // 若 有 回调函数，执行回调函数
-      if(cb && typeof(cb)=='function'){
-        cb.apply(this) 
-      } 
-      return ndata;  
-
     },
 
      // 图片方向 的旋转处理 参数：图片对象、旋转方向、canvas对象
@@ -388,9 +318,46 @@ export default {
           this.imageState.left = newX < 0 ? 0 : (newX > maxX ? maxX : newX)
           this.imageState.top = newY < 0 ? 0 : (newY > maxY ? maxY : newY)
         }
-        this.touchPos = touchPos
-
+        this.touchPos = touchPos 
       }     
+    },
+
+    croppaConfirm(){
+      console.log(this.imageState)
+      let This = this;
+
+      let cutState = {
+        startX:this.imageState.left,
+        startY:-this.imageState.top,
+        canvasW:this.croppaBodyRect.w,
+        canvasH:this.croppaBodyRect.h
+      }
+      //正常 canvas ， 直接绘制一张图片（低于100w像素）
+      let canvas = document.createElement('canvas');
+      let ctx = canvas.getContext("2d");
+      canvas.width = cutState.canvasW;
+      canvas.height = cutState.canvasH; 
+
+      ctx.fillStyle = '#fff' // 画板填充色为 白
+      ctx.fillRect(0,0,canvas.width,canvas.height); // 设定画板的填充范围（左上角至右下角）
+      
+      let oImg = new Image()
+      oImg.src = this.uploadImgSrc
+      oImg.onload=function(){
+        console.log(cutState.startX+','+cutState.startY)
+        ctx.drawImage(
+          oImg, 
+          cutState.startX,//*this.imageState.scale, 
+          cutState.startY,//*this.imageState.scale, 
+          This.imageState.width*This.imageState.scale, 
+          This.imageState.height*This.imageState.scale
+        );
+        let ndata = canvas.toDataURL('image/jpeg', 0.1);
+        //console.log(ndata)
+        This.$emit('croppaCuted',ndata)
+      }
+      
+       
     }
   },
   watch:{
@@ -445,7 +412,13 @@ export default {
       width 100%
       height 100%
       background rgba(0,0,0,0.5)
-    
+  .croppa-footer
+    position fixed
+    left 0
+    bottom 1rem
+    height 0.8rem
+    width 100%
+    z-index 11  
     
 </style>
  

@@ -2,19 +2,12 @@
   <transition name="router-fade"> 
   <div class="croppa-view"  >
     <mHeader :isBack="true" text="图片裁切"></mHeader>
-    <div class="data-wrap">
-      <p>
-        x:
-        <input type="text" />
-      </p>
-      <p>
-        y:
-        <input type="text" />
-      </p> 
-    </div> 
-    <div class="croppa-btn" @touchend="toUpLoad"></div>
     
-    <imgCroppa ref="imgCroppa"></imgCroppa>
+    <div class="croppa-btn" @touchend="toUpLoad"></div>
+
+    <img :src="cutedImg" v-if="cutedImg" alt="">
+
+    <imgCroppa ref="imgCroppa" @croppaCuted="imageCut"></imgCroppa>
   </div>
   </transition>
 </template>
@@ -29,7 +22,7 @@ export default {
   },
   data () {
     return {
-      
+      cutedImg:''
     }
   },
   computed:{
@@ -45,8 +38,12 @@ export default {
   methods:{
     toUpLoad(){
       this.$refs.imgCroppa.imgUpload()
-    }
-     
+    },
+    imageCut(ndata){
+      //alert("A")
+      this.$refs.imgCroppa.croppaClean()
+      this.cutedImg = ndata
+    } 
   },
   watch:{
 
