@@ -81,12 +81,13 @@ export default {
 
           // 如果上传图片大小 小于 10k 直接上传
           if(this.result.length <=(100*1024)){
+            This.isProcessing = false;
             This.headerImage = this.result // 赋值给当前组件定义的headerImage 属性
             clearTimeout(errNoticTimer)  // 清除错误提醒
           }else{  // 如果 图片 大于 10k
             img.onload = function(){
               // 调用组件的图片压缩函数(传参为 图片处理对象，Orient方向参数, cb回调)
-              let data = This.compress(img,Orientation,8,()=>{ 
+              let data = This.compress(img,Orientation,8,function(){ 
                 This.isProcessing = false;
                 clearTimeout(errNoticTimer)  // 清除错误提醒
               }); 

@@ -327,7 +327,7 @@ export default {
       let This = this;
 
       let cutState = {
-        startX:this.imageState.left,
+        startX:-this.imageState.left,
         startY:-this.imageState.top,
         canvasW:this.croppaBodyRect.w,
         canvasH:this.croppaBodyRect.h
@@ -347,12 +347,12 @@ export default {
         console.log(cutState.startX+','+cutState.startY)
         ctx.drawImage(
           oImg, 
-          cutState.startX,//*this.imageState.scale, 
-          cutState.startY,//*this.imageState.scale, 
+          cutState.startX, 
+          cutState.startY, 
           This.imageState.width*This.imageState.scale, 
           This.imageState.height*This.imageState.scale
         );
-        let ndata = canvas.toDataURL('image/jpeg', 0.1);
+        let ndata = canvas.toDataURL('image/jpeg', 0.8);
         //console.log(ndata)
         This.$emit('croppaCuted',ndata)
       }
