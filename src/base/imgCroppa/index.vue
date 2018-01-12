@@ -126,9 +126,12 @@ export default {
 
       if(/^image/.test(file.type)){ // 正则判断 file的类型是否是img 类型 
         let reader = new FileReader(); // 创建一个 fileReader
-
-        reader.onload=function(){  
-          let result  = this.result // 此处的this 为 reader
+        console.log(reader)
+        reader.onload = imgLoadSuccess
+        function imgLoadSuccess(event){  
+          console.log(event.target)
+          //let result  = this.result // 此处的this 为 reader
+          let result = event.target.result
           let img = new Image();  // 创建一个 新 图片对象 （用作处理图片）
           img.src = result 
             
