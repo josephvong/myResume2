@@ -37,13 +37,7 @@
      <cubeLoading :size="50"></cubeLoading>
      <br/> 
      <p class="tip-eg">
-      <span  style="font-size:0.28rem">cube-ui</span>
-      <cubeTip
-          ref="tip2"
-          :direction="direction"
-          :style="tipStyle"
-          @close="close"
-      >
+      <span  style="font-size:0.28rem">cube-ui</span> 
         <div style="font-size:0.28rem " >Awesome!</div>
       </cubeTip>
     </p>
@@ -73,7 +67,7 @@ export default {
 
   },
   methods:{
-    showTip(direction) {
+    /*showTip(direction) {
       this.direction = direction
       this.$refs.tip2.show()
 
@@ -91,7 +85,7 @@ export default {
           this.tipStyle = 'left: 2px; top: -10px;'
           break
       }
-    }
+    }*/
   },
   watch:{ 
   },
