@@ -23,6 +23,19 @@
 解决方法：在reset.css 中添加 以下 样式
 *, *:before, *:after { max-height: 100000px }
 
+兼容 cube-ui 库
+在主目录 的 .postcssrc.js （postcss-loader配置文档）中的 plugin 里面添加以下配置：
+"postcss-px2rem":{
+  remUnit: 50  
+}
+解析： 
+rem方案的比例为：window.flex(100,1) 
+假如设备显示需求为14px, 设计图为28px, 比例 1:2 
+rem比率为 1：100， 因此代码为 0.28rem (28px/100)
+UI库的的 尺寸为 1:1 (设备显示需求14px,代码就是14px)
+因此 px2rem 需要 设置remUnit:50 (100/2)  (UI库中px转化为：14px/100/2)
+
+
 参考： https://segmentfault.com/a/1190000007350680
 */
 !function(e){function t(a){if(i[a])return i[a].exports;var n=i[a]={exports:{},id:a,loaded:!1};return e[a].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var i={};return t.m=e,t.c=i,t.p="",t(0)}([function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var i=window;t["default"]=i.flex=function(e,t){var a=e||100,n=t||1,r=i.document,o=navigator.userAgent,d=o.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i),l=o.match(/U3\/((\d+|\.){5,})/i),c=l&&parseInt(l[1].split(".").join(""),10)>=80,p=navigator.appVersion.match(/(iphone|ipad|ipod)/gi),s=i.devicePixelRatio||1;p||d&&d[1]>534||c||(s=1);var u=1/s,m=r.querySelector('meta[name="viewport"]');m||(m=r.createElement("meta"),m.setAttribute("name","viewport"),r.head.appendChild(m)),m.setAttribute("content","width=device-width,user-scalable=no,initial-scale="+u+",maximum-scale="+u+",minimum-scale="+u),r.documentElement.style.fontSize=a/2*s*n+"px"},e.exports=t["default"]}]);

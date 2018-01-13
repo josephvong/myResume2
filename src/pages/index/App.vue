@@ -31,7 +31,7 @@
        </mGrid>  
      </div>
      <cubeButton style="font-size:0.28rem">button</cubeButton>
-     <cube-checkbox v-model="checked" style="font-size:0.28rem">
+     <cube-checkbox v-model="checked" ><!-- style="font-size:0.28rem" -->
       Checkbox
      </cube-checkbox>
      <cubeLoading :size="50"></cubeLoading>
@@ -42,12 +42,22 @@
       </cubeTip>
     </p>
     <br/> 
-    <cubeButton  @click="showTip('down')">top</cubeButton>
+    <cubeButton class="testBtn" @click="showPopup('myPopup')">top</cubeButton>
+    <cube-popup type="my-popup" ref="myPopup">
+      <div class="cube-extend-popup-content"  >
+        My Popup Content 1
+      </div>
+    </cube-popup>
+
+    <br/>
+    <cube-button class="testBtn" @click="showPicker">Picker</cube-button>
+
+    <div class="test-flex"></div>
   </div>
 </template>
 
 <script>
-import {  Style, Button, Checkbox, Loading, Tip } from 'cube-ui'
+import { Button, Checkbox, Loading, Tip, Popup, Picker } from 'cube-ui'
 import mGrid from 'base/mGrid'
 const col1Data = [{ text: '剧毒', value: '剧毒'}, { text: '蚂蚁', value: '蚂蚁' }, 
   { text: '幽鬼', value: '幽鬼' }]
@@ -67,25 +77,17 @@ export default {
 
   },
   methods:{
-    /*showTip(direction) {
-      this.direction = direction
-      this.$refs.tip2.show()
+    showPopup(refId) {
+      const component = this.$refs[refId]
+      component.show()
+      setTimeout(() => {
+        component.hide()
+      }, 1000)
+    },
 
-      switch (direction) {
-        case 'top':
-          this.tipStyle = 'left: 100px; top: 30px;'
-          break
-        case 'bottom':
-          this.tipStyle = 'left: 100px; top: -50px;'
-          break
-        case 'left':
-          this.tipStyle = 'left: 200px; top: -10px;'
-          break
-        case 'right':
-          this.tipStyle = 'left: 2px; top: -10px;'
-          break
-      }
-    }*/
+    showPicker () {
+      this.picker.show()
+    }
   },
   watch:{ 
   },
@@ -94,10 +96,30 @@ export default {
     cubeButton:Button,
     cubeCheckbox:Checkbox,
     cubeLoading:Loading,
-    cubeTip:Tip 
+    cubeTip:Tip,
+    cubePopup:Popup,
+    Picker:Picker 
   },
   mounted(){ 
-    
+    this.picker = this.$createPicker({
+      title: 'Picker',
+      data: [col1Data],
+      /*onSelect: (selectedVal, selectedIndex, selectedText) => {
+        this.$createDialog({
+          type: 'warn',
+          content: `Selected Item: <br/> - value: ${selectedVal.join(', ')} <br/>
+            - index: ${selectedIndex.join(', ')} <br/> - text: ${selectedText.join(' ')}`,
+          icon: 'cubeic-alert'
+        }).show()
+      },
+      onCancel: () => {
+        this.$createToast({
+          type: 'correct',
+          txt: 'Picker canceled',
+          time: 1000
+        }).show()
+      }*/
+    })
   }
 }
 </script>
@@ -109,10 +131,20 @@ export default {
   max-width 10rem
   margin 0 auto
   background pink
+  font-size 0.28rem
   .grid-wrap
     width 100%
     .m-grid
       gird-column-ctrl(3)
-    
+  .testBtn
+    font-size 0.28rem
+
+.cube-extend-popup-content
+  padding: 20px
+  color: #fff
+  background-color: rgba(0, 0, 0, .8)
+
+.test-flex
+  display flex  
 </style>
 

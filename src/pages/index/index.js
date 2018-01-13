@@ -3,7 +3,8 @@
 //import Vue from 'vue'
 import Vue from 'common/js/Lib' // Lib 是全局公共配置（公共样式，Vue封装等）
 import App from './App'
-
+import {  Style, Picker } from 'cube-ui'
+Vue.use(Picker)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
