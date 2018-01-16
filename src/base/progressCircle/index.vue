@@ -68,6 +68,7 @@ export default {
 //@import "~style/mixin"
 .progress-circle
   position relative
+  border:1px solid red
   .svg
     left 0
     top 0
@@ -77,10 +78,11 @@ export default {
       transform-origin center
       &.progress-background
         stroke: #BCC6CB
-        transform:scale(0.9)
+        transform:scale(0.8)
       &.progress-bar
         stroke #FC930F
-        transform:scale(0.9)
+        transform:scale(0.8)
+        transition stroke-dashoffset 0.1s
         //animation go 1s linear
   .count
     position absolute

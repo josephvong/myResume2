@@ -87,6 +87,11 @@ export default new Router({
           path: 'imgcroppaview',
           component: _import('imgCroppaView/index'),
           name: '图片裁切'
+        },
+        {
+          path: 'countdownview',
+          component: _import('countDownView/index'),
+          name: '倒计时'
         }
       ]
     }

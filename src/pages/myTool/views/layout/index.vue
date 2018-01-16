@@ -85,6 +85,12 @@
           </div>
           <p class="grid_label">图片裁切</p>
         </a>
+        <a class="m-grid"  @click="routerGo"  data-link="countdownview"  >
+          <div class="grid_icon">
+            <img :src="require('assets/img/jizhi.png')" alt="">
+          </div>
+          <p class="grid_label">倒计时</p>
+        </a>
     </mGrid>
     <router-view></router-view> 
   </div>
