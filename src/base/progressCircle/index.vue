@@ -1,15 +1,15 @@
 <template>
   <div class="progress-circle" :style="{width:radius+'px',height:radius+'px'}" >
     <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" version="1.1"  :width='radius' :height="radius" style="">
-      <circle class="progress-background" r="50" cx="50" cy="50" fill="transparent">
+      <circle class="progress-background" :style="{stroke:bgColor}" r="50" cx="50" cy="50" fill="transparent">
       </circle>
-      <circle ref="circleBar" class="progress-bar" r="50" cx="50" cy="50" fill="transparent"
+      <circle ref="circleBar" class="progress-bar" :style="{stroke:trackColor}" r="50" cx="50" cy="50" fill="transparent"
               :stroke-dasharray="dashArray" :stroke-dashoffset="dashoffset"
       >
       </circle> 
     </svg>
     <div class="count" @click="">
-      <strong :style="{'font-size':0.2*radius+'px'}">{{percent}}%</strong>
+      <strong :style="{'font-size':0.3*radius+'px',color:centerColor}">{{centerShow}}</strong>
     </div>
   </div>
 </template>
@@ -26,6 +26,22 @@ export default {
       type:Number,
       default:0
     },
+    showPercent:{
+      type:String,
+      default:''
+    },
+    bgColor:{
+      type:String,
+      default:'#BCC6CB'
+    },
+    trackColor:{
+      type:String,
+      default:'#FC930F'
+    },
+    centerColor:{
+      type:String,
+      default:'#000000'
+    }
 
   },
   data(){
@@ -43,6 +59,13 @@ export default {
         percent = this.percent;
       }
       return (100-percent)/100*this.dashArray
+    },
+    centerShow(){
+      if(this.showPercent){
+        return this.showPercent
+      }else{
+        return this.percent + '%'
+      }
     }
 
   },
@@ -67,30 +90,28 @@ export default {
 //@import "~style/variable"
 //@import "~style/mixin"
 .progress-circle
-  position relative
-  border:1px solid red
+  position relative 
   .svg
     left 0
     top 0
     position:absolute;
     circle
-      stroke-width 8px
+      stroke-width 10px
       transform-origin center
       &.progress-background
-        stroke: #BCC6CB
+        //stroke: #BCC6CB
         transform:scale(0.8)
       &.progress-bar
-        stroke #FC930F
+        //stroke green//#FC930F
         transform:scale(0.8)
-        transition stroke-dashoffset 0.1s
-        //animation go 1s linear
+        transition stroke-dashoffset 0.1s 
   .count
     position absolute
     left 20%
     top 20%
     width:60%;
     height:60%;
-    text-align center
+    text-align center 
     //padding-top 10px
     &:before
       content ''
@@ -102,8 +123,7 @@ export default {
       text-align center
       display inline
       width 100%
-      font-weight bold
-      font-size 0.4rem
+      font-weight bold 
       //margin-left 10px
 
 

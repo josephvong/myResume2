@@ -59,6 +59,10 @@ export default new Router({
     {
       path:'/linearbgview',
       component:_import('cssViews/linearBgView'),
+    },
+    {
+      path:'/stickyview',
+      component:_import('cssViews/stickyView/index'),
     }
   ]
 })

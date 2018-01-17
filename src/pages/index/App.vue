@@ -8,6 +8,12 @@
             </div>
             <p class="grid_label">我的样式案例</p> 
           </a>
+          <a href="./cssCase.html" class="m-grid" >
+            <div class="grid_icon">
+              <img :src="require('assets/img/jizhi.png')" alt="">
+            </div>
+            <p class="grid_label">css样式实例</p> 
+          </a>
 
           <a href="./myTool.html" class="m-grid" >
             <div class="grid_icon">
@@ -50,7 +56,7 @@
     </cube-popup>
 
     <br/>
-    <cube-button class="testBtn" @click="showPicker">Picker</cube-button>
+    <cube-button class="testBtn" style="display:none" @click="showPicker">Picker</cube-button>
 
     <div class="test-flex"></div>
   </div>

@@ -100,6 +100,16 @@
           <p class="desc"></p>
         </div>
       </li>
+      <li class="case-item" @click="routerGo" data-link="stickyview">
+        <div class="left-icon">
+          <img :src="require('assets/img/jizhi.png')" alt="">
+        </div>
+        <div class="right-desc">
+          <h3 class="title">粘滞融合效果</h3>
+          <p class="desc"></p>
+        </div>
+      </li>
+      
     </ul>
   </div>
 </template>

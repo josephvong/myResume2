@@ -28,6 +28,7 @@
     "quill-image-resize-module": "^3.0.0",
     "showdown": "^1.8.5",
     "simplemde": "^1.11.2",
+    "tween.js": "^16.6.0",
     "vue": "^2.5.2",
     "vue-lazyload": "^1.1.4",
     "vue-loader": "^13.5.0",
