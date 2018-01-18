@@ -21,6 +21,7 @@
 //import {mapActions, mapGetters, mapState} from 'vuex'
 import mHeader from 'base/mHeader/mHeader'
 import countDown from 'base/countDown/index' 
+//import create from 'createjs'
 export default {
   props:{
     
@@ -86,7 +87,7 @@ export default {
     mHeader,countDown
   },
   mounted(){
-     
+    //console.log(createjs)
   }
 }
 </script>

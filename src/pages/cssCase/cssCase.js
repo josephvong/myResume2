@@ -4,11 +4,21 @@
 import Vue from 'common/js/Lib' // Lib 是全局公共配置（公共样式，Vue封装等）
 import App from './App' 
 
+import router from './router'
+
+import highlight from 'directive/highlight'
+
+Vue.use(highlight)
+
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  render: h => h(App), 
+  router,
+  render: h => h(App),
+  mounted(){
+    //this.$router.push('/layoutcase')
+  } 
   //template: '<App/>',
   //components: { App }
 })

@@ -1,51 +1,76 @@
 <template>
   <div id="app">  
-    <div class="side-bar">first</div>
-    <div class="main-wrap">second</div>
+    <div class="side-bar-wrap">
+      <mSideBar :treeData="treeData" @listClick="routerGo"></mSideBar>
+    </div>
+
+
+    <div class="main-wrap">
+      <router-view></router-view> 
+    </div>
       
   </div>
 </template>
 
-<script> 
+<script>
+import mSideBar from 'base/mSideBar' 
 export default {
   name: 'app',
   props:{
 
   },
   data () {
-    return {
-       
+    return {   
     }
   },
-  computed:{ 
+  computed:{
+    treeData(){
+      let rList = this.$router.options.routes.splice(1,this.$router.options.routes.length);
+
+      let obj = {}
+      for (var i = 0; i < rList.length; i++) {
+        let gName = rList[i].meta.gName;
+        if(!obj[gName]){
+          obj[gName]= [rList[i]]
+        }else{
+          obj[gName].push(rList[i])
+        } 
+      }
+      return obj
+    }
   },
-  created(){
+  created(){  
 
   },
-  methods:{
-     
+  methods:{ 
+    routerGo(path){
+      this.$router.push({
+        path:path
+      })
+      console.log(path)
+    }
   },
   watch:{ 
   },
   components:{
-     
+    mSideBar
   },
   mounted(){ 
-     
+     console.log(this.$router.options.routes.splice(1,this.$router.options.routes.length))
   }
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" scoped rel="stylesheet/stylus">
 @import '~style/mixin.styl'
-body,html
-  background-image linear-gradient(90deg,#EDF0FC 250px,#ffffff 280px)
 #app
-  display flex 
-  font-size 28px
-  .side-bar
+  display flex  
+  .side-bar-wrap
     flex 0 0 250px
+    padding 10px 
   .main-wrap
     flex auto
+    padding 10px
+ 
 </style>
 
