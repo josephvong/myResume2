@@ -35,11 +35,19 @@ export default new Router({
       } 
     },
 
-    //------------------------------------
+    //----------------特殊样式分类---------------
     {
       path: '/rgradientcase',   
       name:'径向渐变案例',
       component:_import('gradientCase/rGradientCase'),
+      meta:{
+        gName:'特殊样式案例'
+      } 
+    },
+    {
+      path: '/lgradientcase',   
+      name:'线性渐变案例',
+      component:_import('gradientCase/lGradientCase'),
       meta:{
         gName:'特殊样式案例'
       } 
