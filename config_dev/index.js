@@ -23,7 +23,7 @@ module.exports = {
   },*/
   dev: {  // npm run dev 开发环境指令 的配置
     env: require('./dev.env'),
-    port: 8081,  // 服务器端口
+    port: 8082,  // 服务器端口
     autoOpenBrowser: true,  // 自动打开浏览器
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',

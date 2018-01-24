@@ -91,6 +91,12 @@
           </div>
           <p class="grid_label">倒计时</p>
         </a>
+        <a class="m-grid"  @click="routerGo"  data-link="sliderlockview"  >
+          <div class="grid_icon">
+            <img :src="require('assets/img/jizhi.png')" alt="">
+          </div>
+          <p class="grid_label">滑动解锁</p>
+        </a>
     </mGrid>
     <router-view></router-view> 
   </div>

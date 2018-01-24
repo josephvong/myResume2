@@ -92,6 +92,11 @@ export default new Router({
           path: 'countdownview',
           component: _import('countDownView/index'),
           name: '倒计时'
+        },
+        {
+          path: 'sliderlockview',
+          component: _import('sliderLockView/index'),
+          name: '滑动解锁'
         }
       ]
     }

@@ -95,7 +95,24 @@
           </div> 
         </div>
       </div>
-       
+      
+      <div class="case">
+        <h3 class="case-name">光斑 + 文字</h3>
+        <div class="sample-wrap case_e clearfix">
+        <div class="linear-gradient" >文字会有白色光斑划过</div>
+         
+        </div> 
+        <div class="code-wrap"> 
+          <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div> 
+        </div>
+      </div> 
     </div>
 
   </div>
@@ -180,7 +197,6 @@ export default {
   animation-timing-function: linear; /*动画频率，和transition-timing-function是一样的*/ 
   animation-iteration-count: infinite;/*定义循环资料，infinite为无限次*/ 
   background-position: 0px 0 
-
 @keyframes case_d_bg
   0%
     background-position: 0px 0
@@ -189,5 +205,24 @@ export default {
   100%
     background-position: 300px 0 
 
+.case_e .linear-gradient
+  width: 400px
+  height 50px
+  line-height 50px
+  text-align center
+  font-size 28px 
+  background linear-gradient(125deg, black 0, black 5%, white 10%, black 15%)
+  //background linear-gradient(red,yellow) 
+  color transparent 
+  -webkit-background-clip: text;
+  animation-name: case_e_bg ; 
+  animation-duration: 3s; 
+  animation-timing-function: linear;  
+  animation-iteration-count: infinite; 
+@keyframes case_e_bg
+  0%
+    background-position: 0px 0  
+  100%
+    background-position: 400px 0
 </style>
 
