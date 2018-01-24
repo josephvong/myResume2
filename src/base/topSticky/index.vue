@@ -1,9 +1,9 @@
 <template> 
-  <div class="top-sticky clearfix" :style="{height:elHeight?'`${elHeight}px`':'auto'}"> 
-    <div class="sticky-inner" :style="{top:stickyTop+'px',zIndex:zIndex,position:position,width:elWidth,height:elHeight+'px'}">
+  <div class="clearfix" ref="stickyTop" :style="{width:elWidth+'px',height:elHeight+'px'}"> 
+    <div class="sticky-inner" :style="{top:stickyTop+'px',zIndex:zIndex,position:position,width:elWidth+'px',height:elHeight+'px'}">
       <slot></slot>
     </div>
-  </div> 
+  </div> <!-- :style="{top:stickyTop+'px',zIndex:zIndex,position:position,width:elWidth,height:elHeight+'px'}" -->
 </template>
 
 <script type="text/ecmascript-6"> 
@@ -41,7 +41,9 @@ export default {
       }
       this.position = 'fixed'
       this.stickyActive = true
-      this.elWidth = this.elWidth + 'px'
+      //this.elWidth = this.elWidth + 'px'
+      //this.$refs.stickyTop.style['position']=this.position
+      //this.$refs.stickyTop.style['top']=this.stickyTop + 'px'
     },
     reset(){
       if (!this.stickyActive) { // 如果 已经 非sticky状态， 直接返回（节流）
@@ -49,13 +51,14 @@ export default {
       }
       this.position = ''  // 还原 定位
       this.stickyActive = false // 还原 为 非sticky 状态
-      this.elWidth = 'auto'  // 还原默认宽度
+      //this.elWidth = 'auto'  // 还原默认宽度
     },
 
     handleScroll(){
-      this.elWidth = this.$el.getBoundingClientRect().width // 获取组件的宽度
+      //this.elWidth = this.$el.getBoundingClientRect().width // 获取组件的宽度
       const offsetTop = this.$el.getBoundingClientRect().top // 获取 当前 组件处于视口中的高度
       if(offsetTop <= this.stickyTop){ // 若组件的offsetTop 小于 设定的粘贴(固定)top
+        //console.log("C")
         this.sticky()  // 执行粘贴函数，进入粘贴状态
         return         // 跳出 handleScroll函数
       }
@@ -70,10 +73,13 @@ export default {
   },
   mounted(){
     this.elHeight = this.$el.getBoundingClientRect().height;
+    this.elWidth = this.$el.getBoundingClientRect().width;
+    console.log(this.elHeight)
+    console.log(this.elWidth)
     window.addEventListener('scroll', this.handleScroll)
   },
   destroyed(){
-    window.removeEventListener('scroll', this.handleScroll)
+    //window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
@@ -82,8 +88,7 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 //@import "~common/stylus/variable"
 //@import "~common/stylus/mixin"
-.top-sticky
-  width 100%
+
  
 
  
