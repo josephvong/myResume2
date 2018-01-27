@@ -9,7 +9,7 @@
       </circle> 
     </svg>
     <div class="count" @click="">
-      <strong :style="{'font-size':0.3*radius+'px',color:centerColor}">{{centerShow}}</strong>
+      <strong :style="{'font-size':0.2*radius+'px',color:centerColor}">{{centerShow}}</strong>
     </div>
   </div>
 </template>

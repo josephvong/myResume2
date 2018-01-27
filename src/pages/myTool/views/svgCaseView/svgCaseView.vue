@@ -8,19 +8,22 @@
         <div class="sample">
           <progressCircle ref="progCircleA" :radius="200" :percent="parseInt(circle1)||0"></progressCircle>
         </div>
+        <!-- <input style="border:1px solid red" type="number" ref="input_a" />
+        <button @click="numberGo">click</button> -->
+      </div>
+    </div>
+    <div class="case-wrap">
+      <div class="case">
+        <h3>新圆形进度条</h3>
+        <div class="sample" >
+          <div class="" style="position:relative;width:200px;height:200px;border:1px solid green">
+            <progressCircleNew  :percent="parseInt(circle1)||0"></progressCircleNew>
+          </div>
+        </div>
         <input style="border:1px solid red" type="number" ref="input_a" />
         <button @click="numberGo">click</button>
       </div>
     </div>
-    <!-- <div class="case-wrap">
-      <div class="case">
-        <h3>多边形雷达图</h3>
-        <div class="sample">
-          <radarChart></radarChart>
-        </div>
-        <input style="border:1px solid red" type="number"  />
-      </div>
-    </div> -->
      
   </div>
   </transition>
@@ -31,8 +34,7 @@
 //import {mapActions, mapGetters, mapState} from 'vuex'
 import mHeader from 'base/mHeader/mHeader'
 import progressCircle from 'base/progressCircle/index'
-import radarChart from 'base/radarChart/radarChart'
-
+import progressCircleNew from 'base/progressCircleNew/index' 
 //import animations from 'create-keyframe-animation'  // 动画插件
 
 export default {
@@ -54,6 +56,7 @@ export default {
   methods:{
     numberGo(){
       let num = this.$refs.input_a.value
+      this.circle1 = num
       //goCount(this.circle1,num,500,'linear')
     } 
   	//-----------------------------
@@ -67,7 +70,7 @@ export default {
   components:{
     mHeader,
     progressCircle,
-    radarChart
+    progressCircleNew 
   },
   mounted(){
      
