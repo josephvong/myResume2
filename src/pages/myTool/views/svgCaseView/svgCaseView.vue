@@ -6,7 +6,7 @@
       <div class="case">
         <h3>圆形进度条</h3>
         <div class="sample">
-          <progressCircle ref="progCircleA" :radius="200" :percent="parseInt(circle1)||0"></progressCircle>
+          <progressCircleSVG ref="progCircleA" :radius="200" :percent="parseInt(circle1)||0"></progressCircleSVG>
         </div>
         <!-- <input style="border:1px solid red" type="number" ref="input_a" />
         <button @click="numberGo">click</button> -->
@@ -15,10 +15,8 @@
     <div class="case-wrap">
       <div class="case">
         <h3>新圆形进度条</h3>
-        <div class="sample" >
-          <div class="" style="position:relative;width:200px;height:200px;border:1px solid green">
-            <progressCircleNew  :percent="parseInt(circle1)||0"></progressCircleNew>
-          </div>
+        <div class="sample" > 
+            <progressCircleDOM  :radius="300"  :percent="parseInt(circle1)||0"></progressCircleDOM> 
         </div>
         <input style="border:1px solid red" type="number" ref="input_a" />
         <button @click="numberGo">click</button>
@@ -33,8 +31,8 @@
 //import {goCount} from 'common/js/cusFn'
 //import {mapActions, mapGetters, mapState} from 'vuex'
 import mHeader from 'base/mHeader/mHeader'
-import progressCircle from 'base/progressCircle/index'
-import progressCircleNew from 'base/progressCircleNew/index' 
+import progressCircleSVG from 'base/progressCircleSVG/index'
+import progressCircleDOM from 'base/progressCircleDOM/index' 
 //import animations from 'create-keyframe-animation'  // 动画插件
 
 export default {
@@ -69,8 +67,8 @@ export default {
   },
   components:{
     mHeader,
-    progressCircle,
-    progressCircleNew 
+    progressCircleSVG,
+    progressCircleDOM 
   },
   mounted(){
      

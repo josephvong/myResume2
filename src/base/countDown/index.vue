@@ -1,11 +1,13 @@
 <template> 
   <div class="wrap">
-    <progressCircle :radius="radius" :percent="num" :showPercent="clockShow"></progressCircle>
+    <!-- <progressCircle :radius="radius" :percent="num" :showPercent="clockShow"></progressCircle> -->
+    <progressCircleDOM :radius="radius" :percent="num" :showPercent="clockShow"></progressCircleDOM>
   </div>  
 </template>
 
 <script type="text/ecmascript-6"> 
-import progressCircle from 'base/progressCircle/index'
+import progressCircle from 'base/progressCircleSVG/index'
+import progressCircleDOM from 'base/progressCircleDOM/index'
 import TWEEN from 'tween.js'
 export default {
   props:{
@@ -115,7 +117,7 @@ export default {
     
   },
   components:{
-    progressCircle
+    progressCircle, progressCircleDOM
   },
   mounted(){
      

@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-circle" :style="{width:radius+'px',height:radius+'px'}" >
+  <div class="progress-circle-svg" :style="{width:radius+'px',height:radius+'px'}" >
     <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" version="1.1"  :width='radius' :height="radius" style="">
       <circle class="progress-background" :style="{stroke:bgColor}" r="50" cx="50" cy="50" fill="transparent">
       </circle>
@@ -16,7 +16,7 @@
 
 <script type="text/ecmascript-6"> 
 export default {
-  name: 'progressCircle',
+  name: 'progressCircleSVG',
   props:{
     radius:{
       type:Number,
@@ -63,8 +63,8 @@ export default {
     centerShow(){
       if(this.showPercent){
         return this.showPercent
-      }else{
-        return this.percent + '%'
+      }else{ 
+        return Math.min(this.percent,100) + '%'
       }
     }
 
@@ -89,7 +89,7 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 //@import "~style/variable"
 //@import "~style/mixin"
-.progress-circle
+.progress-circle-svg
   position relative 
   .svg
     left 0
