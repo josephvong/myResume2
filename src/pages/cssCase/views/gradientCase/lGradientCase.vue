@@ -6,9 +6,7 @@
       <div class="case">
         <h3 class="case-name">基础使用</h3>
         <div class="sample-wrap case_a clearfix">
-          <div class="linear-gradient" style="background:linear-gradient(yellow,red)" > </div>
-         <!--  <div class="linear-gradient" style="background:linear-gradient(to left,yellow,red)" > </div>
-          <div class="linear-gradient" style="background:linear-gradient(to top right,yellow,red)" > </div>  -->
+          <div class="linear-gradient" style="background:linear-gradient(yellow,red)" > </div> 
           <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(to right,yellow 70px,red 71px)" > </div>
           <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(0deg,yellow 70px,red 71px)" > </div>
           <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(-1deg,yellow 70px,red 71px)" > </div>
@@ -19,7 +17,7 @@
             <p>html: </p> 
             <pre>
               <code class="html">
-                
+                {{codeObj.case_a.html}}
               </code>
             </pre>
           </div>
@@ -30,19 +28,19 @@
                  
               </code>
             </pre>
-          </div>  -->
+          </div> -->
         </div>
       </div>
 
       <div class="case">
         <h3 class="case-name">偏转角度</h3>
         <div class="sample-wrap case_b clearfix">
-        <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(yellow 70px,red 71px)" > </div>
-        <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(180deg, yellow 70px,red 71px)" > </div>
-         <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(0deg, yellow 70px,red 71px)" > </div>
-        <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(45deg,yellow 70px,red 71px)" > </div>
-        <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(90deg,yellow 70px,red 71px)" > </div>
-         <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(-45deg,yellow 70px,red 71px)" > </div>
+          <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(yellow 70px,red 71px)" > </div>
+          <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(180deg, yellow 70px,red 71px)" > </div>
+           <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(0deg, yellow 70px,red 71px)" > </div>
+          <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(45deg,yellow 70px,red 71px)" > </div>
+          <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(90deg,yellow 70px,red 71px)" > </div>
+           <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(-45deg,yellow 70px,red 71px)" > </div>
        
         </div> 
         <div class="code-wrap"> 
@@ -50,7 +48,7 @@
             <p>html: </p> 
             <pre>
               <code class="html">
-                
+                {{codeObj.case_b.html}}
               </code>
             </pre>
           </div> 
@@ -62,19 +60,25 @@
         <div class="sample-wrap case_c clearfix">
         <div class="linear-gradient" style="background:repeating-linear-gradient(to right,yellow 0, yellow 10px)" > </div>
         <div class="linear-gradient" style="background:repeating-linear-gradient(to right,yellow 0, red 10px)" > </div>
-        <div class="linear-gradient" style="background:repeating-linear-gradient(to right,yellow 0, yellow 10px,red 11px, red 20px)" > </div>
-        <!-- <div class="linear-gradient" style="width:100px;height:100px;background:linear-gradient(180deg, yellow 70px,red 71px)" > </div>
-         --> 
+        <div class="linear-gradient" style="background:repeating-linear-gradient(to right,yellow 0, yellow 10px,red 11px, red 20px)" > </div> 
         </div> 
         <div class="code-wrap"> 
           <div class="code"  v-highlight>
             <p>html: </p> 
             <pre>
               <code class="html">
-                
+                {{codeObj.case_c.html}}
               </code>
             </pre>
           </div> 
+          <!-- <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code>
+                 {{codeObj.case_c.css}}
+              </code>
+            </pre>
+          </div>--> 
         </div>
       </div>
       
@@ -85,11 +89,11 @@
          
         </div> 
         <div class="code-wrap"> 
-          <div class="code"  v-highlight>
-            <p>html: </p> 
+          <div class="code"  v-highlight>  
+            <p>css:</p>
             <pre>
-              <code class="html">
-                
+              <code>
+                 {{codeObj.case_d.css}}
               </code>
             </pre>
           </div> 
@@ -103,14 +107,14 @@
          
         </div> 
         <div class="code-wrap"> 
-          <div class="code"  v-highlight>
-            <p>html: </p> 
+          <div class="code"  v-highlight>  
+            <p>css:</p>
             <pre>
-              <code class="html">
-                
+              <code>
+                 {{codeObj.case_e.css}}
               </code>
             </pre>
-          </div> 
+          </div>
         </div>
       </div> 
     </div>
@@ -119,7 +123,7 @@
 </template>
 
 <script> 
-//import codeObj from './caseCode'
+import codeObj from './caseCode_l'
 export default {
   name: 'lGradientCase',
   props:{
@@ -127,7 +131,7 @@ export default {
   },
   data () {
     return {
-      //codeObj:codeObj
+      codeObj:codeObj
     }
   },
   computed:{
@@ -199,9 +203,7 @@ export default {
   background-position: 0px 0 
 @keyframes case_d_bg
   0%
-    background-position: 0px 0
-  //50%
-     
+    background-position: 0px 0  
   100%
     background-position: 300px 0 
 

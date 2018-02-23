@@ -183,7 +183,7 @@
 </template>
 
 <script> 
-import codeObj from './caseCode'
+import codeObj from './caseCode_r'
 export default {
   name: 'rGradientCase',
   props:{
