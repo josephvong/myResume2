@@ -53,5 +53,24 @@ export default new Router({
       } 
     },
 
+    //-----------------css Magic 01-----------------------
+    {
+      path: '/cssmagic_1',   
+      name:'css编码技巧',
+      component:_import('cssMgic_1/cssSkillCase'),
+      meta:{
+        gName:'css Magic 第一章'
+      } 
+    },
+
+    //-----------------css Magic 02-----------------------
+    {
+      path: '/cssmagic_2',   
+      name:'背景与边框',
+      component:_import('cssMgic_2/index'),
+      meta:{
+        gName:'css Magic 第二章'
+      } 
+    },
   ]
 })
