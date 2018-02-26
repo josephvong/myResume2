@@ -93,7 +93,60 @@
             </pre>
           </div> 
         </div>
-      </div> 
+      </div>
+
+      <div class="case">
+        <h3 class="case-name">圆角内边框</h3>
+        <div class="sample-wrap case_d clearfix">
+          <div class="sample sample_1"> bg-position </div>
+          <div class="sample sample_2"> bg-position </div>   
+        </div> 
+        <div class="code-wrap"> 
+          <!-- <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div>-->
+          <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code> 
+              </code>
+            </pre>
+          </div> 
+        </div>
+      </div>
+
+      <div class="case">
+        <h3 class="case-name">条纹背景</h3>
+        <div class="sample-wrap case_e clearfix">
+          <div class="sample sample_1"></div>
+          <div class="sample sample_2"></div>
+          <div class="sample sample_3"></div>
+          <div class="sample sample_4"></div>
+          <div class="sample sample_5"></div>      
+        </div> 
+        <div class="code-wrap"> 
+          <!-- <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div>-->
+          <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code> 
+              </code>
+            </pre>
+          </div> 
+        </div>
+      </div>  
     </div>
 
   </div>
@@ -227,5 +280,58 @@ export default {
       padding 10px
       background: url(http://csssecrets.io/images/code-pirate.svg) no-repeat bottom right #58a;  
       background-origin content-box
+      
+.case_d
+  border 1px solid red
+  padding 20px
+  font-size 16px
+  .sample
+    float:left 
+    margin-right 20px
+    &.sample_1
+      outline 0.6em solid #655
+      box-shadow 0 0 0 0.4em #655
+      border-radius 0.8em
+      padding 0.4em
+      width 200px
+      height 100px
+      padding 1em 
+      background pink 
+    &.sample_2
+      width 200px
+      height 100px
+      border 1px solid red
+
+.case_e
+  border 1px solid red
+  padding 20px
+  font-size 16px
+  .sample
+    float:left 
+    margin-right 20px
+    &.sample_1
+      width 200px
+      height 200px
+      background: linear-gradient(#fb3 50%, #58a 50%);
+      background-size:100% 5% ;
+    &.sample_2
+      width 200px
+      height 200px
+      background: linear-gradient(to left, #fb3 50%, #58a 50%);
+      background-size: 5% 100%;
+    &.sample_3 
+      width 200px
+      height 200px
+      background: linear-gradient(45deg,#fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75%, #58a 0)
+      background-size: 30% 30%;
+    &.sample_4 
+      width 200px
+      height 200px
+      background: repeating-linear-gradient(30deg,#fb3, #fb3 10px, #58a 0, #58a 20px) 
+    &.sample_5 
+      width 200px
+      height 200px
+      background: #58a;
+      background-image: repeating-linear-gradient(60deg,hsla(0,0,100%,0.1) 0,hsla(0,0,100%,0.1) 15px, transparent 0,transparent 30px) 
 </style>
 
