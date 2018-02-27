@@ -146,7 +146,89 @@
             </pre>
           </div> 
         </div>
-      </div>  
+      </div>
+
+      <div class="case">
+        <h3 class="case-name">网格背景</h3>
+        <div class="sample-wrap case_f clearfix">
+          <div class="sample sample_1"></div> 
+          <div class="sample sample_2"></div> 
+          <div class="sample sample_3"></div>      
+        </div> 
+        <div class="code-wrap"> 
+          <!-- <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div>-->
+          <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code> 
+              </code>
+            </pre>
+          </div> 
+        </div>
+      </div>
+
+      <div class="case">
+        <h3 class="case-name">波点背景</h3>
+        <div class="sample-wrap case_g clearfix">
+          <div class="sample sample_1"></div>
+          <div class="sample sample_2"></div>
+          <div class="sample sample_3"></div>    
+        </div> 
+        <div class="code-wrap"> 
+          <!-- <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div>-->
+          <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code> 
+              </code>
+            </pre>
+          </div> 
+        </div>
+      </div>
+
+      <div class="case">
+        <h3 class="case-name">波点背景</h3>
+        <div class="sample-wrap case_h clearfix">
+          <div class="sample sample_1"></div>
+          <div class="sample sample_2"></div>
+          <div class="sample sample_3"></div>
+          <div class="sample sample_4"></div>
+          <div class="sample sample_5">
+           
+          </div> 
+        </div> 
+        <div class="code-wrap"> 
+          <!-- <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div>-->
+          <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code> 
+              </code>
+            </pre>
+          </div> 
+        </div>
+      </div>    
     </div>
 
   </div>
@@ -333,5 +415,118 @@ export default {
       height 200px
       background: #58a;
       background-image: repeating-linear-gradient(60deg,hsla(0,0,100%,0.1) 0,hsla(0,0,100%,0.1) 15px, transparent 0,transparent 30px) 
+
+.case_f
+  border 1px solid red
+  padding 20px
+  font-size 16px
+  background #cccccc
+  .sample
+    float:left 
+    margin-right 20px
+    &.sample_1
+      width 200px
+      height 200px
+      background white
+      background-image linear-gradient(90deg, rgba(200,0,0,.5) 50%, transparent 0),
+                       linear-gradient(rgba(200,0,0,.5) 50%, transparent 0);
+      background-size 20px 20px  
+    &.sample_2
+      width 200px
+      height 200px
+      background white
+      background-image linear-gradient(90deg, rgba(200,0,0,.5) 2px, transparent 0),
+                       linear-gradient(rgba(200,0,0,.5) 2px, transparent 0);
+      background-size 30px 30px
+    &.sample_3
+      width 200px
+      height 200px
+      background #58a
+      background-image linear-gradient(white 3px,transparent 0),linear-gradient(90deg, white 3px,transparent 0),
+                       linear-gradient(hsla(0,0,100%,0.9) 1px, transparent 0), linear-gradient(90deg, hsla(0,0,100%,0.9) 1px, transparent 0)
+      background-size 50px 50px, 50px 50px, 10px 10px, 10px 10px  
+
+.case_g
+  border 1px solid red
+  padding 20px
+  font-size 16px
+  background #cccccc
+  .sample
+    float:left 
+    margin-right 20px
+    &.sample_1
+      width 200px
+      height 200px
+      background skyblue
+      background-image radial-gradient(red 2px, transparent 0)
+      background-size 10px 10px
+    &.sample_2
+      width 200px
+      height 200px  
+      background: #655;
+      background-image: radial-gradient(tan 5px, transparent 0);
+      background-size: 20px 20px;
+      background-position -10px -10px // bg-position 必须是 负的bg-size 一半
+    &.sample_3
+      width 200px
+      height 200px  
+      background: #655;
+      background-image: radial-gradient(tan 5px, transparent 0),radial-gradient(tan 5px, transparent 0);
+      background-size: 20px 20px;
+      background-position 0 0, 10px 10px  // 第二层的偏移值必须是背景大小的50% 
+
+.case_h
+  border 1px solid red
+  padding 20px
+  font-size 16px
+  background #cccccc
+  .sample
+    float:left 
+    margin-right 20px
+    &.sample_1
+      width 200px
+      height 200px
+      background #eee
+      background-image linear-gradient(45deg, #bbb 25%, transparent 0)
+      background-size 40px 40px
+    
+    &.sample_2
+      width 200px
+      height 200px
+      background #eee
+      background-image linear-gradient(45deg, #bbb 25%, transparent 0),// 形成一个 左下角的直角三角形 
+                       linear-gradient(45deg, transparent 75%, #bbb 0%)// 形成与前一个位置相反的三角形
+      background-size 40px 40px
+      
+    &.sample_3
+      width 200px
+      height 200px
+      background green //#eee
+      background-image linear-gradient(45deg, #bbb 25%, transparent 0),  
+                       linear-gradient(45deg, transparent 75%, hsla(0,0,100%,1) 0%),  
+                       linear-gradient(45deg, #bbb 25%, transparent 0),
+                       linear-gradient(45deg, transparent 75%, hsla(0,0,100%,1) 0)
+      background-position 0 0, 15px 15px, 15px 15px, 35px 35px
+      background-size 40px 40px
+    &.sample_4
+      width 200px
+      height 200px
+      background  #eee
+      background-image linear-gradient(45deg, #bbb 25%, transparent 0),  
+                       linear-gradient(45deg, transparent 75%, #bbb 0%),  
+                       linear-gradient(45deg, #bbb 25%, transparent 0),
+                       linear-gradient(45deg, transparent 75%, #bbb 0)
+      background-position 0 0, 20px 20px, 20px 20px, 40px 40px
+      background-size 40px 40px
+    &.sample_5
+      width 200px
+      height 200px
+      background #eee
+      background-image url('data:image/svg+xml,\
+                      <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill-opacity=".25" >\
+                        <rect x="50" width="50" height="50" />\
+                        <rect y="50" width="50" height="50" />\
+                      </svg>');
+      background-size 40px 40px
 </style>
 
