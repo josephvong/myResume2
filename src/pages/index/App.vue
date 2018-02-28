@@ -34,6 +34,12 @@
             </div>
             <p class="grid_label">日历控件</p> 
           </a>
+           <a href="./resume.html" class="m-grid" >
+            <div class="grid_icon">
+              <img :src="require('assets/img/jizhi.png')" alt="">
+            </div>
+            <p class="grid_label">我的简历</p> 
+          </a>
        </mGrid>  
      </div>
      <cubeButton style="font-size:0.28rem">button</cubeButton>

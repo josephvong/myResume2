@@ -5,7 +5,7 @@
   "author": "joseph",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 127.0.0.1",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.8.119",
     "start": "node build/dev-server.js",
     "blogstart": "node server/server.js",
     "test": "npm run blogstart & npm run start",
@@ -34,6 +34,7 @@
     "soundjs": "^1.0.1",
     "tween.js": "^16.6.0",
     "vue": "^2.5.2",
+    "vue-awesome-swiper": "^3.1.2",
     "vue-lazyload": "^1.1.4",
     "vue-loader": "^13.5.0",
     "vue-quill-editor": "^3.0.4",
