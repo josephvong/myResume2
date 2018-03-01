@@ -5,7 +5,7 @@
   "author": "joseph",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.8.119",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 127.0.0.1",
     "start": "node build/dev-server.js",
     "blogstart": "node server/server.js",
     "test": "npm run blogstart & npm run start",
