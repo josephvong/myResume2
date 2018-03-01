@@ -43,6 +43,6 @@ var articleRouter = require('./routes/article')
 app.use('/api',articleRouter)
 
 //================静态文件=====================
-app.use('/',express.static(__dirname+'/staticFile')) 
-
+//app.use('/',express.static(__dirname+'/staticFile')) 
+app.use('/',express.static('../dist'))
 app.listen(port);
