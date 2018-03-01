@@ -42,8 +42,8 @@
           </a>
        </mGrid>  
      </div>
-     <cubeButton style="font-size:0.28rem">button</cubeButton>
-     <cube-checkbox v-model="checked" ><!-- style="font-size:0.28rem" -->
+     <!-- <cubeButton style="font-size:0.28rem">button</cubeButton>
+     <cube-checkbox v-model="checked" > 
       Checkbox
      </cube-checkbox>
      <cubeLoading :size="50"></cubeLoading>
@@ -64,15 +64,13 @@
     <br/>
     <cube-button class="testBtn" style="display:none" @click="showPicker">Picker</cube-button>
 
-    <div class="test-flex"></div>
+    <div class="test-flex"></div> -->
   </div>
 </template>
 
 <script>
-import { Button, Checkbox, Loading, Tip, Popup, Picker } from 'cube-ui'
-import mGrid from 'base/mGrid'
-const col1Data = [{ text: '剧毒', value: '剧毒'}, { text: '蚂蚁', value: '蚂蚁' }, 
-  { text: '幽鬼', value: '幽鬼' }]
+//import { Button, Checkbox, Loading, Tip, Popup, Picker } from 'cube-ui'
+import mGrid from 'base/mGrid' 
 export default {
   name: 'app',
   props:{
@@ -89,7 +87,7 @@ export default {
 
   },
   methods:{
-    showPopup(refId) {
+    /*showPopup(refId) {
       const component = this.$refs[refId]
       component.show()
       setTimeout(() => {
@@ -99,39 +97,15 @@ export default {
 
     showPicker () {
       this.picker.show()
-    }
+    }*/
   },
   watch:{ 
   },
   components:{
-    mGrid,
-    cubeButton:Button,
-    cubeCheckbox:Checkbox,
-    cubeLoading:Loading,
-    cubeTip:Tip,
-    cubePopup:Popup,
-    Picker:Picker 
+    mGrid, 
   },
   mounted(){ 
-    this.picker = this.$createPicker({
-      title: 'Picker',
-      data: [col1Data],
-      /*onSelect: (selectedVal, selectedIndex, selectedText) => {
-        this.$createDialog({
-          type: 'warn',
-          content: `Selected Item: <br/> - value: ${selectedVal.join(', ')} <br/>
-            - index: ${selectedIndex.join(', ')} <br/> - text: ${selectedText.join(' ')}`,
-          icon: 'cubeic-alert'
-        }).show()
-      },
-      onCancel: () => {
-        this.$createToast({
-          type: 'correct',
-          txt: 'Picker canceled',
-          time: 1000
-        }).show()
-      }*/
-    })
+     
   }
 }
 </script>
@@ -142,7 +116,7 @@ export default {
   width 100%
   max-width 10rem
   margin 0 auto
-  background pink
+  //background pink
   font-size 0.28rem
   .grid-wrap
     width 100%

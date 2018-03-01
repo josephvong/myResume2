@@ -14,7 +14,9 @@
 
     <!--   -->
     <swiper v-if="swiperOption" ref="pageSwiper" :options="swiperOption" class="swiper-box" @slideChangeTransitionEnd='slideEndHandle'>
-      <swiper-slide class="swiper-item">1</swiper-slide>
+      <swiper-slide class="swiper-item">
+        <viewa></viewa>
+      </swiper-slide>
       <swiper-slide class="swiper-item">2</swiper-slide>
       <swiper-slide class="swiper-item">3</swiper-slide>
       <swiper-slide class="swiper-item">4</swiper-slide>  
@@ -26,6 +28,7 @@
 <script>
 import 'swiper/dist/css/swiper.css' 
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import viewa from './pageview/view_a'
 const pageTitle = ['首页','技术','经历','作品']
 const pageIcon = ['&#xe60e;','&#xe60e;','&#xe60e;','&#xe60e;']
 const swiperOpt = {
@@ -76,15 +79,16 @@ export default {
       this.hNavShow = !this.hNavShow
     }, 
     slideEndHandle(){
-      this.pageIndex = this.swiper.activeIndex
-      //console.log(this.swiper.activeIndex)
+      this.pageIndex = this.swiper.activeIndex 
     }
   },
   watch:{ 
   },
   components:{
     swiper,
-    swiperSlide
+    swiperSlide,
+    //------page--------
+    viewa
   },
   mounted(){ 
     console.log(this.swiper.previousIndex)
@@ -97,6 +101,9 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 @import '~style/mixin.styl'
+html,body
+  checker-bg(#ccc,rgba(0,0,0,0.1),10px)
+  
 #app
   position fixed
   width 100%
@@ -125,7 +132,7 @@ export default {
           justify-content space-between
           align-items center
           transition all 0.2s
-          background green 
+          background rgba(255,255,255,0.6) 
           .cus-bullet
             flex 1
             display inline-block
@@ -133,24 +140,24 @@ export default {
             transition all 0.2s
             &:after
               content attr(data-title) 
-            &.cus-bullet-active 
-              background yellow
+            &.cus-bullet-active
+              color skyblue 
+              //background yellow
   
-  .cus-v-nav
-    //display block
+  .cus-v-nav 
     position fixed
     right 20px
     top 50%
     transform translate3d(0,-50%,0) 
-    font-size 1.2rem//0.32rem 
+    font-size 1.2rem 
     z-index 1000
     background blue 
     .cus-bullet
       display block
-      width 2rem//0.4rem
-      height 2rem //0.4rem
-      line-height 2rem //0.4rem
-      margin 3rem 0//0.5rem 0
+      width 2rem 
+      height 2rem  
+      line-height 2rem  
+      margin 3rem 0 
       text-align center
       border-radius 50% 
       background red
@@ -167,21 +174,21 @@ export default {
   .swiper-box
     width 100%
     height 100%
-    margin 0 auto
-    //padding 0 calc(50% - 450px)
+    margin 0 auto 
     .swiper-item
       height 100%
       padding-top  
       font-size 1.6rem //0.32rem
-      /*display flex
+      background rgba(0,0,0,0)
+      display flex
       justify-content center
-      align-items center*/
-      background-image url('data:image/svg+xml,\
-                      <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill-opacity=".1" >\
-                        <rect x="50" width="50" height="50" fill="green" />\
-                        <rect y="50" width="50" height="50" fill="green" />\
-                      </svg>');
-      background-size 20px 20px
+      align-items center 
+      &:nth-of-type(2) 
+        checker-bg(white,rgba(0,255,0,0.1),10px)
+      &:nth-of-type(3) 
+        checker-bg(white,rgba(255,0,0,0.1),10px)
+      /*&:nth-of-type(4) 
+        checker-bg(white,rgba(0,0,0,0.1),10px)*/
       
 @media screen and (max-width:640px)
   .header .nav-wrap
@@ -192,12 +199,6 @@ export default {
   .header .nav-wrap
     display none
 
-/*@media screen and (max-width:415px)
-  .cus-h-nav
-    display none
-  .cus-v-nav
-    display block
-*/  
 
 
 

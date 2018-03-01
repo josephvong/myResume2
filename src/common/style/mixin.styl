@@ -99,4 +99,14 @@ triangle(color,width,orient)
   if orient == 'left'
     transform rotate(-45deg)
   if orient == 'right'
-    transform rotate(-225deg)  
+    transform rotate(-225deg) 
+    
+checker-bg(lc,dc,size)
+  background  lc
+  background-image linear-gradient(45deg, dc 25%, transparent 0), 
+                   linear-gradient(45deg, transparent 75%, dc 0%), 
+                   linear-gradient(45deg, dc 25%, transparent 0),
+                   linear-gradient(45deg, transparent 75%, dc 0)
+  background-position 0 0, size size, size size, size*2 size*2
+  background-size size*2 size*2
+ 
