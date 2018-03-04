@@ -228,6 +228,56 @@
             </pre>
           </div> 
         </div>
+      </div>
+
+      <div class="case">
+        <h3 class="case-name">波点背景</h3>
+        <div class="sample-wrap case_i clearfix">
+          <div class="sample sample_1"></div>
+          <div class="sample sample_2"></div>    
+        </div> 
+        <div class="code-wrap"> 
+          <!-- <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div>-->
+          <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code> 
+              </code>
+            </pre>
+          </div> 
+        </div>
+      </div>
+
+      <div class="case">
+        <h3 class="case-name">图片边框</h3>
+        <div class="sample-wrap case_j clearfix">
+          <div class="sample sample_1"> CCC </div> 
+          <div class="sample sample_2"> CCC </div> 
+        </div> 
+        <div class="code-wrap"> 
+          <!-- <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div>-->
+          <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code> 
+              </code>
+            </pre>
+          </div> 
+        </div>
       </div>    
     </div>
 
@@ -528,5 +578,49 @@ export default {
                         <rect y="50" width="50" height="50" />\
                       </svg>');
       background-size 40px 40px
+
+.case_i
+  border 1px solid red
+  padding 20px
+  font-size 16px
+  background #cccccc
+  .sample_1
+    width 600px
+    height 100px
+    background linear-gradient(90deg, #fb3 15%, #655 0, #655 40%, #ab4 0, #ab4 65%, hsl(20, 40%, 90%) 0)
+    background-size 80px 100%
+  .sample_2
+    width 600px
+    height 100px
+    background hsl(20,40%,90%) //no-repeat
+    background-image linear-gradient(90deg, #fb3 11px, transparent 0),
+                     linear-gradient(90deg, #ab4 23px, transparent 0),
+                     linear-gradient(90deg, #655 43px, transparent 0);
+    background-size  41px 100%, 61px 100%, 83px 100%;
+
+.case_j
+  border 1px solid red
+  padding 20px
+  font-size 16px
+  background #cccccc
+  .sample
+    float:left 
+    margin-right 20px
+    &.sample_1 
+      width 200px
+      height 200px
+      //padding 20px
+      border 20px solid transparent  // 透明边框，用来透视 图片，达到图片边框的效果
+      background linear-gradient(white,white), //用linear-gradient 来模拟白色遮盖bg
+                 url('http://csssecrets.io/images/stone-art.jpg') //被纯白bg覆盖的背景图
+      background-clip padding-box, border-box// 第一个 padding 用来修饰 线性模拟的纯白bg        
+      background-size cover  // 背景平铺
+      background-origin border-box // 背景平铺从border的占位范围开始
+    &.sample_2
+      width 200px
+      height 200px
+      border 10px solid transparent
+      background linear-gradient(white,white) padding-box, 
+                 repeating-linear-gradient(-45deg,red 0,red 12.5%,transparent 0, transparent 25%, #58a 0, #58a 37.5%, transparent 0, transparent 50%) 0/20px 20px; 
 </style>
 
