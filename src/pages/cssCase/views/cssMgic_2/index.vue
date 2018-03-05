@@ -260,6 +260,8 @@
         <div class="sample-wrap case_j clearfix">
           <div class="sample sample_1"> CCC </div> 
           <div class="sample sample_2"> CCC </div> 
+          <div class="sample sample_3"> 使用border-image 实现 </div>
+          <div class="sample sample_4"> </div> 
         </div> 
         <div class="code-wrap"> 
           <!-- <div class="code"  v-highlight>
@@ -621,6 +623,25 @@ export default {
       height 200px
       border 10px solid transparent
       background linear-gradient(white,white) padding-box, 
-                 repeating-linear-gradient(-45deg,red 0,red 12.5%,transparent 0, transparent 25%, #58a 0, #58a 37.5%, transparent 0, transparent 50%) 0/20px 20px; 
+                 repeating-linear-gradient(-45deg,red 0,red 12.5%,transparent 0, transparent 25%, #58a 0, #58a 37.5%, transparent 0, transparent 50%) 0/20px 20px;
+    
+    &.sample_3
+      width 200px
+      height 200px
+      border 10px solid transparent
+      border-image 10 repeating-linear-gradient(-45deg,red 0, red 1em,transparent 0, transparent 2em,#58a 0, #58a 3em,transparent 0, transparent 4em)
+    
+    &.sample_4
+      width 200px
+      height 200px
+      border 1px solid transparent
+      background linear-gradient(white,white) padding-box,
+                 repeating-linear-gradient(-45deg,black 0,black 25%,white 0,white 50%) 0 / 10px 10px;
+      animation ants 12s linear infinite
+@keyframes ants{
+  to{
+    background-position 100% 100%
+  }
+}
 </style>
 
