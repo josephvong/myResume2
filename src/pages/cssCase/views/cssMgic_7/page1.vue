@@ -116,7 +116,32 @@
             </pre>
           </div> 
         </div>
-      </div> 
+      </div>
+      
+      <div class="case">
+        <h3 class="case-name">根据兄弟元素的数量改变元素的样式</h3> 
+        <div class="sample-wrap case_c ">
+          <ul class="sample_1 clearfix">
+            <li></li><li></li><li></li><li></li>
+          </ul> 
+        </div> 
+        <div class="code-wrap"> 
+          <!-- <div class="code"  v-highlight>
+            <p>html: </p> 
+            <pre>
+              <code class="html">
+                
+              </code>
+            </pre>
+          </div>-->
+          <div class="code"  v-highlight>  
+            <p>css:</p>
+            <pre>
+              <code> </code>
+            </pre>
+          </div> 
+        </div>
+      </div>  
     </div>
 
   </div>
@@ -207,7 +232,18 @@ export default {
       border 1px solid gray
     &.fixed
       table-layout fixed
-      
+
+.case_c .sample_1
+  border 1px solid blue 
+  li
+    float left
+    width 50px
+    height 50px
+    margin 10px
+    border 1px solid red
+    &:first-child:nth-last-child(4),&:first-child:nth-last-child(4) ~ li
+      background green
+          
              
 </style>
 
