@@ -82,5 +82,13 @@ export default new Router({
         gName:'css Magic 第七章'
       } 
     },
+    {
+      path: '/cssmagic_7_2',   
+      name:'结构与布局2',
+      component:_import('cssMgic_7/page2'),
+      meta:{
+        gName:'css Magic 第七章'
+      } 
+    },
   ]
 })

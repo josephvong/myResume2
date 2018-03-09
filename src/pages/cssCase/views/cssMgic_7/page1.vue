@@ -122,8 +122,23 @@
         <h3 class="case-name">根据兄弟元素的数量改变元素的样式</h3> 
         <div class="sample-wrap case_c ">
           <ul class="sample_1 clearfix">
-            <li></li><li></li><li></li><li></li>
+            <li>1</li><li>2</li><li>3</li><li>4</li>
+          </ul>
+          <ul class="sample_2 clearfix">
+            <li>1</li><li>2</li><li>3</li><li>4</li>
+          </ul>
+          <ul class="sample_3 clearfix">
+            <li v-for="i in 8">{{i}}</li> 
+          </ul>
+          <ul class="sample_4 clearfix">
+            <li v-for="i in 6">{{i}}</li> 
+          </ul>
+          <ul class="sample_5 clearfix">
+            <li v-for="i in 5">{{i}}</li> 
           </ul> 
+          <ul class="sample_5 clearfix">
+            <li v-for="i in 7">{{i}}</li> 
+          </ul>  
         </div> 
         <div class="code-wrap"> 
           <!-- <div class="code"  v-highlight>
@@ -142,7 +157,7 @@
           </div> 
         </div>
       </div>  
-    </div>
+    </div>  
 
   </div>
 </template>
@@ -233,6 +248,13 @@ export default {
     &.fixed
       table-layout fixed
 
+
+/*n-items($n) 
+  &:first-child:nth-last-child($n), &:first-child:nth-last-child($n) ~ & {
+    @content;
+*/     
+   
+    
 .case_c .sample_1
   border 1px solid blue 
   li
@@ -243,7 +265,45 @@ export default {
     border 1px solid red
     &:first-child:nth-last-child(4),&:first-child:nth-last-child(4) ~ li
       background green
-          
-             
+
+.case_c .sample_2
+  border 1px solid blue 
+  li
+    float left
+    width 50px
+    height 50px
+    margin 10px
+    border 1px solid red 
+.case_c .sample_3
+  border 1px solid blue 
+  li
+    float left
+    width 50px
+    height 50px
+    margin 10px
+    border 1px solid red
+    &:nth-child(n+3)//:nth-last-child(n+3)/*, &:first-child:nth-last-child(8) ~ li*/
+      background green    
+.case_c .sample_4
+  border 1px solid blue 
+  li
+    float left
+    width 50px
+    height 50px
+    margin 10px
+    border 1px solid red
+    &:first-child:nth-last-child(n+6), &:first-child:nth-last-child(n+6) ~ li 
+      background green
+.case_c .sample_5
+  border 1px solid blue 
+  li
+    float left
+    width 50px
+    height 50px
+    margin 10px
+    border 1px solid red
+    &:first-child:nth-last-child(n+2):nth-last-child(-n+6), 
+    &:first-child:nth-last-child(n+2):nth-last-child(-n+6) ~ li 
+      background green                   
 </style>
 
