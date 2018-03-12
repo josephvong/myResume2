@@ -72,7 +72,15 @@ export default new Router({
         gName:'css Magic 第二章'
       } 
     },
-
+    //-----------------css Magic 05-----------------------
+    {
+      path: '/cssmagic_5',   
+      name:'字体排印',
+      component:_import('cssMgic_5/index'),
+      meta:{
+        gName:'css Magic 第五章'
+      } 
+    },
     //-----------------css Magic 07-----------------------
     {
       path: '/cssmagic_7_1',   
