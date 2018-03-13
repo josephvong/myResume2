@@ -1,0 +1,16 @@
+test_color($color)
+  color $color
+  
+text-3d($color= white, $depth = 5)  
+  // 默认白色字体，5层阴影
+  $shadow = (); // 阴影属性值的变量
+  $shadow-color = $color; // 赋值的文字和阴影颜色
+  
+  for num in (0..$depth)  // 遍历 阴影层数
+    $shadow-color = darken($shadow-color, 10%) //每次遍历将文字与阴影的颜色 加深10%（darken是stylus的默认函数）
+    if(num == $depth) // 遍历到最后，添加一个 全黑的阴影
+      push($shadow, 0 (num*1px) $shadow-color\,, 0 ($depth * 1px) 10px black ) 
+    else // 添加每一层的阴影
+      push($shadow, 0 (num*1px) $shadow-color\,)  // 用push()函数来处理 $shadow
+  color $shadow-color
+  text-shadow $shadow    
