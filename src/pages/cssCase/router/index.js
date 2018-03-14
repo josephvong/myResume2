@@ -81,6 +81,15 @@ export default new Router({
         gName:'css Magic 第五章'
       } 
     },
+    //-----------------css Magic 06-----------------------
+    {
+      path: '/cssmagic_6',   
+      name:'用户体验优化',
+      component:_import('cssMgic_6/index'),
+      meta:{
+        gName:'css Magic 第六章'
+      } 
+    },
     //-----------------css Magic 07-----------------------
     {
       path: '/cssmagic_7_1',   
