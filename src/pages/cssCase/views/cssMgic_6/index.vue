@@ -28,11 +28,7 @@
         </div>
       </div>  
     </div>  
-    <button onclick="document.querySelector('#modal').showModal()">Click me</button>
-    <dialog id="modal">
-    O HAI!
-    <button onclick="this.parentNode.close()">Close</button>
-    </dialog>
+    
     <!-- <div class="dialog"></div> -->
   </div>
 </template>
