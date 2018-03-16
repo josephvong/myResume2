@@ -176,7 +176,7 @@
       <div class="case">
         <h3 class="case-name">范围输入拖动控件方案</h3> 
         <div class="sample-wrap case_d clearfix">
-          <div class="image-slider" ref="imageSlider">
+          <div class="image-slider" >
             <div :style="{width:`${sliderRange}%`}">
               <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521194743229&di=fa56abede3070c721df2d27624843290&imgtype=0&src=http%3A%2F%2Fatt.x2.hiapk.com%2Fforum%2Fmonth_1202%2F12020311340d5dffefb3498a50.jpg" alt="">
             </div>  
