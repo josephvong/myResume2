@@ -72,6 +72,15 @@ export default new Router({
         gName:'css Magic 第二章'
       } 
     },
+    // --------------------css Magic 03-------------------
+    {
+      path: '/cssmagic_3',   
+      name:'形状',
+      component:_import('cssMgic_3/index'),
+      meta:{
+        gName:'css Magic 第三章'
+      } 
+    },
     //-----------------css Magic 04-----------------------
     {
       path: '/cssmagic_4',   
