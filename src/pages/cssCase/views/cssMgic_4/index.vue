@@ -181,9 +181,9 @@ export default {
     border 1px solid black
     background transparent
     color black
-    filter drop-shadow(10px,10px,5px ,blue)
+    filter drop-shadow(2px 2px 10px rgba(0,0,0,.8)); //drop-shadow(10px,10px,5px ,blue)
     &:hover
-      background red
-      filter drop-shadow(40px,40px,5px ,blue)
+      background white
+      filter drop-shadow(2px 2px 10px rgba(0,0,0,1));
        
 </style> 
