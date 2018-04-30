@@ -30,36 +30,79 @@
           </div> 
         </div>
       </div> 
-    </div>  
-    
-    <div class="page-body">
-      <div class="case">
-        <h3 class="case-name"> filter函数 </h3> 
-        <div class="sample-wrap case_b clearfix">
-          <div class="sample sample_1">blur</div>
-          <div class="sample sample_2">brightness</div>
-          <div class="sample sample_3">contrast</div>
-          <div class="sample sample_4">drop shadow</div>   
+    </div>   
+    <div class="case">
+      <h3 class="case-name"> filter函数 </h3> 
+      <div class="sample-wrap case_b clearfix">
+        <div class="sample sample_1">blur</div>
+        <div class="sample sample_2">brightness</div>
+        <div class="sample sample_3">contrast</div>
+        <div class="sample sample_4">drop shadow</div>   
+      </div> 
+      <div class="code-wrap"> 
+        <!-- <div class="code"  v-highlight>
+          <p>html: </p> 
+          <pre>
+            <code class="html">
+              
+            </code>
+          </pre>
+        </div>-->
+        <div class="code"  v-highlight>  
+          <p>css:</p>
+          <pre>
+            <code> 
+            </code>
+          </pre>
         </div> 
-        <div class="code-wrap"> 
-          <!-- <div class="code"  v-highlight>
-            <p>html: </p> 
-            <pre>
-              <code class="html">
-                
-              </code>
-            </pre>
-          </div>-->
-          <div class="code"  v-highlight>  
-            <p>css:</p>
-            <pre>
-              <code> 
-              </code>
-            </pre>
-          </div> 
+      </div>
+    </div>
+
+    <div class="case">
+      <h3 class="case-name"> filter函数 </h3> 
+      <div class="sample-wrap case_b clearfix">
+        <div class="sample sample_1">blur</div>
+        
+      </div> 
+      <div class="code-wrap"> 
+        <!-- <div class="code"  v-highlight>
+          <p>html: </p> 
+          <pre>
+            <code class="html">
+              
+            </code>
+          </pre>
+        </div>-->
+        <div class="code"  v-highlight>  
+          <p>css:</p>
+          <pre>
+            <code> 
+            </code>
+          </pre>
+        </div> 
+      </div>
+    </div>
+
+    <div class="case">
+      <h3 class="case-name"> 毛玻璃 </h3> 
+      <div class="sample-wrap case_c clearfix">
+        <div class="main">
+          <div class="content">
+            “The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
+— Oscar Wilde, The Picture of Dorian Gray
+          </div>
         </div>
       </div> 
-    </div> 
+      <div class="code-wrap">  
+        <div class="code"  v-highlight>  
+          <p>css:</p>
+          <pre>
+            <code> 
+            </code>
+          </pre>
+        </div> 
+      </div>
+    </div>  
   </div>
 </template>
 
@@ -185,5 +228,41 @@ export default {
     &:hover
       background white
       filter drop-shadow(2px 2px 10px rgba(0,0,0,1));
-       
+.case_c
+  width 100%
+  .main
+    position relative
+    width: 50%;
+    min-width 600px
+    height: 0
+    min-height 500px
+    padding-top: 50%
+    margin: 0 auto
+    border 1px solid red
+    background-image: url("http://csssecrets.io/images/tiger.jpg")
+    background-position: 0 0
+    background-size: cover 
+    background-attachment: local;
+    &:before
+      content ''
+      display block
+      position absolute
+      width: 80%
+      height:70%
+      left 10%
+      top: 15%
+      -webkit-filter: blur(20px);
+      filter: blur(20px);
+      background rgba(225,225,225,0.8)
+    .content
+      position absolute
+      width: 80%
+      height:70%
+      left 10%
+      top: 15%
+      text-align center
+      padding 20px
+      line-height 1.8
+      font-size: 16px;
+           
 </style> 
