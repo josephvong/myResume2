@@ -89,9 +89,34 @@
         <div class="main">
           <div class="content">
             “The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
-— Oscar Wilde, The Picture of Dorian Gray
+            — Oscar Wilde, The Picture of Dorian Gray
           </div>
         </div>
+      </div> 
+      <div class="code-wrap">  
+        <div class="code"  v-highlight>  
+          <p>css:</p>
+          <pre>
+            <code> 
+            </code>
+          </pre>
+        </div> 
+      </div>
+    </div>
+
+     <div class="case">
+      <h3 class="case-name"> 图片变色 </h3> 
+      <div class="sample-wrap case_d clearfix">
+         <div class="sample sample_1" style="background-blend-mode:normal">normal</div>
+         <div class="sample sample_2" style="background-blend-mode:multiply">multiply</div>
+         <div class="sample sample_3" style="background-blend-mode:screen">screen</div>
+         <div class="sample sample_4" style="background-blend-mode:overlay">overlay</div>
+         <div class="sample sample_5" style="background-blend-mode:darken">darken</div>
+         <div class="sample sample_6" style="background-blend-mode:lighten">lighten</div>
+         <div class="sample sample_7" style="background-blend-mode:color-dodge">color-dodge</div>
+         <div class="sample sample_8" style="background-blend-mode:saturation">saturation</div>
+         <div class="sample sample_9" style="background-blend-mode:color">color</div>
+         <div class="sample sample_9" style="background-blend-mode:luminosity">luminosity</div> 
       </div> 
       <div class="code-wrap">  
         <div class="code"  v-highlight>  
@@ -264,5 +289,15 @@ export default {
       padding 20px
       line-height 1.8
       font-size: 16px;
-           
+.case_d
+  .sample
+    float left
+    position relative
+    width 200px
+    padding-top 150px
+    height: 0px
+    margin-bottom 30px
+    background-size cover
+    background-color: hsl(335, 100%, 50%)
+    background-image url('http://csssecrets.io/images/tiger.jpg')
 </style> 
