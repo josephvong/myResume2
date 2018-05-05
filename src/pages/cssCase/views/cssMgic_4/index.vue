@@ -58,30 +58,6 @@
       </div>
     </div>
 
-    <div class="case">
-      <h3 class="case-name"> filter函数 </h3> 
-      <div class="sample-wrap case_b clearfix">
-        <div class="sample sample_1">blur</div>
-        
-      </div> 
-      <div class="code-wrap"> 
-        <!-- <div class="code"  v-highlight>
-          <p>html: </p> 
-          <pre>
-            <code class="html">
-              
-            </code>
-          </pre>
-        </div>-->
-        <div class="code"  v-highlight>  
-          <p>css:</p>
-          <pre>
-            <code> 
-            </code>
-          </pre>
-        </div> 
-      </div>
-    </div>
 
     <div class="case">
       <h3 class="case-name"> 毛玻璃 </h3> 
@@ -104,7 +80,7 @@
       </div>
     </div>
 
-     <div class="case">
+    <div class="case">
       <h3 class="case-name"> 图片变色 </h3> 
       <div class="sample-wrap case_d clearfix">
          <div class="sample sample_1" style="background-blend-mode:normal">normal</div>
@@ -127,7 +103,39 @@
           </pre>
         </div> 
       </div>
-    </div>  
+    </div>
+    <div class="case">
+      <h3 class="case-name">  折角 </h3> 
+      <div class="sample-wrap case_e clearfix">
+        <div class="sample_1">
+          “The only way to get rid of a temptation is to yield to it.” — Oscar Wilde, The Picture of Dorian Gray
+        </div>
+        <div class="sample_2">
+          “The only way to get rid of a temptation is to yield to it.” — Oscar Wilde, The Picture of Dorian Gray
+        </div>
+        <div class="sample_3">
+          “The only way to get rid of a temptation is to yield to it.” — Oscar Wilde, The Picture of Dorian Gray
+        </div>
+        <div class="sample_4">
+          “The only way to get rid of a temptation is to yield to it.” — Oscar Wilde, The Picture of Dorian Gray
+        </div>
+        <div class="sample_5">
+          “The only way to get rid of a temptation is to yield to it.” — Oscar Wilde, The Picture of Dorian Gray
+        </div>
+        <div class="sample_6">
+          “The only way to get rid of a temptation is to yield to it.” — Oscar Wilde, The Picture of Dorian Gray
+        </div>   
+      </div> 
+      <div class="code-wrap">  
+        <div class="code"  v-highlight>  
+          <p>css:</p>
+          <pre>
+            <code> 
+            </code>
+          </pre>
+        </div> 
+      </div>
+    </div>    
   </div>
 </template>
 
@@ -163,7 +171,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
-//@import '~style/mixin.styl' 
+@import '~style/mixin.styl' 
+
 .page-title
   height 60px
   line-height 60px
@@ -300,4 +309,57 @@ export default {
     background-size cover
     background-color: hsl(335, 100%, 50%)
     background-image url('http://csssecrets.io/images/tiger.jpg')
+.case_e
+  .sample_1
+    width 300px
+    padding 20px
+    color white 
+    background linear-gradient(-135deg, transparent 50%, rgba(0,0,0,0.4) 0) right top no-repeat,
+               linear-gradient(-135deg, transparent 20px, #58a 0);
+    background-size 28px 28px, auto;
+    margin-bottom 20px
+  .sample_2
+    position relative
+    width 300px
+    padding 20px
+    color white
+    background linear-gradient(-150deg, transparent 20px, #58a 0);
+    border-radius: .5em;
+    margin-bottom 20px
+    &::before
+      content ''
+      position absolute
+      top 0
+      right 0px
+      background linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,0.4) 0, rgba(0,0,0,.4)) 100% 0 no-repeat
+      height 40px
+      width 23px
+      transform translateY(-18px) rotate(-30deg)
+      transform-origin bottom right
+      border-bottom-left-radius: inherit;
+      box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.15);  
+  .sample_3
+    width: 300px
+    padding 20px
+    border-radius 10px
+    margin-bottom 10px
+    foled-tr-corner(red, 20px, 30deg)
+  .sample_4
+    width: 300px
+    padding 20px
+    border-radius 10px
+    margin-bottom 10px
+    foled-tl-corner(red, 20px, 30deg)
+  .sample_5
+    width: 300px
+    padding 20px
+    border-radius 10px
+    margin-bottom 10px
+    foled-bl-corner(red, 20px, 20deg)
+  .sample_6
+    width: 300px
+    padding 20px
+    border-radius 10px
+    margin-bottom 10px
+    foled-br-corner(red, 15px, 35deg)
 </style> 

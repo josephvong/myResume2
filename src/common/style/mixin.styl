@@ -109,4 +109,80 @@ checker-bg(lc,dc,size)
                    linear-gradient(45deg, transparent 75%, dc 0)
   background-position 0 0, size size, size size, size*2 size*2
   background-size size*2 size*2
- 
+
+foled-tr-corner($color, $size, $angle)
+  $x = $size / sin($angle)
+  $y = $size / cos($angle)
+  position relative
+  background $color
+  background linear-gradient($angle - 180deg, transparent $size, $color 0)
+  &::before
+    content ''
+    position absolute
+    top 0
+    right 0
+    background linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.5)) 100% 0 no-repeat
+    width $y
+    height $x
+    transform: translateY($y - $x) rotate(2*$angle - 90deg)
+    transform-origin bottom right
+    border-bottom-left-radius inherit
+    box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.2)
+
+foled-tl-corner($color, $size, $angle)
+  $x = $size / sin($angle)
+  $y = $size / cos($angle)
+  position relative
+  background $color
+  background linear-gradient(180deg - $angle, transparent $size, $color 0)
+  &::before
+    content ''
+    position absolute
+    top 0
+    left 0
+    width $y
+    height $x
+    background linear-gradient(to right bottom, transparent 50%, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.5)) 100% 0 no-repeat
+    transform-origin bottom left
+    transform: translateY($y - $x) rotate(90deg - 2*$angle)
+    border-bottom-right-radius inherit
+    box-shadow: 0.2em 0.2em 0.3em -0.1em rgba(0,0,0,.2)
+foled-bl-corner($color, $size, $angle)
+  $x = $size / sin($angle)
+  $y = $size / cos($angle)
+  position relative
+  background $color
+  background linear-gradient($angle, transparent $size, $color 0)
+  &::before
+    content ''
+    position absolute
+    bottom 0
+    left 0
+    width $x
+    height $y
+    background linear-gradient(to left top, transparent 50%, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.5)) 100% 0 no-repeat
+    
+    transform-origin top left
+    transform: rotate(2*$angle) translateY(-1*$y) 
+    
+    border-top-left-radius inherit
+    box-shadow: -0.2em -0.2em 0.3em -0.1em rgba(0,0,0,.2)
+foled-br-corner($color, $size, $angle)
+  $x = $size / sin($angle)
+  $y = $size / cos($angle)
+  position relative
+  background $color
+  background linear-gradient(360deg - $angle, transparent $size, $color 0)
+  &::before
+    content ''
+    position absolute
+    bottom 0
+    right 0
+    width $x
+    height $y
+    background linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.5)) 100% 0 no-repeat
+    transform-origin top left
+    transform: translateX($x) rotate($angle) //
+    border-bottom-left-radius inherit
+    box-shadow: -0.2em 0.2em 0.3em -0.1em rgba(0,0,0,.2) 
+    
