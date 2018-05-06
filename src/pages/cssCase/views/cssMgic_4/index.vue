@@ -361,5 +361,5 @@ export default {
     padding 20px
     border-radius 10px
     margin-bottom 10px
-    foled-br-corner(red, 15px, 35deg)
+    foled-br-corner(red, 15px, 20deg)
 </style> 

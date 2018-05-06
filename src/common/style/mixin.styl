@@ -161,10 +161,8 @@ foled-bl-corner($color, $size, $angle)
     width $x
     height $y
     background linear-gradient(to left top, transparent 50%, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.5)) 100% 0 no-repeat
-    
     transform-origin top left
     transform: rotate(2*$angle) translateY(-1*$y) 
-    
     border-top-left-radius inherit
     box-shadow: -0.2em -0.2em 0.3em -0.1em rgba(0,0,0,.2)
 foled-br-corner($color, $size, $angle)
@@ -180,9 +178,9 @@ foled-br-corner($color, $size, $angle)
     right 0
     width $x
     height $y
-    background linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.5)) 100% 0 no-repeat
-    transform-origin top left
-    transform: translateX($x) rotate($angle) //
-    border-bottom-left-radius inherit
-    box-shadow: -0.2em 0.2em 0.3em -0.1em rgba(0,0,0,.2) 
+    background linear-gradient(to right top, transparent 50%, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.5)) 100% 0 no-repeat
+    transform-origin center center 
+    transform: rotate(-2*$angle)  
+    border-top-right-radius inherit
+    box-shadow: 0.2em *-0.2em 0.3em -0.1em rgba(0,0,0,.2) 
     
