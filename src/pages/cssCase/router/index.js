@@ -125,5 +125,14 @@ export default new Router({
         gName:'css Magic 第七章'
       } 
     },
+    //-----------------css Magic 08-----------------------
+    {
+      path: '/cssmagic_8',   
+      name:'过渡与动画',
+      component:_import('cssMgic_8/page'),
+      meta:{
+        gName:'css Magic 第八章'
+      } 
+    }
   ]
 })
