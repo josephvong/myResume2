@@ -4,10 +4,19 @@
    
     <div class="page-body">
       <div class="case">
-        <h3 class="case-name">缓动效果： 弹性小球</h3>
+        <h3 class="case-name">animate 基本用法</h3>
         <p class="desc"> 
         </p>
         <div class="sample-wrap case_a clearfix">
+          <div class="sample sample1"></div>
+          <div class="sample sample2"></div>
+        </div> 
+      </div> 
+      <div class="case">
+        <h3 class="case-name">缓动效果： 弹性小球</h3>
+        <p class="desc"> 
+        </p>
+        <div class="sample-wrap case_b clearfix">
           <div class="ball"></div>
         </div> 
         <div class="code-wrap"> 
@@ -99,6 +108,26 @@ export default {
         font-weight 700
         color white
 .case_a
+  border 1px solid red
+  padding 10px
+  .sample
+    float left
+    width 100px
+    height 100px
+    margin 5px
+    border 1px solid green
+    &.sample1
+      &:hover  /*在hover时 执行（插入）以下的动画*/
+        animation: test 3s ease 500ms 3 /*keyframes名 动画时长(3s) 速度函数 延时时间(500ms) 播放次数*/
+    &.sample2
+      animation: test 1s ease infinite// alternate
+        
+@keyframes test
+  from
+    background red
+  to
+    background yellow
+.case_b
   position relative
   height 400px;
   border 1px solid red
