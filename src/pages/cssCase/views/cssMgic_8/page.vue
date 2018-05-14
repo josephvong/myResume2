@@ -10,6 +10,8 @@
         <div class="sample-wrap case_a clearfix">
           <div class="sample sample1"></div>
           <div class="sample sample2"></div>
+          <div class="sample sample3"></div>
+          <div class="sample sample4"></div>
         </div> 
       </div> 
       <div class="case">
@@ -36,6 +38,20 @@
             </pre>
           </div> 
         </div>
+      </div>
+      <div class="case">
+        <h3 class="case-name">弹性提示框</h3>
+        <p class="desc"> 
+        </p>
+        <div class="sample-wrap case_c clearfix">
+          <label>
+            Your username:
+            <input value="leaverou"></input>
+            <span class="callout">
+            Only letters, numbers, underscores (_) and hyphens (-) allowed!
+            </span>
+          </label>
+        </div> 
       </div> 
     </div>  
 
@@ -121,6 +137,12 @@ export default {
         animation: test 3s ease 500ms 3 /*keyframes名 动画时长(3s) 速度函数 延时时间(500ms) 播放次数*/
     &.sample2
       animation: test 1s ease infinite// alternate
+    &.sample3
+      animation: test 1s ease infinite alternate
+    &.sample4
+      // background green
+      // &:hover
+      animation: test 1s ease 5s 3 both //backwards //forwards
         
 @keyframes test
   from
@@ -151,5 +173,30 @@ export default {
     transform translateY(250px)
   90%
     transform translateY(310px)             
+.case_c
+  min-height 250px
+  font: 200%/1.6 Baskerville;
+  input
+    border 1px solid skyblue
+    display: block;
+    padding: 0 .4em;
+    font: inherit;
+  .callout
+    position: absolute;
+    max-width: 14em;
+    padding: .6em .8em;
+    border-radius: .3em;
+    margin: .3em 0 0 -.2em;
+    background: #fed;
+    border: 1px solid rgba(0,0,0,.3);
+    box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+    font-size: 75%;
+    transition all 0.5s cubic-bezier(.01,.76,.59,1.53)
+    transform-origin 1.5em -.5em
+  input:not(:focus) + .callout
+    transform scale(0)
+    transition: .25s;
+    // transition-timing-function: ease;
+
 </style>
 
