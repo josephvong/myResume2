@@ -52,6 +52,14 @@
             </span>
           </label>
         </div> 
+      </div>
+      <div class="case">
+        <h3 class="case-name">帧动画loading图</h3>
+        <p class="desc"> 
+        </p>
+        <div class="sample-wrap case_d clearfix">
+          <div class="sample-load"></div>
+        </div> 
       </div> 
     </div>  
 
@@ -197,6 +205,15 @@ export default {
     transform scale(0)
     transition: .25s;
     // transition-timing-function: ease;
-
+.case_d
+  .sample-load
+    width 100px
+    height 100px
+    text-indent 999px; overflow: hidden; /* Hide text */
+    background url(http://dabblet.com/img/loader.png) 0 0;
+    animation loader 1s infinite steps(8)
+@keyframes loader
+  to
+    background-position -800px 0;
 </style>
 
